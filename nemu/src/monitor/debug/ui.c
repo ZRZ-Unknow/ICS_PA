@@ -42,7 +42,7 @@ static int cmd_si(char *args) {
   char *ch=strtok(args," ");
   int num=atoi(ch);
   if (num<=0){
-     printf("execution times error");
+     printf("execution times error\n");
      return 0;
   }
   cpu_exec(num);
