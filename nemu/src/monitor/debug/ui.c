@@ -44,6 +44,7 @@ static int cmd_si(char *args) {
      printf("please input an integer after 'si'\n");
      return 0;
   }
+  printf("%s\n",ch);
   int num=atoi(ch);
   if (num<=0){
      printf("execution times error\n");
@@ -52,7 +53,13 @@ static int cmd_si(char *args) {
   cpu_exec(num);
   return 0;
 }
-
+/*
+static int cmd_info(char *args){
+  char *ch=strtok(args," ");
+  printf("%s\n",ch);
+  return 0;
+}
+*/
 static struct {
   char *name;
   char *description;
