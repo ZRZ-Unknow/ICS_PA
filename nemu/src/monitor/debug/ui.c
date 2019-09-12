@@ -2,7 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-
+#include "../../isa/x86/reg.c"
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
