@@ -56,16 +56,15 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args){
   char *ch=strtok(args," ");
   char *r="r",*w="w";
-  if (ch==NULL || (ch!=r && ch!=w)){
-     printf("please input 'r' or 'w' after 'info' to command\n");
-     return 0;
-  }
   if (ch==r){
-  printf("r\n");
+     printf("r\n");
   }
   else if (ch==w){
-  printf("w\n");
+     printf("w\n");
   } 
+  else if (ch==NULL){
+     printf("please input 'r' or 'w' after 'info' to command\n");
+  }
   return 0;
 }
 static struct {
