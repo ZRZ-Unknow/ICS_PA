@@ -43,7 +43,7 @@ static int cmd_si(char *args) {
   int num=atoi(ch);
   if (num<=0){
      printf("execution times error");
-     return -1;
+     return 0;
   }
   cpu_exec(num);
   return 0;
