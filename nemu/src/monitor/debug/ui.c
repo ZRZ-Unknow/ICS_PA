@@ -39,13 +39,11 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args) {
-  printf("%s\n",args);
   char *ch=strtok(args," ");
   if (ch==NULL){
      printf("please input an integer after 'si'\n");
      return 0;
   }
-  printf("%s\n",ch);
   int num=atoi(ch);
   if (num<=0){
      printf("execution times error\n");
@@ -54,13 +52,22 @@ static int cmd_si(char *args) {
   cpu_exec(num);
   return 0;
 }
-/*
+
 static int cmd_info(char *args){
   char *ch=strtok(args," ");
-  printf("%s\n",ch);
+  char *r="r",*w="w";
+  if (ch==NULL || ch!=r || ch!=w){
+     printf("please input 'r' or 'w' after 'info' to command");
+     return 0;
+  }
+  if (ch==r){
+  printf("r\n");
+  }
+  else if (ch==w){
+  printf("w\n");
+  } 
   return 0;
 }
-*/
 static struct {
   char *name;
   char *description;
@@ -70,6 +77,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single execute" ,cmd_si},
+  { "info","Print program status,'r' for register status and 'w' for watchpoint information",cmd_info},
   /* TODO: Add more commands */
 
 };
