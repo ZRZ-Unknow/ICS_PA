@@ -41,7 +41,7 @@ static int cmd_help(char *args);
 static int cmd_si(char *args) {
   char *ch=strtok(args," ");
   if (ch==NULL){
-     printf("please input an integer after 'si'");
+     printf("please input an integer after 'si'\n");
      return 0;
   }
   int num=atoi(ch);
