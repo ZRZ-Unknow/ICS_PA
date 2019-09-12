@@ -57,7 +57,7 @@ static int cmd_info(char *args){
   char *ch=strtok(args," ");
   char *r="r",*w="w";
   if (ch==NULL || (ch!=r && ch!=w)){
-     printf("please input 'r' or 'w' after 'info' to command");
+     printf("please input 'r' or 'w' after 'info' to command\n");
      return 0;
   }
   if (ch==r){
@@ -77,7 +77,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single execute" ,cmd_si},
-  { "info","Print program status,'r' for register status and 'w' for watchpoint information\n",cmd_info},
+  { "info","Print program status,'r' for register status and 'w' for watchpoint information",cmd_info},
   /* TODO: Add more commands */
 
 };
