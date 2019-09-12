@@ -55,14 +55,13 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args){
   char *ch=strtok(args," ");
-  char *r="r",*w="w";
-  if (ch==r){
+  if (strcmp(ch,"r")==0){
      printf("r\n");
   }
-  else if (ch==w){
+  else if (strcmp(ch,"r")){
      printf("w\n");
   } 
-  else if (ch==NULL){
+  else {
      printf("please input 'r' or 'w' after 'info' to command\n");
   }
   return 0;
