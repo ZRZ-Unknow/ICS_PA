@@ -2,13 +2,12 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-#include "../../isa/x86/reg.c"
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
 void cpu_exec(uint64_t); /*unsigned long int*/
-
+extern void isa_reg_display();
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -61,6 +60,7 @@ static int cmd_info(char *args){
   char *ch=strtok(args," ");
   if (strcmp(ch,"r")==0){
      isa_reg_display();
+ 
   }
   else if (strcmp(ch,"w")==0){
      printf("w\n");
@@ -69,6 +69,18 @@ static int cmd_info(char *args){
      printf("please input 'r' or 'w' after 'info' to command\n");
   }
   return 0;
+}
+
+static int cmd_x(char *args){
+  if (args==NULL){
+  printf("please input an integer and expression\n");
+  return 0;
+  }
+  return 0;
+  
+
+
+
 }
 
 static struct {
@@ -81,6 +93,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single execute" ,cmd_si},
   { "info","Print program status,'r' for register status and 'w' for watchpoint information",cmd_info},
+  { "x","Scan memory",cmd_x},
   /* TODO: Add more commands */
 
 };
