@@ -39,11 +39,11 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args) {
-  char *ch=strtok(args," ");
-  if (ch==NULL){
+  if (args==NULL){
      printf("please input an integer after 'si'\n");
      return 0;
   }
+  char *ch=strtok(args," ");
   int num=atoi(ch);
   if (num<=0){
      printf("execution times error\n");
@@ -54,19 +54,23 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args){
+  if (args==NULL){
+     printf("please input 'r' or 'w' after 'info' to command\n");
+     return 0;
+  }
   char *ch=strtok(args," ");
-  printf("%s\n",ch);
-/*  if (strcmp(ch,"r")==0){
+  if (strcmp(ch,"r")==0){
      printf("r\n");
   }
-  else if (strcmp(ch,"r")){
+  else if (strcmp(ch,"w")==0){
      printf("w\n");
   } 
   else {
      printf("please input 'r' or 'w' after 'info' to command\n");
-  }*/
+  }
   return 0;
 }
+
 static struct {
   char *name;
   char *description;
