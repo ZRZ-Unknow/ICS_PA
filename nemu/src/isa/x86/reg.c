@@ -41,6 +41,8 @@ void reg_test() {
 }
 
 void isa_reg_display() {
+/*  printf("eax %s\n",cpu.eax);
+  printf("ecx %s\n",cpu.ecx);*/
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {

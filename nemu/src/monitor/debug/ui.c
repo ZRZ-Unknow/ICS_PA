@@ -2,7 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-#include "../../isa/x86/reg.c"
+/*#include "../../isa/x86/reg.c"*/
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -60,7 +60,7 @@ static int cmd_info(char *args){
   }
   char *ch=strtok(args," ");
   if (strcmp(ch,"r")==0){
-     printf("r\n");
+/*     isa_reg_display();*/;
   }
   else if (strcmp(ch,"w")==0){
      printf("w\n");
