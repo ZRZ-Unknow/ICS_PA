@@ -8,6 +8,7 @@
 
 void cpu_exec(uint64_t); /*unsigned long int*/
 extern void isa_reg_display();
+extern uint32_t paddr_read(paddr_t addr, int len);
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -60,7 +61,6 @@ static int cmd_info(char *args){
   char *ch=strtok(args," ");
   if (strcmp(ch,"r")==0){
      isa_reg_display();
- 
   }
   else if (strcmp(ch,"w")==0){
      printf("w\n");
@@ -73,8 +73,19 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
   if (args==NULL){
-  printf("please input an integer and expression\n");
-  return 0;
+     printf("please input an integer and expression\n");
+     return 0;
+  }
+  char *ch=strtok(args," ");
+  int num =atoi(ch);
+  if (num<=0){
+     printf("please input an positive integer\n");
+     return 0;
+  }
+  char *expr=strtok(NULL," ");
+  if (expr==NULL){
+     printf("please input an expression\n");
+     return 0;
   }
   return 0;
   
