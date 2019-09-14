@@ -31,7 +31,6 @@ static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
 }
-
 static int cmd_q(char *args) {
   return -1;
 }
@@ -89,7 +88,9 @@ static int cmd_x(char *args){
   }
   paddr_t addr;
   sscanf(expr,"%x",&addr);
-  for (int i=0;i<ceil(num/4);i++){
+  double p=num;
+  int n=ceil(p/4.0);
+  for (int i=0;i<n;i++){
      int memory=paddr_read(addr+i*16,4);
      printf("0x%08x: ",addr+i*16);
      if (i==num/4){
