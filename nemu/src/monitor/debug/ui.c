@@ -87,14 +87,16 @@ static int cmd_x(char *args){
      printf("please input an expression\n");
      return 0;
   }
-  paddr_t address=atoi(expr);
+  paddr_t addr;
+  sscanf(expr,"%x",&addr);
   for (int i=0;i<num;i++){
-     int memory=paddr_read(address+i*4,4);
-     printf("0x%08x:",address+i*4);
+     int memory=paddr_read(addr+i*4,4);
+     printf("0x%08x:",addr+i*4);
      for (int j=0;j<4;j++){
         printf("%x  ",memory);
 	memory=memory>>8;
      }
+     printf("\n");
   }
   return 0;
 }
