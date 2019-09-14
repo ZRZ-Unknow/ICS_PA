@@ -93,7 +93,7 @@ static int cmd_x(char *args){
      int memory=paddr_read(addr+i*4,4);
      printf("0x%08x:",addr+i*4);
      for (int j=0;j<4;j++){
-        printf("%x  ",memory);
+        printf("%02x ",memory);
 	memory=memory>>8;
      }
      printf("\n");
