@@ -90,8 +90,8 @@ static int cmd_x(char *args){
   paddr_t addr;
   sscanf(expr,"%x",&addr);
   for (int i=0;i<num/4;i++){
-     int memory=paddr_read(addr+i*4,4);
-     printf("0x%08x: ",addr+i*4);
+     int memory=paddr_read(addr+i*16,4);
+     printf("0x%08x: ",addr+i*16);
      for (int j=0;j<4;j++){
         printf("0x%08x ",memory);
 	memory=memory>>8;
