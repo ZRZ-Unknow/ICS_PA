@@ -96,20 +96,18 @@ static int cmd_x(char *args){
      if (i==num/4){
 	for (int j=0;j<num%4;j++){
            printf("0x%08x ",memory);
+	   for (int q=0;q<4;q++){
 	   memory=memory>>8;
-           memory=memory>>8;
-	   memory=memory>>8;
-           memory=memory>>8;
+	   }
         }
      }
      else{
         for (int j=0;j<4;j++){
            printf("0x%08x ",memory);
-	   memory=memory>>8;
+        for (int q=0;q<4;q++){
            memory=memory>>8;
-	   memory=memory>>8;
-           memory=memory>>8;
-        }
+           }
+	}
      }
      printf("\n");
   }
