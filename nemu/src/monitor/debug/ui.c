@@ -84,9 +84,10 @@ static int cmd_x(char *args){
   }
   char *expr=strtok(NULL," ");
   if (expr==NULL){
-     printf("please input an expression\n");
+     printf("please input an hexadecimal address like 0x~\n");
      return 0;
   }
+
   paddr_t addr;
   sscanf(expr,"%x",&addr);
   for (int i=0;i<num;i++){
