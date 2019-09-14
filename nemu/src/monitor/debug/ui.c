@@ -87,7 +87,6 @@ static int cmd_x(char *args){
      printf("please input an hexadecimal address like 0x~\n");
      return 0;
   }
-
   paddr_t addr;
   sscanf(expr,"%x",&addr);
   for (int i=0;i<num;i++){
