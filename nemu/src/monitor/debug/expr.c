@@ -29,6 +29,7 @@ static struct rule {
   {"/",'/'},
   {"\\(",'('},
   {"\\)",')'},
+  {"[0-9]+$",'a'}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
