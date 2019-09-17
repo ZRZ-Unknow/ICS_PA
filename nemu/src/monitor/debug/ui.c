@@ -91,8 +91,8 @@ static int cmd_x(char *args){
   double p=num;
   int n=ceil(p/4.0);
   for (int i=0;i<n;i++){
-     int memory=paddr_read(addr+i*16,4);
      printf("0x%08x: ",addr+i*16);
+     int memory=paddr_read(addr+i*16,32);
      if (i==num/4){
 	for (int j=0;j<num%4;j++){
            printf("0x%08x ",memory);
