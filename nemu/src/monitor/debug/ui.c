@@ -114,6 +114,12 @@ static int cmd_x(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+return 0;
+
+
+}
+
 static struct {
   char *name;
   char *description;
@@ -125,6 +131,7 @@ static struct {
   { "si", "Single execute" ,cmd_si},
   { "info","Print program status,'r' for register status and 'w' for watchpoint information",cmd_info},
   { "x","Scan memory",cmd_x},
+  { "p","Expression evaluation",cmd_p},
   /* TODO: Add more commands */
 
 };
