@@ -9,7 +9,6 @@
 void cpu_exec(uint64_t); /*unsigned long int*/
 extern void isa_reg_display();
 extern uint32_t paddr_read(paddr_t addr, int len);
-extern  bool make_token(char *e);
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -117,7 +116,6 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
 
-	make_token(args);
 	return 0;
 }
 

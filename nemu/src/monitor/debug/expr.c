@@ -99,12 +99,11 @@ static bool make_token(char *e) {
 		       substr_start++;
                      }
                     strcpy(tokens[nr_token].str,ch);
-		   }
-		   break;
+		   break;}
 	  default: TODO();
         }
         nr_token++;
-        break;
+	break;
       }
     }
 
@@ -116,13 +115,56 @@ static bool make_token(char *e) {
 
   return true;
 }
+// use stack to check parentheses
+typedef struct stack{
+  int top;
+  char ch[32];
+}Stack;
+static Stack stack;
 
+bool is_empty(){
+  if (stack.top==0){return true;}
+  return false;
+}
+void set_empty(){
+  stack.top=0;
+}
+void push(char e){
+  if (stack.top<=31){
+    stack.ch[stack.top]=e;
+    stack.top++;
+  }
+  else {printf("stackoverflow");}
+}
+void pop(){
+  if(!is_empty()){
+    stack.top--;
+  }
+  else {printf("statck is empty");}
+}
+bool check_parentheses(int p,int q){
+  //if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
+  for (int i=p;i<q;i++){
+    if (tokens[i].type=='('){push('(');}
+    if (tokens[i].type==')'){
+      if (is_empty()){return false;}
+      else {pop();}
+    }
+  }
+  return is_empty();
+}
+int main_operator(int p,int q){
+//  for (int i=p;i<q;i++){
+  return 0;
+ // }  
+
+}
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-
+  make_token(e);
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
