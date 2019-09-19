@@ -1,5 +1,6 @@
 #include "nemu.h"
-
+#include <stdio.h>
+#include <stdlib.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
@@ -120,45 +121,107 @@ typedef struct stack{
   int top;
   char ch[32];
 }Stack;
-static Stack stack;
 
-bool is_empty(){
-  if (stack.top==0){return true;}
+bool is_empty(Stack st){
+  if (st.top==0){return true;}
   return false;
 }
-void set_empty(){
-  stack.top=0;
+void set_empty(Stack st){
+  st.top=0;
 }
-void push(char e){
-  if (stack.top<=31){
-    stack.ch[stack.top]=e;
-    stack.top++;
+void push(Stack st,char e){
+  if (st.top<=31){
+    st.ch[st.top]=e;
+    st.top++;
   }
   else {printf("stackoverflow");}
 }
-void pop(){
-  if(!is_empty()){
-    stack.top--;
+void pop(Stack st){
+  if(!is_empty(st)){
+    st.top--;
   }
   else {printf("statck is empty");}
 }
+
+static Stack stack1;
 bool check_parentheses(int p,int q){
-  //if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
-  for (int i=p;i<q;i++){
-    if (tokens[i].type=='('){push('(');}
+  if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
+  for (int i=p;i<=q;i++){
+    if (tokens[i].type=='('){push(stack1,'(');}
     if (tokens[i].type==')'){
-      if (is_empty()){return false;}
-      else {pop();}
+      if (is_empty(stack1)){return false;}
+      else {pop(stack1);}
     }
   }
-  return is_empty();
+  return is_empty(stack1);
 }
-int main_operator(int p,int q){
-//  for (int i=p;i<q;i++){
-  return 0;
- // }  
 
+static bool priority(int op1,int op2){
+  switch(op1){
+    case '+':{if (op2=='*'||op2=='/'){ return true;}
+             else {return false;}
+             }
+    case '-':{if (op2=='*'||op2=='/'){
+	       return true;
+	     }
+	     else {return false;}
+	     }
+    case '*':{if (op2=='*'||op2=='/'){
+               return false;
+             }
+             else {return true;}
+             }
+    case '/':{if (op2=='*'||op2=='/'){
+               return false;
+             }
+             else {return true;}
+   	     }
+    default:return false;
+  }
 }
+
+int main_operator(int p,int q){
+  static Stack stack2;
+  int op=tokens[p].type;
+  int op_position=p;
+  for (int i=p;i<=q;i++){
+    if (tokens[i].type=='('){
+      push(stack2,'(');
+      i++;
+      while(true){
+        if (tokens[i].type=='('){push(stack2,'(');}
+	else if(tokens[i].type==')'){pop(stack2);}
+	i++;
+        if (is_empty(stack2)){break;}
+	if(i>q){break;}
+      }
+    }
+    else if (tokens[i].type!=TK_NUM){
+      if(!priority(op,tokens[i].type)) {op=tokens[i].type;op_position=i;}
+    }
+  }
+  return op_position;
+}
+
+double eval(int p,int q){
+  if (p>q){return -1;}
+  else if (p==q) {return atoi(tokens[p].str);}
+  else if (check_parentheses(p,q)==true) {return eval(p+1,q-1);}
+  else {
+    int op=main_operator(p,q);
+    int val1=eval(p,op-1);
+    int val2=eval(op+1,q);
+    switch(tokens[op].type){
+      case '+':return val1+val2;
+      case '-':return val1-val2;
+      case '*':return val1*val2;
+      case '/':return val1/val2;
+      default:assert(0);	       
+    }
+  }
+}
+
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;

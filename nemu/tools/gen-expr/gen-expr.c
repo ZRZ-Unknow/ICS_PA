@@ -7,8 +7,26 @@
 
 // this should be enough
 static char buf[65536];
+buf[0]='\0';
+#define random(x) (rand()%x)
+
+static inline void gen_rand_op(){
+  srand((unsigned)time(NULL));
+  switch(random(4)){
+    case 0:{strcat(buf,'+');break;}
+    case 1:{strcat(buf,'-');break;}
+    case 2:{strcat(buf,'*');break;}
+    case 3:{strcat(buf,'/');break;}
+  }
+}
+
 static inline void gen_rand_expr() {
-  buf[0] = '\0';
+  srand((unsigned)time(NULL));
+  switch(random(3)){
+    case 0:{char s[3];itoa(random(100),s,10);strcat(buf,s);break;}
+    case 1:{strcat(buf,'(');gen_rand_expr();strcat(buf,')');break;}
+    case 2:{gen_rand_expr();gen_rand_op();gen_rand_expr();break;}	   
+  }
 }
 
 static char code_buf[65536];
