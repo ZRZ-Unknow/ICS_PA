@@ -38,7 +38,17 @@ static struct rule {
 static regex_t re[NR_REGEX] = {};
 
 /* Rules are used for many times.
- * Therefore we compile them only once before any usage.
+bool check_parentheses(int p,int q){
+  int temp=0;
+  if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
+  for (int i=p;i<=q;i++){
+    if (tokens[i].type=='('){temp++;}
+    else if (tokens[i].type==')'){temp--;}
+    if (temp==0 && i<q){return false;}
+  }
+  if (temp!=0)return false;
+  return true;
+} * Therefore we compile them only once before any usage.
  */
 void init_regex() {
   int i;
@@ -118,7 +128,7 @@ static bool make_token(char *e) {
 // use stack to check parentheses
 typedef struct stack{
   int top;
-  char ch[32];
+  char ch[64];
 }Stack;
 
 bool is_empty(Stack st){
@@ -129,7 +139,7 @@ void set_empty(Stack st){
   st.top=0;
 }
 void push(Stack st,char e){
-  if (st.top<=31){
+  if (st.top<64){
     st.ch[st.top]=e;
     st.top++;
   }
@@ -153,7 +163,20 @@ bool check_parentheses(int p,int q){
   if (temp!=0)return false;
   return true;
 }
-
+/*
+bool check_parentheses(int p,int q){
+  Stack stack1;
+  set_empty(stack1);
+  if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
+  for (int i=p;i<=q;i++){
+    if (tokens[i].type=='('){push(stack1,'(');}
+    else if (tokens[i].type==')'){pop(stack1);}
+    if (is_empty(stack1) && i<q){return false;}
+  }
+  if (!is_empty(stack1))return false;
+  return true;
+}
+*/
 static bool priority(int op1,int op2){
   switch(op1){
     case '+':{if (op2=='*'||op2=='/'){ return true;}

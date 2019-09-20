@@ -112,7 +112,7 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  char *ch=strtok(NULL,"@");
+  char *ch=strtok(NULL," ");
   bool success=true;
   uint32_t result=expr(ch,&success);
   if(success){printf("result=%d\n",result);}
