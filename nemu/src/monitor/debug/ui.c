@@ -91,24 +91,21 @@ static int cmd_x(char *args){
   double p=num;
   int n=ceil(p/4.0);
   for (int i=0;i<n;i++){
-     printf("0x%08x: ",addr+i*16);
-     int memory=paddr_read(addr+i*16,4);
+     printf("0x%08x: ",addr);
      if (i==num/4){
 	for (int j=0;j<num%4;j++){
-           printf("0x%08x ",memory);
-	   for (int q=0;q<1;q++){
-	   memory=memory>>8;
-	   }
+	  int memory=paddr_read(addr,4);
+          printf("%08x",memory);
+          addr+=4;	  
+	}
         }
-     }
      else{
         for (int j=0;j<4;j++){
-           printf("0x%08x ",memory);
-        for (int q=0;q<1;q++){
-           memory=memory>>8;
-           }
+          int memory=paddr_read(addr,4);
+          printf("%08x",memory);
+          addr+=4;
+         }
 	}
-     }
      printf("\n");
   }
   return 0;
