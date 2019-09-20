@@ -143,15 +143,15 @@ void pop(Stack st){
 }
 
 bool check_parentheses(int p,int q){
-  static Stack stack1;
+  int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
   for (int i=p;i<=q;i++){
-    if (tokens[i].type=='('){push(stack1,'(');}
-    else if (tokens[i].type==')'){pop(stack1);}
-    if (is_empty(stack1) && i<q){return false;}
-   
+    if (tokens[i].type=='('){temp++;}
+    else if (tokens[i].type==')'){temp--;}
+    if (temp==0 && i<q){return false;} 
   }
-  return is_empty(stack1);
+  if (temp!=0)return false;
+  return true;
 }
 
 static bool priority(int op1,int op2){
