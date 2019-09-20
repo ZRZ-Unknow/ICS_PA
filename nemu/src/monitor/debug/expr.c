@@ -185,7 +185,6 @@ int main_operator(int p,int q){
   int op_position=p;
   bool init=false;
   for (int i=p;i<=q;i++){
-	  printf("i%d,op_p%d\n",i,op_position);
     if (tokens[i].type=='('){
       push(stack2,'(');
       i++;
@@ -194,8 +193,8 @@ int main_operator(int p,int q){
 	else if(tokens[i].type==')'){pop(stack2);}
 	i++;
         if (is_empty(stack2)){break;}
-	if(i>q){break;}
       }
+      if(i>q){break;}
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
