@@ -85,16 +85,22 @@ static bool make_token(char *e) {
          */
         if (rules[i].token_type==TK_NOTYPE){continue;}
         switch (rules[i].token_type) {
-	  case '+':{tokens[nr_token].type=rules[i].token_type;break;}
-	  case TK_EQ:{tokens[nr_token].type=rules[i].token_type;break;}
-	  case '-':{tokens[nr_token].type=rules[i].token_type;break;}
-	  case '*':{tokens[nr_token].type=rules[i].token_type;break;}
-          case '/':{tokens[nr_token].type=rules[i].token_type;break;}
-	  case '(':{tokens[nr_token].type=rules[i].token_type;break;}
-	  case ')':{tokens[nr_token].type=rules[i].token_type;break;}
+	  case '+':{tokens[nr_token].type=rules[i].token_type;
+	            strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
+	  case TK_EQ:{tokens[nr_token].type=rules[i].token_type;
+		     strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
+	  case '-':{tokens[nr_token].type=rules[i].token_type;
+		   strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
+	  case '*':{tokens[nr_token].type=rules[i].token_type;
+		   strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
+          case '/':{tokens[nr_token].type=rules[i].token_type;
+		    strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
+	  case '(':{tokens[nr_token].type=rules[i].token_type;
+		    strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
+	  case ')':{tokens[nr_token].type=rules[i].token_type;
+		    strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
 	  case TK_NUM:{tokens[nr_token].type=rules[i].token_type;
-		    strncpy(tokens[nr_token].str,substr_start,substr_len);
-		    break;}
+		       strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
 	  default: assert(0);
         }
         nr_token++;
@@ -107,7 +113,7 @@ static bool make_token(char *e) {
       return false;
     }
   }
-
+  for (int j=0;j<=nr_token;j++){printf("%s",tokens[j].str);}
   return true;
 }
 // use stack to check parentheses
