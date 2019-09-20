@@ -198,7 +198,8 @@ int main_operator(int p,int q){
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
-      if (init==false){op=tokens[i].type;op_position=i;init=true;printf("op=%d  ",op);}	    
+      if (init==false){op=tokens[i].type;op_position=i;init=true;
+	      printf("op=%d,posi=%d ",op,op_position);}	    
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
