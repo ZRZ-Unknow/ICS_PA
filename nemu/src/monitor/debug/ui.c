@@ -95,14 +95,14 @@ static int cmd_x(char *args){
      if (i==num/4){
 	for (int j=0;j<num%4;j++){
 	  int memory=paddr_read(addr,4);
-          printf("%08x",memory);
+          printf("0x%08x ",memory);
           addr+=4;	  
 	}
         }
      else{
         for (int j=0;j<4;j++){
           int memory=paddr_read(addr,4);
-          printf("%08x",memory);
+          printf("0x%08x ",memory);
           addr+=4;
          }
 	}
