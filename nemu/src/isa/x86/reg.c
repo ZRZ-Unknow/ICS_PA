@@ -49,7 +49,9 @@ void isa_reg_display() {
   printf("ebp  0x%08x\n",cpu.ebp);
   printf("esi  0x%08x\n",cpu.esi);
   printf("edi  0x%08x\n",cpu.edi);
-  printf("     0x%08x\n ",cpu.gpr[0]._16);
+  for (int i=0;i<8;i++){
+    printf("%s  0x%08x\n",regsw[i],cpu.gpr[0]._16);
+  }
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
