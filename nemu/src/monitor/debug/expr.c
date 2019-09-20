@@ -175,7 +175,7 @@ static bool priority(int op1,int op2){
              }
              else {return true;}
    	     }
-    default:return false;
+    default:assert(0);
   }
 }
 
