@@ -114,7 +114,7 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
   char *ch=strtok(NULL,"@");
   bool success=true;
-  int result=expr(ch,&success);
+  uint32_t result=expr(ch,&success);
   if(success){printf("result=%d\n",result);}
   else {printf("error p\n");}
   return 0;
