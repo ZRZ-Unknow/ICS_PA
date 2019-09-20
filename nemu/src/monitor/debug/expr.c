@@ -38,17 +38,7 @@ static struct rule {
 static regex_t re[NR_REGEX] = {};
 
 /* Rules are used for many times.
-bool check_parentheses(int p,int q){
-  int temp=0;
-  if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
-  for (int i=p;i<=q;i++){
-    if (tokens[i].type=='('){temp++;}
-    else if (tokens[i].type==')'){temp--;}
-    if (temp==0 && i<q){return false;}
-  }
-  if (temp!=0)return false;
-  return true;
-} * Therefore we compile them only once before any usage.
+ * Therefore we compile them only once before any usage.
  */
 void init_regex() {
   int i;
@@ -151,7 +141,7 @@ void pop(Stack st){
   }
   else {printf("statck is empty");}
 }
-
+/*
 bool check_parentheses(int p,int q){
   int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
@@ -163,9 +153,10 @@ bool check_parentheses(int p,int q){
   if (temp!=0)return false;
   return true;
 }
-/*
+*/
+
 bool check_parentheses(int p,int q){
-  Stack stack1;
+  static Stack stack1;
   set_empty(stack1);
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
   for (int i=p;i<=q;i++){
@@ -176,7 +167,7 @@ bool check_parentheses(int p,int q){
   if (!is_empty(stack1))return false;
   return true;
 }
-*/
+
 static bool priority(int op1,int op2){
   switch(op1){
     case '+':{if (op2=='*'||op2=='/'){ return true;}
