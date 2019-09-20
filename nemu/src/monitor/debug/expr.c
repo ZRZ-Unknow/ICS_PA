@@ -185,15 +185,14 @@ int main_operator(int p,int q){
   bool init=false;
   for (int i=p;i<=q;i++){
     if (tokens[i].type=='('){
-      static Stack stack2;
-      push(stack2,'(');
+      int temp=1;
       i++;
       while(true){
-        if (tokens[i].type=='('){push(stack2,'(');}
-	else if(tokens[i].type==')'){pop(stack2);}
+        if (tokens[i].type=='('){temp++;}
+	else if(tokens[i].type==')'){temp--;}
 	i++;
 	printf("while i:%d",i);
-        if (is_empty(stack2)){break;}
+        if (temp==0){break;}
       }
       if(i>q){break;}
     }
