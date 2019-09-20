@@ -217,7 +217,7 @@ int eval(int p,int q){
       case '-':return val1-val2;
       case '*':return val1*val2;
       case '/':return val1/val2;
-      default:assert(0);	       
+      default:{printf("%d",tokens[op].type);assert(0);}	       
     }
   }
 }
