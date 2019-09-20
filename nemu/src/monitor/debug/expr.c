@@ -113,7 +113,7 @@ static bool make_token(char *e) {
       return false;
     }
   }
-  for (int j=0;j<=nr_token;j++){printf("%s",tokens[j].str);}
+  for (int j=0;j<=nr_token;j++){printf("%s",tokens[j].str);}printf("\n");
   return true;
 }
 // use stack to check parentheses
@@ -205,7 +205,7 @@ int main_operator(int p,int q){
 
 int eval(int p,int q){
   if (p>q){return -1;}
-  else if (p==q) {int num;sscanf(tokens[p].str,"%d",&num);return num;}
+  else if (p==q) {int num;sscanf(tokens[p].str,"%d",&num);printf("%d",num);return num;}
   else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);
