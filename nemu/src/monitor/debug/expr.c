@@ -201,7 +201,8 @@ int main_operator(int p,int q){
     else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;
 	      printf("op=%d,posi=%d ",op,op_position);continue;}	    
-      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;printf("erro");}
+      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;
+	      printf("erro  ");printf("opposition:%d",op_position);}
     }
   }
   printf("ppppf %d\n",op_position);
