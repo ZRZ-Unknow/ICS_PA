@@ -200,6 +200,7 @@ int main_operator(int p,int q){
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
+  printf("%s",tokens[op_position].str);
   return op_position;
 }
 
