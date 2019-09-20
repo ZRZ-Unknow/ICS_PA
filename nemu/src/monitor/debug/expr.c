@@ -197,7 +197,7 @@ int main_operator(int p,int q){
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
-      if (init==false){op=tokens[i].type;op_position=i;init=true;}	    
+      if (init==false){op=tokens[i].type;op_position=i;init=true;printf("i%d",i);assert(0);}	    
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
