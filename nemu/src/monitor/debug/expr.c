@@ -201,7 +201,7 @@ int main_operator(int p,int q){
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
-  printf("ppppf%s\n",tokens[op_position].str);
+  printf("ppppf %s\n",tokens[op_position].str);
   return op_position;
 }
 
@@ -210,7 +210,7 @@ uint32_t eval(int p,int q){
   else if (p==q) {uint32_t num=0;sscanf(tokens[p].str,"%d",&num);return num;}
   else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
-    int op=main_operator(p,q);printf("%s,%d",tokens[op].str,tokens[op].type);
+    int op=main_operator(p,q);printf("eval %s,%d\n",tokens[op].str,tokens[op].type);
     uint32_t val1=eval(p,op-1);
     uint32_t val2=eval(op+1,q);
     switch(tokens[op].type){
