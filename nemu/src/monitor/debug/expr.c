@@ -25,9 +25,9 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},         // equal
-  {"-",'-'},
+  {"\\-",'-'},
   {"\\*",'*'},
-  {"/",'/'},
+  {"\\/",'/'},
   {"\\(",'('},
   {"\\)",')'},
   {"[0-9]+",TK_NUM}
@@ -211,6 +211,7 @@ int eval(int p,int q){
     int op=main_operator(p,q);
     int val1=eval(p,op-1);
     int val2=eval(op+1,q);
+    printf("%d",tokens[op].type);
     switch(tokens[op].type){
       case '+':return val1+val2;
       case '-':return val1-val2;
