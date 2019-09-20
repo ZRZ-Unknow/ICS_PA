@@ -217,7 +217,7 @@ int eval(int p,int q){
       case '-':return val1-val2;
       case '*':return val1*val2;
       case '/':return val1/val2;
-      default:{printf("%d",tokens[op].type);return 0;}	       
+      default:{printf("fucking %d\n",tokens[op].type);return 0;}	       
     }
   }
 }

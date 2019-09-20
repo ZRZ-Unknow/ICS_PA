@@ -116,8 +116,8 @@ static int cmd_p(char *args){
   printf(ch);
   bool success=true;
   int result=expr(ch,&success);
-  if(success){printf("result=%d",result);}
-  else {printf("error p");}
+  if(success){printf("result=%d\n",result);}
+  else {printf("error p\n");}
   return 0;
 }
 
