@@ -112,9 +112,8 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  char *arg=NULL;
-  char *ch=strtok_r(args," ",&arg);
-  printf(arg);
+  char *ch=strtok(NULL,"@");
+  printf(ch);
   bool success=true;
   int result=expr(ch,&success);
   if(success){printf("result=%d\n",result);}
