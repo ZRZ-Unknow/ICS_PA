@@ -200,7 +200,7 @@ int main_operator(int p,int q){
     else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;
 	      printf("op=%d,posi=%d ",op,op_position);}	    
-      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
+      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;assert(0);}
     }
   }
   printf("ppppf %d\n",op_position);
