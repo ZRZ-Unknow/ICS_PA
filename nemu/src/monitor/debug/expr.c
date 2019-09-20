@@ -185,6 +185,7 @@ int main_operator(int p,int q){
   int op_position=p;
   bool init=false;
   for (int i=p;i<=q;i++){
+	  printf("i%d,op_p%d",i,op_position);
     if (tokens[i].type=='('){
       push(stack2,'(');
       i++;
