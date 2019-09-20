@@ -53,7 +53,6 @@ void init_regex() {
     }
   }
 }
-
 typedef struct token {
   int type;
   char str[32];
@@ -181,8 +180,9 @@ static bool priority(int op1,int op2){printf("%d,%d\n",op1,'+');
 
 int main_operator(int p,int q){
   static Stack stack2;
-  int op=tokens[p].type;
+  int op;
   int op_position=p;
+  bool init=false;
   for (int i=p;i<=q;i++){
     if (tokens[i].type=='('){
       push(stack2,'(');
@@ -195,9 +195,9 @@ int main_operator(int p,int q){
 	if(i>q){break;}
       }
     }
-    else if (tokens[i].type!=TK_NUM){printf("%s:%d",tokens[i].str,tokens[i].type);
-      printf(" %s::%d\n",tokens[op_position].str,op);
-	    if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
+    else if (tokens[i].type!=TK_NUM){
+      if (init==false){op=tokens[i].type;op_position=i;init=true;}	    
+      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
   return op_position;
@@ -205,13 +205,12 @@ int main_operator(int p,int q){
 
 int eval(int p,int q){
   if (p>q){return -1;}
-  else if (p==q) {uint32_t num;sscanf(tokens[p].str,"%d",&num);return num;}
+  else if (p==q) {int num=0;sscanf(tokens[p].str,"%d",&num);return num;}
   else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);
-    uint32_t val1=eval(p,op-1);
-    uint32_t val2=eval(op+1,q);
-    printf("%d,,%d\n",val1,val2);
+    int val1=eval(p,op-1);
+    int val2=eval(op+1,q);
     switch(tokens[op].type){
       case '+':return val1+val2;
       case '-':return val1-val2;
