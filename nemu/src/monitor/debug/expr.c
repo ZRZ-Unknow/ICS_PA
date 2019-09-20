@@ -195,7 +195,7 @@ int main_operator(int p,int q){
 	if(i>q){break;}
       }
     }
-    else if (tokens[i].type!=TK_NUM){
+    else if (tokens[i].type!=TK_NUM){printf("%s:%d",tokens[i].str,tokens[i].type);
       if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
