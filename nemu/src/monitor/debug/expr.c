@@ -116,7 +116,7 @@ static bool make_token(char *e) {
   return true;
 }
 // use stack to check parentheses
-typedef struct stack{
+typedef struct{
   int top;
   char ch[64];
 }Stack;
@@ -129,19 +129,13 @@ void set_empty(Stack st){
   st.top=0;
 }
 void push(Stack st,char e){
-  if (st.top<64){
     st.ch[st.top]=e;
     st.top++;
-  }
-  else {printf("stackoverflow");}
 }
 void pop(Stack st){
-  if(!is_empty(st)){
     st.top--;
-  }
-  else {printf("statck is empty");}
 }
-/*
+
 bool check_parentheses(int p,int q){
   int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
@@ -153,10 +147,10 @@ bool check_parentheses(int p,int q){
   if (temp!=0)return false;
   return true;
 }
-*/
 
+/*
 bool check_parentheses(int p,int q){
-  static Stack stack1;
+  Stack stack1;
   set_empty(stack1);
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
   for (int i=p;i<=q;i++){
@@ -167,7 +161,7 @@ bool check_parentheses(int p,int q){
   if (!is_empty(stack1))return false;
   return true;
 }
-
+*/
 static bool priority(int op1,int op2){
   switch(op1){
     case '+':{if (op2=='*'||op2=='/'){ return true;}
