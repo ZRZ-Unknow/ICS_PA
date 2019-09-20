@@ -211,7 +211,8 @@ int eval(int p,int q){
     int op=main_operator(p,q);
     int val1=eval(p,op-1);
     int val2=eval(op+1,q);
-    printf("%d",tokens[op].type);
+    printf("%d,%d",val1,val2);
+    printf("str %s\n",tokens[op].str);
     switch(tokens[op].type){
       case '+':return val1+val2;
       case '-':return val1-val2;
