@@ -180,12 +180,12 @@ static bool priority(int op1,int op2){
 }
 
 int main_operator(int p,int q){
-  static Stack stack2;
   int op;
   int op_position=p;
   bool init=false;
   for (int i=p;i<=q;i++){
     if (tokens[i].type=='('){
+      static Stack stack2;
       push(stack2,'(');
       i++;
       while(true){
