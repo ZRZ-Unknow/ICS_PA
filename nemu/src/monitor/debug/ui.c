@@ -112,7 +112,11 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  
+  char *ch=strtok(args," ");
+  bool success=true;
+  int result=expr(ch,&success);
+  if(success){printf("result=%d",result);}
+  else {printf("error p");}
   return 0;
 }
 

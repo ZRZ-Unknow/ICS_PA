@@ -203,7 +203,7 @@ int main_operator(int p,int q){
   return op_position;
 }
 
-double eval(int p,int q){
+int eval(int p,int q){
   if (p>q){return -1;}
   else if (p==q) {return atoi(tokens[p].str);}
   else if (check_parentheses(p,q)==true) {return eval(p+1,q-1);}
@@ -225,11 +225,10 @@ double eval(int p,int q){
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
+    printf("not make_token");
     return 0;
   }
-  make_token(e);
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  int result=eval(0,nr_token);
+  return result;
 }
