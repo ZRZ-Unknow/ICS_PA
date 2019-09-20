@@ -192,6 +192,7 @@ int main_operator(int p,int q){
         if (tokens[i].type=='('){push(stack2,'(');}
 	else if(tokens[i].type==')'){pop(stack2);}
 	i++;
+	printf("while i:%d",i);
         if (is_empty(stack2)){break;}
       }
       if(i>q){break;}
