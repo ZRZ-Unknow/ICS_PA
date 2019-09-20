@@ -196,7 +196,8 @@ int main_operator(int p,int q){
       }
     }
     else if (tokens[i].type!=TK_NUM){printf("%s:%d",tokens[i].str,tokens[i].type);
-      if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
+      printf(" %s::%d\n",tokens[op_position].str,op);
+	    if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
   return op_position;
