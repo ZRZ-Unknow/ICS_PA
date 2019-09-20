@@ -93,13 +93,8 @@ static bool make_token(char *e) {
 	  case '(':{tokens[nr_token].type=rules[i].token_type;break;}
 	  case ')':{tokens[nr_token].type=rules[i].token_type;break;}
 	  case TK_NUM:{tokens[nr_token].type=rules[i].token_type;
-		    char ch[]="";
-                    for (int j=0;j<substr_len;j++){
-                       ch[j]=*substr_start;
-		       substr_start++;
-                     }
-                    strcpy(tokens[nr_token].str,ch);
-		   break;}
+		    strncpy(tokens[nr_token].str,substr_start,substr_len);
+		    break;}
 	  default: assert(0);
         }
         nr_token++;
