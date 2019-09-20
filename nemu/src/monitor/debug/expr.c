@@ -206,7 +206,7 @@ int main_operator(int p,int q){
 int eval(int p,int q){
   if (p>q){return -1;}
   else if (p==q) {int num;sscanf(tokens[p].str,"%d",&num);return num;}
-  else if (check_parentheses(p,q)==true) {return eval(p+1,q-1);}
+  else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);
     int val1=eval(p,op-1);
@@ -217,7 +217,7 @@ int eval(int p,int q){
       case '-':return val1-val2;
       case '*':return val1*val2;
       case '/':return val1/val2;
-      default:{printf("%d",tokens[op].type);assert(0);}	       
+      default:{printf("%d",tokens[op].type);return 0;}	       
     }
   }
 }
