@@ -142,15 +142,14 @@ void pop(Stack st){
   else {printf("statck is empty");}
 }
 
-static Stack stack1;
 bool check_parentheses(int p,int q){
+  static Stack stack1;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
   for (int i=p;i<=q;i++){
     if (tokens[i].type=='('){push(stack1,'(');}
-    if (tokens[i].type==')'){
-      if (is_empty(stack1)){return false;}
-      else {pop(stack1);}
-    }
+    else if (tokens[i].type==')'){pop(stack1);}
+    if (is_empty(stack1) && i<q){return false;}
+   
   }
   return is_empty(stack1);
 }
