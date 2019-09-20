@@ -50,10 +50,16 @@ void isa_reg_display() {
   printf("esi  0x%08x\n",cpu.esi);
   printf("edi  0x%08x\n",cpu.edi);
   for (int i=0;i<8;i++){
-    printf("%s  0x%08x\n",regsw[i],cpu.gpr[0]._16);
+    printf("%s   0x%x\n",regsw[i],cpu.gpr[i]._16);
+  }
+  for (int i=0;i<8;i++){
+    printf("%s  ",regsb[i]);
+    for (int j=0;j<2;j++){
+      printf(" 0x%x",cpu.gpr[i]._8[j]);
+    }
+    printf("\n");
   }
 }
-
 uint32_t isa_reg_str2val(const char *s, bool *success) {
   return 0;
 }
