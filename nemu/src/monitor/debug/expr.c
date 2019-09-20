@@ -154,7 +154,7 @@ bool check_parentheses(int p,int q){
   return is_empty(stack1);
 }
 
-static bool priority(int op1,int op2){printf("%d,%d\n",op1,'+');
+static bool priority(int op1,int op2){
   switch(op1){
     case '+':{if (op2=='*'||op2=='/'){ return true;}
              else {return false;}
@@ -195,12 +195,13 @@ int main_operator(int p,int q){
 	if(i>q){break;}
       }
     }
-    else if (tokens[i].type!=TK_NUM){
+    else if (tokens[i].type==TK_NUM){continue;}
+    else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;}	    
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
-  printf("%s",tokens[op_position].str);
+  printf("ppppf%s\n",tokens[op_position].str);
   return op_position;
 }
 
