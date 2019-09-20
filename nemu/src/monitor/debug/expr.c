@@ -198,11 +198,11 @@ int main_operator(int p,int q){
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
-      if (init==false){op=tokens[i].type;op_position=i;init=true;printf("i%d",i);}	    
+      if (init==false){op=tokens[i].type;op_position=i;init=true;printf("op=%d  ",op);}	    
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
-  printf("ppppf %s\n",tokens[op_position].str);
+  printf("ppppf %d\n",op_position);
   return op_position;
 }
 
