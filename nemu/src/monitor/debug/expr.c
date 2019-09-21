@@ -193,6 +193,7 @@ int main_operator(int p,int q){
   bool init=false;
   for (int i=p;i<=q;i++){
     if (tokens[i].type=='('){
+      assert(0);
       int temp=1;
       i++;
       while(true){
@@ -240,7 +241,6 @@ uint32_t expr(char *e, bool *success) {
     printf("not make_token");
     return 0;
   }
-  printf("nr%d\n",nr_token);
   /* TODO: Insert codes to evaluate the expression. */
   return eval(0,nr_token-1);
 }
