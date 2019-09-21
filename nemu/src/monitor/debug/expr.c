@@ -6,7 +6,8 @@
  */
 #include <sys/types.h>
 #include <regex.h>
-
+extern uint32_t isa_reg_str2val(const char *s,bool *success);
+extern uint32_t paddr_read(paddr_t addr,int len);
 enum {
   TK_NOTYPE = 256, TK_EQ=1,TK_NUM=10,TK_UNEQ=0,TK_AND=2,TK_SIXT=16,TK_REG=255,DEREF=254,
   /* TODO: Add more token types */
@@ -215,7 +216,7 @@ int main_operator(int p,int q){
       }
       if(i>=q){break;}
     }
-    else if (tokens[i].type==TK_NUM){continue;}
+    else if (tokens[i].type==DEREF){continue;}
     else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;
 	  continue;}	    
@@ -227,10 +228,25 @@ int main_operator(int p,int q){
 
 uint32_t eval(int p,int q){
   if (p>q){return -1;}
-  else if (p==q) {uint32_t num=0;sscanf(tokens[p].str,"%d",&num);return num;}
+  else if (p==q){
+    uint32_t num=0;
+    if(tokens[p].type==TK_NUM){
+      sscanf(tokens[p].str,"%d",&num);
+      return num;}
+    else if(tokens[p].type==TK_SIXT){
+      sscanf(tokens[p].str,"%x",&num);
+      return num;
+    }
+    else if (tokens[p].type==TK_REG){
+      bool success=true;
+      num=isa_reg_str2val(strtok(tokens[p].str,"$"),&success);
+      return num;
+    }
+  }
   else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
+    if(op==p && tokens[op].type==DEREF){return paddr_read(eval(p+1,q),4);}
     uint32_t val1=eval(p,op-1);
     uint32_t val2=eval(op+1,q);
     switch(tokens[op].type){
@@ -238,9 +254,13 @@ uint32_t eval(int p,int q){
       case '-':return val1-val2;
       case '*':return val1*val2;
       case '/':return val1/val2;
+      case TK_EQ:return val1==val2;
+      case TK_UNEQ:return val1!=val2;
+      case TK_AND:return val1 && val2;
       default:assert(0);	       
     }
   }
+  return 0;
 }
 
 
