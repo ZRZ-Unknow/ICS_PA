@@ -240,7 +240,7 @@ uint32_t eval(int p,int q){
     else if (tokens[p].type==TK_REG){
       bool success=true;
       num=isa_reg_str2val(strtok(tokens[p].str,"$"),&success);
-      printf("%x",num);
+      printf("%x\n",num);
       return num;
     }
   }
