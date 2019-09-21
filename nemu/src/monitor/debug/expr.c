@@ -199,7 +199,7 @@ int main_operator(int p,int q){
         if (tokens[i].type=='('){temp++;}
 	else if(tokens[i].type==')'){temp--;}
 	i++;
-	//printf("while i:%d",i);
+	printf("while i:%d",i);
         if (temp==0){i--;break;}
       }
       if(i>=q){break;}
