@@ -13,8 +13,8 @@ int main(int argc, char *argv[]) {
   char buf[101];
   while(fgets(buf,sizeof(buf),fp)){
     char *p=strtok(buf," ");
-    char *q=strtok(NULL," ");
-    printf("%s=%s\n",q,p);}
+    char *q=strtok(NULL,"\n");
+    printf("%s=%s \n",q,p);}
 	  //int ptr;char *p=NULL;
     //ptr=strtok_r(buf," ",&p);
     //printf("%s:%d\n",p,ptr); }
