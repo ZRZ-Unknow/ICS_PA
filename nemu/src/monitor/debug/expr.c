@@ -188,7 +188,7 @@ static bool priority(int op1,int op2){
 }
 
 int main_operator(int p,int q){
-  int op;
+  int op=tokens[p].type;
   int op_position=p;
   bool init=false;
   for (int i=p;i<=q;i++){
@@ -199,7 +199,7 @@ int main_operator(int p,int q){
         if (tokens[i].type=='('){temp++;}
 	else if(tokens[i].type==')'){temp--;}
 	printf("while i:%d",i);
-        if (temp==0){printf("i=%d\n",i);break;}
+        if (temp==0){printf("i=%d\n",i);assert(0);break;}
 	i++;
       }
       if(i>=q){break;}
