@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "monitor/expr.h"
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 
@@ -14,13 +15,11 @@ int main(int argc, char *argv[]) {
   while(fgets(buf,sizeof(buf),fp)){
     char *p=strtok(buf," ");
     char *q=strtok(NULL,"\n");
-    printf("%s=%s \n",q,p);}
-	  //int ptr;char *p=NULL;
-    //ptr=strtok_r(buf," ",&p);
-    //printf("%s:%d\n",p,ptr); }
-    //int i;
-    //for (i=0;i<strlen(buf);i++){
-     // if(buf[i]==32)break;}
+    bool success=true;
+    int res=expr(q,&success);
+    if(success){printf("%s=%s,myresult=%d\n",q,p,res);}
+    else {printf("fail to eval");}
+  } 
   fclose(fp);  
   ui_mainloop(is_batch_mode);
   
