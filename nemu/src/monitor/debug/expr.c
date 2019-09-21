@@ -192,6 +192,7 @@ int main_operator(int p,int q){
   int op_position=p;
   bool init=false;
   for (int i=p;i<=q;i++){
+    printf("i=%d\n",i);
     if (tokens[i].type=='('){
       assert(0);
       int temp=1;
