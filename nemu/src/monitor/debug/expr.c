@@ -75,8 +75,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+          //  i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -198,20 +198,18 @@ int main_operator(int p,int q){
         if (tokens[i].type=='('){temp++;}
 	else if(tokens[i].type==')'){temp--;}
 	i++;
-	printf("while i:%d",i);
+	//printf("while i:%d",i);
         if (temp==0){break;}
       }
       if(i>q){break;}
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
-      if (init==false){op=tokens[i].type;op_position=i;init=true;
-	      printf("op=%d,posi=%d ",op,op_position);continue;}	    
-      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;
-	      printf("erro  ");printf("opposition:%d",op_position);}
+      if (init==false){op=tokens[i].type;op_position=i;init=true;continue;}	    
+      else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
-  printf("ppppf %d\n",op_position);
+  //printf("ppppf %d\n",op_position);
   return op_position;
 }
 
@@ -220,7 +218,7 @@ uint32_t eval(int p,int q){
   else if (p==q) {uint32_t num=0;sscanf(tokens[p].str,"%d",&num);return num;}
   else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
-    int op=main_operator(p,q);printf("eval %s,%d\n",tokens[op].str,op);
+    int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
     uint32_t val1=eval(p,op-1);
     uint32_t val2=eval(op+1,q);
     switch(tokens[op].type){
@@ -241,6 +239,5 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
   /* TODO: Insert codes to evaluate the expression. */
-  printf("ddd%d\n",nr_token);
   return eval(0,nr_token-1);
 }
