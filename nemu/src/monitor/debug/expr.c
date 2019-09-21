@@ -220,7 +220,7 @@ int main_operator(int p,int q){
 uint32_t eval(int p,int q){
   if (p>q){return -1;}
   else if (p==q) {uint32_t num=0;sscanf(tokens[p].str,"%d",&num);return num;}
-  else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
+  else if (check_parentheses(p,q)) {printf("true\n");return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
     uint32_t val1=eval(p,op-1);
