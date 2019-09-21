@@ -203,15 +203,13 @@ int main_operator(int p,int q){
   int op_position=p;
   bool init=false;
   for (int i=p;i<=q;i++){
-    printf("i=%d\n",i);
     if (tokens[i].type=='('){
       int temp=1;
       i++;
       while(true){
         if (tokens[i].type=='('){temp++;}
 	else if(tokens[i].type==')'){temp--;}
-	printf("while i:%d",i);
-        if (temp==0){printf("i=%d\n",i);break;}
+        if (temp==0){break;}
 	i++;
       }
       if(i>=q){break;}
@@ -219,18 +217,17 @@ int main_operator(int p,int q){
     else if (tokens[i].type==TK_NUM){continue;}
     else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;
-	  printf("init_op:%d\n",op_position);    continue;}	    
+	  continue;}	    
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
-  printf("ppppf %d\n",op_position);
   return op_position;
 }
 
 uint32_t eval(int p,int q){
   if (p>q){return -1;}
   else if (p==q) {uint32_t num=0;sscanf(tokens[p].str,"%d",&num);return num;}
-  else if (check_parentheses(p,q)) {printf("true\n");return eval(p+1,q-1);}
+  else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
     uint32_t val1=eval(p,op-1);
