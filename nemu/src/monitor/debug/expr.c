@@ -206,7 +206,8 @@ int main_operator(int p,int q){
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
-      if (init==false){op=tokens[i].type;op_position=i;init=true;continue;}	    
+      if (init==false){op=tokens[i].type;op_position=i;init=true;
+	  printf("init_op:%d\n",op_position);    continue;}	    
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
