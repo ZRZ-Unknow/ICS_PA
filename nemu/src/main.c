@@ -17,7 +17,11 @@ int main(int argc, char *argv[]) {
     char *q=strtok(NULL,"\n");
     bool success=true;
     int res=expr(q,&success);
-    if(success){printf("%s=%s,myresult=%d\n",q,p,res);}
+    if(success){
+      if(atoi(p)==res){
+      printf("%s=%s, myresult=%d, equal=true\n",q,p,res);}
+      else {printf("%s=%s, myresult=%d, equal=false\n",q,p,res);}
+    }
     else {printf("fail to eval");}
   } 
   fclose(fp); 
