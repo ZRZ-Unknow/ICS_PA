@@ -215,8 +215,11 @@ int main_operator(int p,int q){
 	i++;
       }
       if(i>=q){break;}
-    }
-    else if (tokens[i].type==DEREF){continue;}
+    }//TK_NOTYPE = 256, TK_EQ=1,TK_NUM=10,TK_UNEQ=0,TK_AND=2,TK_SIXT=16,TK_REG=255,DEREF=254,
+    else if (tokens[i].type==DEREF||tokens[i].type==TK_NUM||tokens[i].type==TK_SIXT||
+		    tokens[i].type==TK_REG){continue;}
+    else if(tokens[i].type==TK_EQ||tokens[i].type==TK_UNEQ||tokens[i].type==TK_AND)
+        {op_position=i;op=tokens[i].type;break;}
     else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;
 	  continue;}	    
