@@ -140,6 +140,17 @@ bool check_parentheses(int p,int q){
   int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
   for (int i=p;i<=q;i++){
+   /* if (tokens[i].type=='('){
+      temp=1;
+      i++;
+      while(true){
+        if (tokens[i].type=='('){temp++;}
+        else if(tokens[i].type==')'){temp--;}
+        printf("while i:%d",i);
+        if (temp==0){printf("i=%d\n",i);break;}
+        i++;
+      }
+      if(i>=q){break;}*/
     if (tokens[i].type=='('){temp++;}
     else if (tokens[i].type==')'){temp--;}
     if (temp<0){assert(0);}
