@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   /* Receive commands from user. */
   char buf[101];
   while(fgets(buf,sizeof(buf),fp)){
-		 printf("%s\n",buf); }
+		 printf("%s",buf); }
   fclose(fp);  
   ui_mainloop(is_batch_mode);
   
