@@ -177,25 +177,34 @@ bool check_parentheses(int p,int q){
 }
 */
 static bool priority(int op1,int op2){
-  switch(op1){
-    case '+':{if (op2=='*'||op2=='/'){ return true;}
+  switch(op1){  //TK_EQ=1,TK_UNEQ=0,TK_AND=i2,DEREF=254,'+','-','*','/'
+    case TK_AND:{if (op2!=TK_AND){ return true;}
              else {return false;}
              }
-    case '-':{if (op2=='*'||op2=='/'){
-	       return true;
-	     }
+    case TK_EQ:{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ){return true;}
 	     else {return false;}
 	     }
-    case '*':{if (op2=='*'||op2=='/'){
-               return false;
+    case TK_UNEQ:{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ){return true;}
+             else {return false;}
              }
-             else {return true;}
+    case '+':{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ && op2!='+' && op2!='-'){return true;}
+             else {return false;}
              }
-    case '/':{if (op2=='*'||op2=='/'){
-               return false;
+    case '-':{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ && op2!='+' && op2!='-'){return true;}
+             else {return false;}
              }
-             else {return true;}
-   	     }
+    case '*':{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ && op2!='+' && op2!='-' && op2!='*' && op2!='/')
+		 {return true;}
+             else {return false;}
+             }
+    case '/':{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ && op2!='+' && op2!='-' && op2!='*' && op2!='/')
+                 {return true;}
+             else {return false;}
+             }
+    case DEREF:{if (op2!=TK_AND && op2!=TK_EQ && op2!=TK_UNEQ && op2!='+' && op2!='-' && op2!='*' && op2!='/'&& op2!=DEREF)
+                 {return true;}
+             else {return false;}
+             }
     default:assert(0);
   }
 }
@@ -218,8 +227,6 @@ int main_operator(int p,int q){
     }//TK_NOTYPE = 256, TK_EQ=1,TK_NUM=10,TK_UNEQ=0,TK_AND=2,TK_SIXT=16,TK_REG=255,DEREF=254,
     else if (tokens[i].type==DEREF||tokens[i].type==TK_NUM||tokens[i].type==TK_SIXT||
 		    tokens[i].type==TK_REG){continue;}
-    else if(tokens[i].type==TK_EQ||tokens[i].type==TK_UNEQ||tokens[i].type==TK_AND)
-        {op_position=i;op=tokens[i].type;break;}
     else {
       if (init==false){op=tokens[i].type;op_position=i;init=true;
 	  continue;}	    
