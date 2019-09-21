@@ -194,14 +194,13 @@ int main_operator(int p,int q){
   for (int i=p;i<=q;i++){
     printf("i=%d\n",i);
     if (tokens[i].type=='('){
-      assert(0);
       int temp=1;
       i++;
       while(true){
         if (tokens[i].type=='('){temp++;}
 	else if(tokens[i].type==')'){temp--;}
 	printf("while i:%d",i);
-        if (temp==0){printf("i=%d\n",i);assert(0);break;}
+        if (temp==0){printf("i=%d\n",i);break;}
 	i++;
       }
       if(i>=q){break;}
