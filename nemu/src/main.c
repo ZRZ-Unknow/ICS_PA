@@ -8,7 +8,7 @@ void ui_mainloop(int);
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
- 
+  /*
   FILE*fp;
   fp=fopen("/home/zrz/ics2019/nemu/tools/gen-expr/input","r");
   char buf[101];
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     else {printf("fail to eval");}
   } 
   fclose(fp); 
-  
+  */
 
   /* Receive commands from user. */ 
   ui_mainloop(is_batch_mode);
