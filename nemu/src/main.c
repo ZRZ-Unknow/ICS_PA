@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 
@@ -10,7 +11,10 @@ int main(int argc, char *argv[]) {
   /* Receive commands from user. */
   char buf[101];
   while(fgets(buf,sizeof(buf),fp)){
-		 printf("%s",buf); }
+    //int ptr;char *p=NULL;
+    //ptr=strtok_r(buf," ",&p);
+    //printf("%s:%d\n",p,ptr); }
+    printf("%d&&\n",buf[2]);}
   fclose(fp);  
   ui_mainloop(is_batch_mode);
   
