@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     }
     char p[20];
     strncpy(p,buf,i);
-    printf("%s&&\n",p);}
+    printf("%d&&\n",atoi(p));}
   fclose(fp);  
   ui_mainloop(is_batch_mode);
   
