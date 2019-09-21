@@ -209,7 +209,7 @@ int main_operator(int p,int q){
       else if(priority(op,tokens[i].type)==false) {op=tokens[i].type;op_position=i;}
     }
   }
-  //printf("ppppf %d\n",op_position);
+  printf("ppppf %d\n",op_position);
   return op_position;
 }
 
