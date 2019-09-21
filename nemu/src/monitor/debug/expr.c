@@ -250,14 +250,13 @@ uint32_t eval(int p,int q){
     else if (tokens[p].type==TK_REG){
       bool success=true;
       num=isa_reg_str2val(strtok(tokens[p].str,"$"),&success);
-      printf("%x\n",num);
       return num;
     }
   }
   else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
-    if(op==p && tokens[op].type==DEREF){return paddr_read(eval(p+1,q),4);}
+    //if(op==p && tokens[op].type==DEREF){return paddr_read(eval(p+1,q),4);}
     uint32_t val1=eval(p,op-1);
     uint32_t val2=eval(op+1,q);
     switch(tokens[op].type){
@@ -268,6 +267,7 @@ uint32_t eval(int p,int q){
       case TK_EQ:return val1==val2;
       case TK_UNEQ:return val1!=val2;
       case TK_AND:return val1 && val2;
+      case DEREF:return paddr_read(val2,4);
       default:assert(0);	       
     }
   }
