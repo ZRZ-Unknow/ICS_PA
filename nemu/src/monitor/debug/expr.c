@@ -240,6 +240,7 @@ uint32_t expr(char *e, bool *success) {
     printf("not make_token");
     return 0;
   }
+  printf("nr%d\n",nr_token);
   /* TODO: Insert codes to evaluate the expression. */
   return eval(0,nr_token-1);
 }
