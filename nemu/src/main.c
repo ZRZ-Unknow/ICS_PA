@@ -12,12 +12,14 @@ int main(int argc, char *argv[]) {
   /* Receive commands from user. */
   char buf[101];
   while(fgets(buf,sizeof(buf),fp)){
-    //int ptr;char *p=NULL;
+    char *p=strtok(buf," ");
+    printf("%s\n",p);}
+	  //int ptr;char *p=NULL;
     //ptr=strtok_r(buf," ",&p);
     //printf("%s:%d\n",p,ptr); }
-    for (int i=0;i<30;i++)
-    { printf("%d&&",buf[i]);}
-		    printf("\n");}
+    //int i;
+    //for (i=0;i<strlen(buf);i++){
+     // if(buf[i]==32)break;}
   fclose(fp);  
   ui_mainloop(is_batch_mode);
   
