@@ -31,10 +31,10 @@ static struct rule {
   {"/",'/'},
   {"\\(",'('},
   {"\\)",')'},
+  {"0x[0-9a-f]+",TK_SIXT},
   {"[0-9]+",TK_NUM},
   {"!=",TK_UNEQ},
   {"&&",TK_AND},
-  {"0x[0-9a-f]+",TK_SIXT},
   {"\\$[a-ehilpx]{2,3}",TK_REG},
 };
 
