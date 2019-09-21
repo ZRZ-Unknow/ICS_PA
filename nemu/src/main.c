@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 
@@ -14,7 +15,13 @@ int main(int argc, char *argv[]) {
     //int ptr;char *p=NULL;
     //ptr=strtok_r(buf," ",&p);
     //printf("%s:%d\n",p,ptr); }
-    printf("%d&&\n",buf[2]);}
+    int i;
+    for(i=0;i<strlen(buf);i++){
+      if (buf[i]==32)break;
+    }
+    char p[20];
+    strncpy(p,buf,i);
+    printf("%s&&\n",p);}
   fclose(fp);  
   ui_mainloop(is_batch_mode);
   
