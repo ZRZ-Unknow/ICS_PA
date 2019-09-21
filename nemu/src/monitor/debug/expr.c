@@ -143,7 +143,7 @@ bool check_parentheses(int p,int q){
     if (tokens[i].type=='('){temp++;}
     else if (tokens[i].type==')'){temp--;}
     if (temp<0){assert(0);}
-    if (temp==0 && i<p){return false;} 
+    if (temp==0 && i<q){return false;} 
   }
   if (temp!=0)return false;
   return true;
