@@ -6,28 +6,37 @@
 #include <string.h>
 
 // this should be enough
-static char buf[65536];
-buf[0]='\0';
+static char buf[65536]="";
 #define random(x) (rand()%x)
 
+//srand((unsigned)time(NULL));
+int random_prob(){
+  int a[10]={0,0,0,1,1,2,2,2,2,2};
+  int k=random(10);
+  return a[k];
+}
 static inline void gen_rand_op(){
-  srand((unsigned)time(NULL));
+//  srand((unsigned)time(NULL));
   switch(random(4)){
-    case 0:{strcat(buf,'+');break;}
-    case 1:{strcat(buf,'-');break;}
-    case 2:{strcat(buf,'*');break;}
-    case 3:{strcat(buf,'/');break;}
+    case 0:{strcat(buf,"+");break;}
+    case 1:{strcat(buf,"-");break;}
+    case 2:{strcat(buf,"*");break;}
+    case 3:{strcat(buf,"/");break;}
+    default:assert(0);
   }
 }
-
+static int sign=0;
 static inline void gen_rand_expr() {
-  srand((unsigned)time(NULL));
-  switch(random(3)){
-    case 0:{char s[3];itoa(random(100),s,10);strcat(buf,s);break;}
-    case 1:{strcat(buf,'(');gen_rand_expr();strcat(buf,')');break;}
-    case 2:{gen_rand_expr();gen_rand_op();gen_rand_expr();break;}	   
+  if (sign>30){return;}
+  sign++;
+  switch(random_prob()){
+    case 0:{char s[4];sprintf(s,"%d",random(100));strcat(buf,s);break;}
+    case 1: {strcat(buf,"(");gen_rand_expr();strcat(buf,")");break;}
+    default:{ gen_rand_expr();gen_rand_op();gen_rand_expr();break;}	   
   }
 }
+  
+
 
 static char code_buf[65536];
 static char *code_format =
@@ -39,16 +48,21 @@ static char *code_format =
 "}";
 
 int main(int argc, char *argv[]) {
-  int seed = time(0);
-  srand(seed);
+//  int seed = time(0);
+// srand(seed);
   int loop = 1;
   if (argc > 1) {
     sscanf(argv[1], "%d", &loop);
   }
   int i;
+  srand((unsigned)time(NULL));
   for (i = 0; i < loop; i ++) {
     gen_rand_expr();
-
+    while (sign>30 || sign<2){
+      memset(buf,0,sizeof(buf));
+      sign=0;
+      gen_rand_expr();}
+      
     sprintf(code_buf, code_format, buf);
 
     FILE *fp = fopen("/tmp/.code.c", "w");
@@ -67,6 +81,7 @@ int main(int argc, char *argv[]) {
     pclose(fp);
 
     printf("%u %s\n", result, buf);
+    memset(buf,0,sizeof(buf));
   }
   return 0;
 }
