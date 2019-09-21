@@ -34,7 +34,7 @@ static struct rule {
   {"!=",TK_UNEQ},
   {"&&",TK_AND},
   {"0x[0-9a-f]+",TK_SIXT},
-  {"\\$[a-ehilpx]{2-3}",TK_REG},
+  {"\\$[a-ehilpx]{2,3}",TK_REG},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
