@@ -201,7 +201,7 @@ int main_operator(int p,int q){
 	//printf("while i:%d",i);
         if (temp==0){break;}
       }
-      if(i>q){break;}
+      if(i>=q){break;}
     }
     else if (tokens[i].type==TK_NUM){continue;}
     else {
