@@ -63,7 +63,7 @@ static int cmd_info(char *args){
      isa_reg_display();
   }
   else if (strcmp(ch,"w")==0){
-     printf("w\n");
+    view_watchpoint(true,-1);
   } 
   else {
      printf("please input 'r' or 'w' after 'info' to command\n");
