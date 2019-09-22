@@ -38,7 +38,6 @@ int free_wp(int no){
     head=head->next;
     p->next=free_;
     free_=p;
-    return 0;
   }
   else{
     WP *pre;
@@ -49,8 +48,8 @@ int free_wp(int no){
     pre->next=p->next;
     p->next=free_;
     free_=p;
-    return 0;
   }
+  printf("delete watchpoint %d\n",no);
   return 0;
 }
 
