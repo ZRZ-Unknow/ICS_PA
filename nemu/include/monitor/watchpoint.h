@@ -18,4 +18,5 @@ extern void set_watchpoint(char *args);
 extern void delete_watchpoint(int no);
 extern void view_watchpoint(bool all,int no);
 extern int scan_watchpoint();
+extern WP *no_to_wp(int no);
 #endif

@@ -60,7 +60,7 @@ void set_watchpoint(char *args){
   bool succ=true;
   p->old_v=expr(p->content,&succ);
   printf("successfully set watchpoint %d\n",p->NO);
-  printf("express:%s\n",p->content);
+  printf("expression:%s\n",p->content);
   printf("old value:%#x\n",p->old_v);
 }
 
@@ -94,6 +94,17 @@ void view_watchpoint(bool all,int no){
   }
 }
 
+WP *no_to_wp(int no){
+  if (no<0){return NULL;}
+  else {
+    WP *p=head;
+    while(p->NO!=no && p!=NULL){
+      p=p->next;
+    }
+    if(p!=NULL && p->NO==no){return p;}
+    else {return NULL;}
+  }
+}
 int scan_watchpoint(){
   WP *p=head;
   while(p!=NULL){

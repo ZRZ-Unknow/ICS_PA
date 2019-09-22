@@ -60,11 +60,14 @@ void cpu_exec(uint64_t n) {
 
   int no=scan_watchpoint();
   if(no!=-1){
-    if(no==false){printf("no watchpoint\n");}
-    else{nemu_state.state=NEMU_STOP;
-    printf("trigger watchpoint %d",no);
+    nemu_state.state=NEMU_STOP;
+    printf("trigger watchpoint %d\n",no);
+    WP *p=no_to_wp(no);
+    printf("expression:%s\n",p->content);
+    printf("old value:%#x\n",p->old_v);
+    printf("new value:%#x\n",p->new_v);
     }
-  }
+  
 
   /* TODO: check watchpoints here. */
 
@@ -79,7 +82,6 @@ void cpu_exec(uint64_t n) {
 
     if (nemu_state.state != NEMU_RUNNING) break;
   }
-
   switch (nemu_state.state) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
 
