@@ -33,7 +33,7 @@ WP* new_wp(){
 
 int free_wp(int no){
   WP *p=head;
-  if(p==NULL){assert(0);}
+  if(p==NULL){printf("no watchpoint");return 0;}
   if(p->NO==no){
     head=head->next;
     p->next=free_;
