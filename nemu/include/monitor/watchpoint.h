@@ -5,7 +5,7 @@
 
 typedef struct watchpoint {
   int NO;
-  char ch[64];
+  char content[64];
   int new_v;
   int old_v;
   struct watchpoint *next;
@@ -14,5 +14,8 @@ typedef struct watchpoint {
 
 
 } WP;
-
+extern void set_watchpoint(char *args);
+extern void delete_watchpoint(int no);
+extern void view_watchpoint(bool all,int no);
+extern WP *scan_watchpoint();
 #endif

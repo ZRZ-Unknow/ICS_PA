@@ -9,6 +9,7 @@
 void cpu_exec(uint64_t); /*unsigned long int*/
 extern void isa_reg_display();
 extern uint32_t paddr_read(paddr_t addr, int len);
+
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -121,11 +122,16 @@ static int cmd_p(char *args){
 }
 
 static int cmd_w(char *args){
-return 0;
+
+  return 0;
 }
 
 static int cmd_d(char *args){
-return 0;
+  char *ch=strtok(args," ");
+  int number=atoi(ch);
+  if(number<0){printf("input an nonnegative integer");return 0;}
+  else {delete_watchpoint(number);}
+  return 0;
 }
 
 static struct {
