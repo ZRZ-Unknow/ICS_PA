@@ -30,7 +30,8 @@ static inline void gen_rand_expr() {
   if (sign>30){return;}
   sign++;
   switch(random_prob()){
-    case 0:{char s[4];sprintf(s,"%d",random(100));strcat(buf,s);break;}
+    case 0:{char s[4];int a=random(100);while(a==0){a=random(100);}
+	    sprintf(s,"%d",a);strcat(buf,s);break;}
     case 1: {strcat(buf,"(");gen_rand_expr();strcat(buf,")");break;}
     default:{ gen_rand_expr();gen_rand_op();gen_rand_expr();break;}	   
   }

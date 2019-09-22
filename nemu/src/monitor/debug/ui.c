@@ -115,9 +115,17 @@ static int cmd_p(char *args){
   char *ch=strtok(NULL," ");
   bool success=true;
   uint32_t result=expr(ch,&success);
-  if(success){printf("%#x\n",result);}
+  if(success){printf("0x%x\n",result);}
   else {printf("error p\n");}
   return 0;
+}
+
+static int cmd_w(char *args){
+return 0;
+}
+
+static int cmd_d(char *args){
+return 0;
 }
 
 static struct {
@@ -132,6 +140,8 @@ static struct {
   { "info","Print program status,'r' for register status and 'w' for watchpoint information",cmd_info},
   { "x","Scan memory",cmd_x},
   { "p","Expression evaluation",cmd_p},
+  { "w","Set watchpoint",cmd_w},
+  { "d","Delete watchpoint",cmd_d},
   /* TODO: Add more commands */
 
 };
