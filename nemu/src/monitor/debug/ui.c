@@ -116,7 +116,7 @@ static int cmd_p(char *args){
   char *ch=strtok(NULL," ");
   bool success=true;
   uint32_t result=expr(ch,&success);
-  if(success){printf("0x%x\n",result);}
+  if(success){printf("%d\n",result);}
   else {printf("error p\n");}
   return 0;
 }
