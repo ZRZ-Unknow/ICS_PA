@@ -57,15 +57,15 @@ void cpu_exec(uint64_t n) {
               "we do not record more instruction trace beyond this point.\n"
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
-/*
+
   int no=scan_watchpoint();
   if(no!=-1){
     if(no==false){printf("no watchpoint\n");}
-    else{nemu_state=NEMU_STOP;
+    else{nemu_state.state=NEMU_STOP;
     printf("trigger watchpoint %d",no);
     }
   }
-*/  
+
   /* TODO: check watchpoints here. */
 
 #endif
