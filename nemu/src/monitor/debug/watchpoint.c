@@ -96,7 +96,6 @@ void view_watchpoint(bool all,int no){
 
 int scan_watchpoint(){
   WP *p=head;
-  if(p==NULL){return false;}
   while(p!=NULL){
     bool succ=true;
     p->new_v=expr(p->content,&succ);
