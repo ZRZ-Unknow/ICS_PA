@@ -92,17 +92,17 @@ void view_watchpoint(bool all,int no){
   }
 }
 
-WP *scan_watchpoint(){
+int scan_watchpoint(){
   WP *p=head;
-  if(p==NULL){printf("no watchpoint");return false;}
+  if(p==NULL){return false;}
   while(p!=NULL){
     bool succ=true;
     p->new_v=expr(p->content,&succ);
     if(p->new_v!=p->old_v){
-      return p;
+      return p->NO;
     }
   }
-  return 0;
+  return -1;
 }
 
 

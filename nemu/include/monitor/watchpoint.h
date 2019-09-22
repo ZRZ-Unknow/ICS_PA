@@ -17,5 +17,5 @@ typedef struct watchpoint {
 extern void set_watchpoint(char *args);
 extern void delete_watchpoint(int no);
 extern void view_watchpoint(bool all,int no);
-extern WP *scan_watchpoint();
+extern int scan_watchpoint();
 #endif
