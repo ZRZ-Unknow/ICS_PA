@@ -40,14 +40,14 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args) {
   if (args==NULL){
-     printf("please input an integer after 'si'\n");
-     return 0;
+    cpu_exec(1);  
+    return 0;
   }
   char *ch=strtok(args," ");
   int num=atoi(ch);
   if (num<=0){
-     printf("execution times error\n");
-     return 0;
+    cpu_exec(-1); 
+    return 0;
   }
   cpu_exec(num);
   return 0;
