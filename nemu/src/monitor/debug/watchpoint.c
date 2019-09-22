@@ -64,7 +64,6 @@ void set_watchpoint(char *args){
 
 void delete_watchpoint(int no){
   free_wp(no);
-  printf("delete watchpoint %d\n",no);
 }
 
 void view_watchpoint(bool all,int no){
