@@ -33,7 +33,7 @@ WP* new_wp(){
 
 int free_wp(int no){
   WP *p=head;
-  if(p==NULL){printf("no watchpoint");return 0;}
+  if(p==NULL){printf("no watchpoint\n");return 0;}
   if(p->NO==no){
     head=head->next;
     p->next=free_;
@@ -108,12 +108,3 @@ WP *scan_watchpoint(){
 
 /* TODO: Implement the functionality of watchpoint */
 
-/*
-typedef struct watchpoint {
-  int NO;
-  char ch[64];
-  int new_v;
-  int old_v;
-  struct watchpoint *next;
-} WP;
-*/
