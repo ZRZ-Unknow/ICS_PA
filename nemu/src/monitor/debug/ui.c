@@ -114,6 +114,7 @@ static int cmd_p(char *args){
   char *ch=args;
   bool success=true;
   uint32_t result=expr(ch,&success);
+  ch=NULL;
   if(success){printf("%#x\n",result);clear_tokens();}
   else {printf("error p\n");}
   return 0;
