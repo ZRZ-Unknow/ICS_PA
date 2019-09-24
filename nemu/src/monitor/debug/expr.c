@@ -100,7 +100,9 @@ static bool make_token(char *e) {
 	  case TK_REG:
 	  case TK_UNEQ:
 	  case TK_SIXT:
-	  case TK_AND:{tokens[nr_token].type=rules[i].token_type;
+	  case TK_AND:{memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
+			      tokens[nr_token].type=rules[i].token_type;
+
                        strncpy(tokens[nr_token].str,substr_start,substr_len);break;}
 	  default: assert(0);
         }
