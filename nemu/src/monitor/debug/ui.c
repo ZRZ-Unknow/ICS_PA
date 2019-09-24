@@ -41,15 +41,13 @@ static int cmd_help(char *args);
 static int cmd_si(char *args) {
   if (args==NULL){
     cpu_exec(1);  
-    return 0;
   }
-  char *ch=strtok(args," ");
-  int num=atoi(ch);
-  if (num<=0){
-    cpu_exec(-1); 
-    return 0;
+  else{
+    char *ch=strtok(args," ");
+    int num=atoi(ch);
+    if (num<=0){cpu_exec(-1);}
+    else{cpu_exec(num);}
   }
-  cpu_exec(num);
   return 0;
 }
 
