@@ -9,7 +9,7 @@
 void cpu_exec(uint64_t); /*unsigned long int*/
 extern void isa_reg_display();
 extern uint32_t paddr_read(paddr_t addr, int len);
-
+extern void clear_tokens();
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -114,7 +114,7 @@ static int cmd_p(char *args){
   char *ch=strtok(NULL," ");
   bool success=true;
   uint32_t result=expr(ch,&success);
-  if(success){printf("%#x\n",result);}
+  if(success){printf("%#x\n",result);clear_tokens();}
   else {printf("error p\n");}
   return 0;
 }
