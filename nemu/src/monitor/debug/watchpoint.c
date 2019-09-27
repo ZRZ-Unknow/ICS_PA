@@ -44,7 +44,8 @@ void free_wp(int no){
     return;
   }
   WP *p=head;
-  while(p->NO!=no && p!=NULL){
+  while(p!=NULL){
+    if(p->NO==no){break;}
     p=p->next;
   }
   if (p==NULL){printf("have no watchpoint %d\n",no);return;}
