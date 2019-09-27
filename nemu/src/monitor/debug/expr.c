@@ -137,12 +137,14 @@ void push(Stack st,char e){
     st.top++;
 }
 void pop(Stack st){
+    memset(st.ch,'\0',sizeof(st.ch));
     st.top--;
 }
 
 bool check_parentheses(int p,int q){
-  int temp=0;
+//  int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
+  Stack stack1;
   for (int i=p;i<=q;i++){
    /* if (tokens[i].type=='('){
       temp=1;
@@ -155,14 +157,30 @@ bool check_parentheses(int p,int q){
         i++;
       }
       if(i>=q){break;}*/
-    if (tokens[i].type=='('){temp++;}
-    else if (tokens[i].type==')'){temp--;}
-    if (temp<0){assert(0);}
-    if (temp==0 && i<q){return false;} 
+    if (tokens[i].type=='('){push(stack1,'(');}
+    else if (tokens[i].type==')'){pop(stack1);}
+    if (stack1.top<0){assert(0);}
+    if (is_empty(stack1) && i<q){return false;} 
   }
-  if (temp!=0)return false;
+  if (!is_empty(stack1))return false;
   return true;
 }
+/*
+bool check_parentheses(int p,int q){
+145   int temp=0;
+146   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
+147   Stack stack1;
+148   for (int i=p;i<=q;i++){
+160     if (tokens[i].type=='('){stack1.push('(');}
+161     else if (tokens[i].type==')'){stack1.pop();}
+162     if (stack1.top<0){assert(0);}
+163     if (is_empty(stack1) && i<q){return false;}
+164   }
+165   if (temp!=0)return false;
+166   return true;
+167 }
+*/
+
 
 /*
 bool check_parentheses(int p,int q){
@@ -255,7 +273,7 @@ uint32_t eval(int p,int q){
       return num;
     }
   }
-  else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
+  else if (check_parentheses(p,q)) {printf("dddd\n");return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
     //if(op==p && tokens[op].type==DEREF){return paddr_read(eval(p+1,q),4);}
@@ -292,7 +310,10 @@ uint32_t expr(char *e, bool *success) {
   return eval(0,nr_token-1);
 }
 void clear_tokens(){
-  nr_token=0;
+  while(nr_token!=0){
+  memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
+  nr_token--;
+  }
 }
 
 
