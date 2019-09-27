@@ -47,7 +47,8 @@ void free_wp(int no){
   while(p->NO!=no && p!=NULL){
     p=p->next;
   }
-  if (p->NO==no && p!=NULL){
+  if (p==NULL){printf("have no watchpoint %d\n",no);return;}
+  if (p->NO==no){
     WP *q=head;
     while(q->next!=p){
       q=q->next;
@@ -58,7 +59,7 @@ void free_wp(int no){
     printf("delete watchpoint %d\n",no);
     return;
   }
-  else {printf("ddddddd\n");}
+  else {assert(0);}
   return;
 }
 
