@@ -7,8 +7,7 @@ static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *free_ = NULL;
 
 void init_wp_pool() {
-  int i;
-  for (i = 0; i < NR_WP; i ++) {
+  for (int i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
   }
@@ -28,6 +27,7 @@ WP* new_wp(){
   if(free_!=NULL){
     WP *p=free_;
     free_=free_->next;
+    printf("%d\n",p->NO);
     p->next=head;
     head=p;
     return head;
@@ -77,7 +77,6 @@ void free_wp(int no){
 
 void set_watchpoint(char *args){
   WP *p=new_wp();
-  printf("successfully set watchpoint %d",p->NO);
   strcpy(p->content,args);
   bool succ=true;
   p->old_v=expr(p->content,&succ);
