@@ -74,10 +74,6 @@ void set_watchpoint(char *args){
   printf("old value:%#x\n",p->old_v);
 }
 
-//void delete_watchpoint(int no){
-//  free_wp(no);
-//}
-
 void view_watchpoint(){
   if(head==NULL){printf("no watchpoint currently\n");}
   else {
@@ -88,49 +84,27 @@ void view_watchpoint(){
     }
   }
 }
-/*void view_watchpoint(int no){
-  if (all==true){
-    WP *p=head;
-    if(p==NULL){printf("no watchpoint currently\n");}
-    else {
-      while(p!=NULL){
-	printf("watchpoint %d:%s,value is %#x\n",p->NO,p->content,p->old_v);
-        p=p->next;
-      }
-    }
-  }
-  else {
-    WP *p=head;
-    if(p==NULL){printf("no watchpoint currently\n");}
-    else {
-      while(p->NO!=no && p!=NULL){
-        p=p->next;
-      }
-      if(p!=NULL && p->NO==no){
-        printf("watchpoint %d:%s,value is %#x\n",p->NO,p->content,p->old_v);
-      }
-      else {printf("not find watchpoint %d\n",no);}
-    }
-  }
-}
-*/
-WP *no_to_wp(int no){
+
+WP *no_to_wp(int no){  
   if (no<0){return NULL;}
   else {
     WP *p=head;
-    while(p->NO!=no && p!=NULL){
+    while(p!=NULL){
+      if (p->NO==no){return p;}
       p=p->next;
     }
-    if(p!=NULL && p->NO==no){return p;}
-    else {return NULL;}
+    printf("watchpoint %d not exit\n",no);
+    return NULL;
   }
 }
-int scan_watchpoint(){
+
+int check__watchpoint(){
   WP *p=head;
   while(p!=NULL){
     bool succ=true;
     p->new_v=expr(p->content,&succ);
     if(p->new_v!=p->old_v){
+      p->old_v=p->new_v;
       return p->NO;
     }
   }

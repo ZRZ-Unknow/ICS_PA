@@ -58,7 +58,7 @@ void cpu_exec(uint64_t n) {
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
 
-  int no=scan_watchpoint();
+  int no=check__watchpoint();
   if(no!=-1){
     nemu_state.state=NEMU_STOP;
     printf("trigger watchpoint %d\n",no);
