@@ -58,7 +58,7 @@ void free_wp(int no){
     printf("delete watchpoint %d\n",no);
     return;
   }
-  else {assert(0);}
+  else {printf("ddddddd\n");}
   return;
 }
 
