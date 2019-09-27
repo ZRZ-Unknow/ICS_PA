@@ -164,37 +164,7 @@ bool check_parentheses(int p,int q){
   if (temp!=0)return false;
   return true;
 }
-/*
-bool check_parentheses(int p,int q){
-145   int temp=0;
-146   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
-147   Stack stack1;
-148   for (int i=p;i<=q;i++){
-160     if (tokens[i].type=='('){stack1.push('(');}
-161     else if (tokens[i].type==')'){stack1.pop();}
-162     if (stack1.top<0){assert(0);}
-163     if (is_empty(stack1) && i<q){return false;}
-164   }
-165   if (temp!=0)return false;
-166   return true;
-167 }
-*/
 
-
-/*
-bool check_parentheses(int p,int q){
-  Stack stack1;
-  set_empty(stack1);
-  if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
-  for (int i=p;i<=q;i++){
-    if (tokens[i].type=='('){push(stack1,'(');}
-    else if (tokens[i].type==')'){pop(stack1);}
-    if (is_empty(stack1) && i<q){return false;}
-  }
-  if (!is_empty(stack1))return false;
-  return true;
-}
-*/
 static bool priority(int op1,int op2){
   switch(op1){  //TK_EQ=1,TK_UNEQ=0,TK_AND=i2,DEREF=254,'+','-','*','/'
     case TK_AND:{if (op2!=TK_AND){ return true;}
