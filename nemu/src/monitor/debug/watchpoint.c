@@ -22,12 +22,10 @@ WP* new_wp(){
   if (init==false){
     init_wp_pool();
     init=true;
-    new_wp();
   }
   if(free_!=NULL){
     WP *p=free_;
     free_=free_->next;
-    printf("%d\n",p->NO);
     p->next=head;
     head=p;
     return head;
