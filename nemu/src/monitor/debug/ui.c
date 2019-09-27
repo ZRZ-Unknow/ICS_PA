@@ -90,7 +90,7 @@ static int cmd_x(char *args){
   double p=num;
   int n=ceil(p/4.0);
   for (int i=0;i<n;i++){
-     printf("0x%08x: ",addr);
+     printf("%#08x: ",addr);
      if (i==num/4){
 	for (int j=0;j<num%4;j++){
 	  int memory=paddr_read(addr,4);
