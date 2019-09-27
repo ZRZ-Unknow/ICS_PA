@@ -41,21 +41,21 @@ void reg_test() {
 }
 
 void isa_reg_display() {
-  printf("eax  0x%08x\n",cpu.eax);
-  printf("ecx  0x%08x\n",cpu.ecx);
-  printf("edx  0x%08x\n",cpu.edx);
-  printf("ebx  0x%08x\n",cpu.ebx);
-  printf("esp  0x%08x\n",cpu.esp);
-  printf("ebp  0x%08x\n",cpu.ebp);
-  printf("esi  0x%08x\n",cpu.esi);
-  printf("edi  0x%08x\n",cpu.edi);
+  printf("eax  %#x\n",cpu.eax);
+  printf("ecx  %#x\n",cpu.ecx);
+  printf("edx  %#x\n",cpu.edx);
+  printf("ebx  %#x\n",cpu.ebx);
+  printf("esp  %#x\n",cpu.esp);
+  printf("ebp  %#x\n",cpu.ebp);
+  printf("esi  %#x\n",cpu.esi);
+  printf("edi  %#x\n",cpu.edi);
   for (int i=0;i<8;i++){
-    printf("%s   0x%x\n",regsw[i],cpu.gpr[i]._16);
+    printf("%s   %#x\n",regsw[i],cpu.gpr[i]._16);
   }
   for (int i=0;i<8;i++){
     printf("%s  ",regsb[i]);
     for (int j=0;j<2;j++){
-      printf(" 0x%x",cpu.gpr[i]._8[j]);
+      printf(" %#x",cpu.gpr[i]._8[j]);
     }
     printf("\n");
   }
