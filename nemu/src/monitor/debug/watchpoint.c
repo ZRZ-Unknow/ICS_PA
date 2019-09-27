@@ -5,7 +5,7 @@
 
 static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *free_ = NULL;
-bool init=false;
+
 void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
@@ -13,19 +13,23 @@ void init_wp_pool() {
     wp_pool[i].next = &wp_pool[i + 1];
   }
   wp_pool[NR_WP - 1].next = NULL;
-
   head = NULL;
   free_ = wp_pool;
 }
 
+bool init=false;
+
 WP* new_wp(){
-  if (init==false){init_wp_pool();}
+  if (init==false){
+    init_wp_pool();
+    init=true;
+    new_wp();
+  }
   if(free_!=NULL){
     WP *p=free_;
     free_=free_->next;
     p->next=head;
     head=p;
-    init=true;
     return head;
   }
   else {assert(0);}
