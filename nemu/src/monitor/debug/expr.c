@@ -142,9 +142,8 @@ void pop(Stack st){
 }
 
 bool check_parentheses(int p,int q){
-//  int temp=0;
+  int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
-  Stack stack1;
   for (int i=p;i<=q;i++){
    /* if (tokens[i].type=='('){
       temp=1;
@@ -157,12 +156,12 @@ bool check_parentheses(int p,int q){
         i++;
       }
       if(i>=q){break;}*/
-    if (tokens[i].type=='('){push(stack1,'(');}
-    else if (tokens[i].type==')'){pop(stack1);}
-    if (stack1.top<0){assert(0);}
-    if (is_empty(stack1) && i<q){return false;} 
+    if (tokens[i].type=='('){temp++;}
+    else if (tokens[i].type==')'){temp--;}
+    if (temp<0){assert(0);}
+    if (temp==0 && i<q){return false;} 
   }
-  if (!is_empty(stack1))return false;
+  if (temp!=0)return false;
   return true;
 }
 /*
@@ -273,7 +272,7 @@ uint32_t eval(int p,int q){
       return num;
     }
   }
-  else if (check_parentheses(p,q)) {printf("dddd\n");return eval(p+1,q-1);}
+  else if (check_parentheses(p,q)) {return eval(p+1,q-1);}
   else {
     int op=main_operator(p,q);//printf("eval %s,%d\n",tokens[op].str,op);
     //if(op==p && tokens[op].type==DEREF){return paddr_read(eval(p+1,q),4);}
