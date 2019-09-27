@@ -119,28 +119,6 @@ static bool make_token(char *e) {
  // for (int j=0;j<nr_token;j++){printf("%s",tokens[j].str);}printf("\n");
   return true;
 }
-// use stack to check parentheses
-typedef struct{
-  int top;
-  char ch[64];
-}Stack;
-
-bool is_empty(Stack st){
-  if (st.top==0){return true;}
-  return false;
-}
-void set_empty(Stack st){
-  st.top=0;
-}
-void push(Stack st,char e){
-    st.ch[st.top]=e;
-    st.top++;
-}
-void pop(Stack st){
-    memset(st.ch,'\0',sizeof(st.ch));
-    st.top--;
-}
-
 bool check_parentheses(int p,int q){
   int temp=0;
   if (tokens[p].type!='(' || tokens[q].type!=')'){return false;}
@@ -278,6 +256,7 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   return eval(0,nr_token-1);
 }
+
 void clear_tokens(){
   while(nr_token!=0){
   memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
