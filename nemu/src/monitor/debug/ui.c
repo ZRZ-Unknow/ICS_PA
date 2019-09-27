@@ -61,7 +61,7 @@ static int cmd_info(char *args){
      isa_reg_display();
   }
   else if (strcmp(ch,"w")==0){
-    view_watchpoint(true,-1);
+    view_watchpoint();
   } 
   else {
      printf("please input 'r' or 'w' after 'info' to command\n");
@@ -129,7 +129,7 @@ static int cmd_d(char *args){
   char *ch=strtok(args," ");
   int number=atoi(ch);
   if(number<0){printf("input an nonnegative integer");return 0;}
-  else {delete_watchpoint(number);}
+  else {free_wp(number);}
   return 0;
 }
 

@@ -58,17 +58,6 @@ void free_wp(int no){
     printf("delete watchpoint %d\n",no);
     return;
   }
-  /*
-  else{
-    WP *pre;
-    while(p->NO!=no){
-      pre=p;
-      p=p->next;
-    }
-    pre->next=p->next;
-    p->next=free_;
-    free_=p;
-  }*/
   else {assert(0);}
   return;
 }
@@ -83,11 +72,21 @@ void set_watchpoint(char *args){
   printf("old value:%#x\n",p->old_v);
 }
 
-void delete_watchpoint(int no){
-  free_wp(no);
-}
+//void delete_watchpoint(int no){
+//  free_wp(no);
+//}
 
-void view_watchpoint(bool all,int no){
+void view_watchpoint(){
+  if(head==NULL){printf("no watchpoint currently\n");}
+  else {
+    WP *p=head;
+    while(p!=NULL){
+      printf("watchpoint %d:%s,value is %#x\n",p->NO,p->content,p->old_v);
+      p=p->next;
+    }
+  }
+}
+/*void view_watchpoint(int no){
   if (all==true){
     WP *p=head;
     if(p==NULL){printf("no watchpoint currently\n");}
@@ -112,7 +111,7 @@ void view_watchpoint(bool all,int no){
     }
   }
 }
-
+*/
 WP *no_to_wp(int no){
   if (no<0){return NULL;}
   else {
