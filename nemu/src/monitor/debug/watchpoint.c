@@ -69,6 +69,10 @@ void set_watchpoint(char *args){
   strcpy(p->content,args);
   bool succ=true;
   p->old_v=expr(p->content,&succ);
+  if(succ==false){
+    free_wp(p->NO);
+    return;
+  }
   printf("successfully set watchpoint %d\n",p->NO);
   printf("expression:%s\n",p->content);
   printf("old value:%#x\n",p->old_v);

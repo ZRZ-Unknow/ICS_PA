@@ -293,7 +293,6 @@ uint32_t expr(char *e, bool *success) {
 }
 void clear_tokens(){
   nr_token=0;
-
 }
 
 
