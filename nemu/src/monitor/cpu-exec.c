@@ -65,7 +65,7 @@ void cpu_exec(uint64_t n) {
     printf("expression:%s\n",p->content);
     printf("old value:%#x\n",p->old_v);
     printf("new value:%#x\n",p->new_v);
-    nemu_state.state=NEMU_STOP;  
+    nemu_state.state=NEMU_STOP;break;  
   }
   
 
