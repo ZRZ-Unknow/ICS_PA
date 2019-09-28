@@ -57,9 +57,9 @@ void cpu_exec(uint64_t n) {
               "we do not record more instruction trace beyond this point.\n"
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
-/*
-  int no=check__watchpoint();
-  if(no!=-1){
+
+  check__watchpoint();
+/*  if(no!=-1){
     WP *p=no_to_wp(no);
     printf("trigger watchpoint %d\n",no);
     printf("expression:%s\n",p->content);
