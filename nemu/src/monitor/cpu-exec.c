@@ -63,8 +63,8 @@ void cpu_exec(uint64_t n) {
     WP *p=no_to_wp(no);
     printf("trigger watchpoint %d\n",no);
     printf("expression:%s\n",p->content);
-    printf("old value:%#x\n",p->old_v);
-    printf("new value:%#x\n",p->new_v);
+    //printf("old value:%#x\n",p->old_v);
+    //printf("new value:%#x\n",p->new_v);
     nemu_state.state=NEMU_STOP;  
   }
 
