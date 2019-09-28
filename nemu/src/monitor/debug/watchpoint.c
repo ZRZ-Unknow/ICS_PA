@@ -139,6 +139,7 @@ int check__watchpoint(){
       p->old_v=p->new_v;
       return p->NO;
     }
+    p=p->next;
   }
   return -1;
 }
