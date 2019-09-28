@@ -112,6 +112,9 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   char *ch=args;
+  if (ch==NULL){
+    printf("please input an expression\n");return 0;
+  }
   bool success=true;
   uint32_t result=expr(ch,&success);
   ch=NULL;
