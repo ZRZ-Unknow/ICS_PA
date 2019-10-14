@@ -1,5 +1,5 @@
 #include "cpu/exec.h"
-
+#include "rtl/rtl.h"
 // decode operand helper
 #define make_DopHelper(name) void concat(decode_op_, name) (vaddr_t *pc, Operand *op, bool load_val)
 
@@ -31,7 +31,7 @@ static inline make_DopHelper(SI) {
    *
    op->simm = ???
    */
-  TODO();
+  op->simm=instr_fetch(pc,op->width);
 
   rtl_li(&op->val, op->simm);
 
