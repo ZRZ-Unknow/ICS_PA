@@ -7,6 +7,7 @@ make_EHelper(sub);
 make_EHelper(xor);
 make_EHelper(ret);
 make_EHelper(jmp);
+make_EHelper(pop);
 make_EHelper(operand_size);
 
 make_EHelper(inv);
