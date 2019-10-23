@@ -13,7 +13,7 @@ make_EHelper(sub) {
   operand_write(id_dest,&s0);
   rtl_update_ZFSF(&s0,id_dest->width);
 
-  //rtl_setrelop(RELOP_LTU,&s1,&id_dest->val,&s0);
+  rtl_setrelop(RELOP_LTU,&s1,&id_dest->val,&s0);
   rtl_or(&s1,&s2,&s1);
   rtl_set_CF(&s1);
 
