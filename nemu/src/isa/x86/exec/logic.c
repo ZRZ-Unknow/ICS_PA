@@ -8,24 +8,24 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  rtl_and(&t1,&id_dest->val,&id_src->val);
-  t0=0;
-  rtl_set_OF(&t0);
-  rtl_set_CF(&t0);
-  rtl_update_ZFSF(&t1,id_dest->width);
-  operand_write(id_dest,&t1);
+  rtl_and(&s1,&id_dest->val,&id_src->val);
+  s0=0;
+  rtl_set_OF(&s0);
+  rtl_set_CF(&s0);
+  rtl_update_ZFSF(&s1,id_dest->width);
+  operand_write(id_dest,&s1);
 
   print_asm_template2(and);
 }
 
 make_EHelper(xor) {
   //TODO();
-  rtl_xor(&t1,&id_dest->val,&id_src->val);
-  t0=0;
-  rtl_set_OF(&t0);
-  rtl_set_CF(&t0);
-  rtl_update_ZFSF(&t1,id_dest->width);
-  operand_write(id_dest,&t1);
+  rtl_xor(&s1,&id_dest->val,&id_src->val);
+  s0=0;
+  rtl_set_OF(&s0);
+  rtl_set_CF(&s0);
+  rtl_update_ZFSF(&s1,id_dest->width);
+  operand_write(id_dest,&s1);
 
   print_asm_template2(xor);
 }
