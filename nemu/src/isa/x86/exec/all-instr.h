@@ -11,4 +11,5 @@ make_EHelper(pop);
 make_EHelper(operand_size);
 make_EHelper(lea);
 make_EHelper(inv);
+make_EHelper(and);
 make_EHelper(nemu_trap);
