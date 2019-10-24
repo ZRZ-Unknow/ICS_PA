@@ -143,11 +143,13 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
       uint16_t temp=*src1;
       int16_t tmp=temp;
       *dest=tmp;
+      break;
     }
     case 1:{
       uint8_t temp=*src1;
       int8_t tmp=temp;
       *dest=tmp;
+      break;
     }
     default:assert(0);
   }
