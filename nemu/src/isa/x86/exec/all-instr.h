@@ -31,6 +31,7 @@ make_EHelper(xor);
 make_EHelper(and);
 make_EHelper(test);
 make_EHelper(or);
+make_EHelper(sar);
 //prefix.c
 make_EHelper(operand_size);
 //special.c
