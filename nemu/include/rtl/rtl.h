@@ -137,18 +137,19 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
+  int32_t t=(int32_t)*src1;
   switch(width){
-    case 4:{*dest=*src1;break;}
+    case 4:{*dest=t;break;}
     case 2:{
-      uint16_t temp=*src1;
-      int16_t tmp=temp;
-      *dest=tmp;
+      t=t<<16;
+      t=t>>16;
+      *dest=t;
       break;
     }
     case 1:{
-      uint8_t temp=*src1;
-      int8_t tmp=temp;
-      *dest=tmp;
+      t=t<<24;
+      t=t>>24;
+      *dest=t;
       break;
     }
     default:assert(0);
