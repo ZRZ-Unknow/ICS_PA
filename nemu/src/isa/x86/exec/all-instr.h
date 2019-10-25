@@ -31,6 +31,7 @@ make_EHelper(movzx);
 make_EHelper(leave);
 make_EHelper(cltd);
 make_EHelper(cwtl);
+make_EHelper(movsx);
 //exec.c
 
 //logic.c
