@@ -35,7 +35,8 @@ static inline void rtl_pop(rtlreg_t* dest) {
   // esp <- esp + 4
   //TODO();
   rtl_lm(dest,&cpu.esp,4);
-  rtl_addi(&cpu.esp,&cpu.esp,4);
+  //rtl_addi(&cpu.esp,&cpu.esp,4);
+  cpu.esp+=4;
 }
 
 static inline void rtl_is_sub_overflow(rtlreg_t* dest,
