@@ -13,6 +13,7 @@ make_EHelper(push) {
     id_dest->val=temp;
   }*/
   rtl_push(&id_dest->val);
+  operand_write(id_dest,&id_src->val);
   print_asm_template1(push);
 }
 
