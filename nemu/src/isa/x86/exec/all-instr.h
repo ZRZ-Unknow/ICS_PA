@@ -14,6 +14,7 @@ make_EHelper(idiv);
 make_EHelper(div);
 make_EHelper(imul1);
 make_EHelper(mul);
+make_EHelper(sbb);
 //cc.c
 make_EHelper(setcc);
 //control.c
