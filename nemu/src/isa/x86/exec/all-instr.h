@@ -32,3 +32,4 @@ make_EHelper(operand_size);
 //special.c
 make_EHelper(nemu_trap);
 //system.c
+make_EHelper(lidt);
