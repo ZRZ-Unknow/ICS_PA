@@ -65,7 +65,7 @@ static inline void rtl_is_add_overflow(rtlreg_t* dest,
   //rtl_xor(dest,src1,src2);
   //rtlreg_t *t=dest;
   rtl_xor(&t0,src1,src2);
-  //rtl_not(t,t);
+  rtl_not(&t0,&t0);
   //rtl_add(t,src1,src2);
   rtl_xor(&t1,src1,res);
   //rtl_and(dest,dest,t);
@@ -76,7 +76,7 @@ static inline void rtl_is_add_overflow(rtlreg_t* dest,
 static inline void rtl_is_add_carry(rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1) {
   // dest <- is_carry(src1 + src2)
-  rtl_setrelop(RELOP_LTU,dest,src1,res);
+  rtl_setrelop(RELOP_LTU,dest,res,src1);
   
 }
 
