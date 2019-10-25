@@ -10,6 +10,10 @@ make_EHelper(inc);
 make_EHelper(imul2);
 make_EHelper(dec);
 make_EHelper(adc);
+make_EHelper(idiv);
+make_EHelper(div);
+make_EHelper(imul1);
+make_EHelper(mul);
 //cc.c
 make_EHelper(setcc);
 //control.c
