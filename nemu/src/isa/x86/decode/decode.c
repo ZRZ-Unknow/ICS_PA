@@ -31,7 +31,7 @@ static inline make_DopHelper(SI) {
    *
    op->simm = ???
    */
-  if(op->width==4){op->simm=instr_fetch(pc,op->width);}
+  /*if(op->width==4){op->simm=instr_fetch(pc,op->width);}
   else if(op->width==2){
     s0=((uint16_t)instr_fetch(pc,op->width));
     rtl_sext(&s1,&s0,2);
@@ -41,9 +41,9 @@ static inline make_DopHelper(SI) {
     s0=((uint16_t)instr_fetch(pc,op->width));
     rtl_sext(&s1,&s0,1);
     op->simm=s1;
-  }
-  //op->simm=instr_fetch(pc,op->width);
-  //op->simm=((op->simm<<(8*(4-op->width)))>>(8*(4-op->width)));
+  }*/
+  op->simm=instr_fetch(pc,op->width);
+  op->simm=((op->simm<<(8*(4-op->width)))>>(8*(4-op->width)));
 
   rtl_li(&op->val, op->simm);
   print_Dop(op->str, OP_STR_SIZE, "$0x%x", op->simm);
