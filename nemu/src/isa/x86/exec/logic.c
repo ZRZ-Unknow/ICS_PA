@@ -5,8 +5,8 @@ make_EHelper(test) {
   //TODO();
   rtl_and(&s1,&id_dest->val,&id_src->val);
   s0=0;
-  rtl_set_CF(&s0);
   rtl_set_OF(&s0);
+  rtl_set_CF(&s0);
   rtl_update_ZFSF(&s1,id_dest->width);
   print_asm_template2(test);
 }
