@@ -19,7 +19,7 @@ make_EHelper(push);
 make_EHelper(pop);
 make_EHelper(lea);
 make_EHelper(movzx);
-make_EHelper(leava);
+make_EHelper(leave);
 //exec.c
 
 //logic.c
