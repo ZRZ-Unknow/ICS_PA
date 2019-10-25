@@ -8,6 +8,7 @@ make_EHelper(add);
 make_EHelper(cmp);
 make_EHelper(inc);
 make_EHelper(imul2);
+make_EHelper(dec);
 //cc.c
 make_EHelper(setcc);
 //control.c
