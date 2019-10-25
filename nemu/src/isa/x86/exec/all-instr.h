@@ -4,7 +4,7 @@
 //arith.c
 make_EHelper(sub);
 make_EHelper(inv);
-
+make_EHelper(add);
 //cc.c
 
 //control.c
