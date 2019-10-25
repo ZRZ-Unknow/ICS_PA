@@ -30,6 +30,7 @@ make_EHelper(leave);
 make_EHelper(xor);
 make_EHelper(and);
 make_EHelper(test);
+make_EHelper(or);
 //prefix.c
 make_EHelper(operand_size);
 //special.c
