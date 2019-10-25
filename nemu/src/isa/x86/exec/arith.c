@@ -92,7 +92,17 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  TODO();
+  //TODO();
+  rtl_addi(&s0,&id_dest->val,1);
+  operand_write(id_dest,&s0);
+  rtl_update_ZFSF(&s0,id_dest->width);
+  rtl_xor(&s1,&id_dest->val,&id_src->val);
+  rtl_not(&s1,&s1);
+  rtlreg_t p;
+  rtl_xor(&p,&id_dest->val,&s0);
+  rtl_and(&s1,&s1,&p);
+  rtl_msb(&s1,&s1,id_dest->width);
+  rtl_set_OF(&s1);
 
   print_asm_template1(inc);
 }
