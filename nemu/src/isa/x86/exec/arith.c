@@ -31,7 +31,7 @@ make_EHelper(add) {
 
 make_EHelper(sub) {
   //TODO();
-  /*rtl_sub(&s0,&id_dest->val,&id_src->val);
+  rtl_sub(&s0,&id_dest->val,&id_src->val);
   rtl_setrelop(RELOP_LEU,&s1,&id_dest->val,&s0);
   operand_write(id_dest,&s0);
   rtl_update_ZFSF(&s0,id_dest->width);
@@ -44,9 +44,9 @@ make_EHelper(sub) {
   rtl_xor(&s2,&id_dest->val,&s0);
   rtl_and(&s1,&s1,&s2);
   rtl_msb(&s1,&s1,id_dest->width);
-  rtl_set_OF(&s1);*/
+  rtl_set_OF(&s1);
 
-  rtl_sub(&s0, &id_dest->val, &id_src->val);
+  /*rtl_sub(&s0, &id_dest->val, &id_src->val);
 
   operand_write(id_dest, &s1);
 
@@ -65,7 +65,7 @@ make_EHelper(sub) {
   // update OF
   rtl_is_sub_overflow(&s0, &s1, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s0);
-
+  */
 
   print_asm_template2(sub);
 }
