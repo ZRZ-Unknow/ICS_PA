@@ -5,8 +5,8 @@ make_EHelper(add) {
   //s0 = dest + src
   rtl_add(&s0, &id_dest->val, &id_src->val);
   // s1 = s0 + CF
-  rtl_get_CF(&s1);
-  rtl_add(&s1, &s0, &s1);
+  //rtl_get_CF(&s1);
+  //rtl_add(&s1, &s0, &s1);
 
   operand_write(id_dest, &s1);
 
@@ -14,7 +14,7 @@ make_EHelper(add) {
     rtl_andi(&s1, &s1, 0xffffffffu >> ((4 - id_dest->width) * 8));
   }
 
-  rtl_update_ZFSF(&s1, id_dest->width);
+  /*rtl_update_ZFSF(&s1, id_dest->width);
 
   // update CF
   rtl_is_add_carry(&s1, &s1, &s0);
@@ -25,7 +25,7 @@ make_EHelper(add) {
   // update OF
   rtl_is_add_overflow(&s0, &s1, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s0);
-
+*/
   print_asm_template2(add);
 }
 
