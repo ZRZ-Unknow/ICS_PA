@@ -12,7 +12,7 @@ make_EHelper(setcc);
 make_EHelper(call);
 make_EHelper(ret);
 make_EHelper(jmp);
-
+make_EHelper(jcc);
 //data-mov.c
 make_EHelper(mov);
 make_EHelper(push);
