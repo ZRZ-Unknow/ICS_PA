@@ -24,6 +24,7 @@ make_EHelper(movzx);
 //logic.c
 make_EHelper(xor);
 make_EHelper(and);
+make_EHelper(test);
 //prefix.c
 make_EHelper(operand_size);
 //special.c
