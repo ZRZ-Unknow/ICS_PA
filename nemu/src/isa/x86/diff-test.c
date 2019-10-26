@@ -2,7 +2,7 @@
 #include "monitor/diff-test.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
-  printf("debug:ref_r->pc is 0x%08X",ref_r->pc);
+  printf("debug:ref_r->pc is 0x%08x\n",ref_r->pc);
   if(ref_r->eax!=cpu.eax||
      ref_r->ecx!=cpu.ecx||
      ref_r->edx!=cpu.edx||
