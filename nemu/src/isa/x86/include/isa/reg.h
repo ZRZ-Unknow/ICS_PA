@@ -34,8 +34,9 @@ typedef struct {
   rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
     }; 
   };
-  vaddr_t pc;
+  //vaddr_t pc;
   union{
+    vaddr_t pc;
     struct{
       uint32_t CF:1;
       unsigned:5;
@@ -46,9 +47,9 @@ typedef struct {
       unsigned:1;
       uint32_t OF:1;
       unsigned:20;
-    };
+    }eflags;
     uint32_t flags;
-  }eflags;
+  };//eflags;
   
   //vaddr_t pc;
 } CPU_state;
