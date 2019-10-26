@@ -11,7 +11,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
      ref_r->ebp!=cpu.ebp||
      ref_r->esi!=cpu.esi||
      ref_r->edi!=cpu.edi||
-     ref_r->pc!=pc
+     ref_r->pc!=pc+5
     ){
       printf("qemu:eax is 0x%08x,nemu eax is 0x%08x, at pc:0x%08x\n",ref_r->eax,cpu.eax,pc);
       printf("qemu:ecx is 0x%08x,nemu ecx is 0x%08x, at pc:0x%08x\n",ref_r->ecx,cpu.ecx,pc);
