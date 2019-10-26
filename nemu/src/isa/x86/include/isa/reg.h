@@ -37,18 +37,18 @@ typedef struct {
   //vaddr_t pc;
   union{
     struct{
-      uint8_t CF:1;
+      uint32_t CF:1;
       unsigned:5;
-      uint8_t ZF:1;
-      uint8_t SF:1;
+      uint32_t ZF:1;
+      uint32_t SF:1;
       unsigned:1;
-      uint8_t IF:1;
+      uint32_t IF:1;
       unsigned:1;
-      uint8_t OF:1;
+      uint32_t OF:1;
       unsigned:20;
-    }eflags;
+    };
     uint32_t flags;
-  };//eflags;
+  }eflags;
   
   vaddr_t pc;
 } CPU_state;
