@@ -40,19 +40,22 @@ char* strcat(char* dst, const char* src) {
 
 int strcmp(const char* s1, const char* s2) {
   int t=0;
-  while((t=(*s1-*s2))==0 && *s1 && *s2){
+  /*while((t=(*s1-*s2))==0 && *s1 && *s2){
     s1++;s2++;
   }
   if(t>0){
-    return 1;
+    return -1;
   }
   else if(t<0){
-    return -1;
+    return 1;
   }
   else{
     return 0;
+  }*/
+  while((t=(*s1-*s2))==0 && *s1 && *s2){
+    s1++;s2++;
   }
-  
+  return t;
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
