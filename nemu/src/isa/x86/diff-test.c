@@ -10,8 +10,8 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
      ref_r->esp!=cpu.esp||
      ref_r->ebp!=cpu.ebp||
      ref_r->esi!=cpu.esi||
-     ref_r->edi!=cpu.edi//||
-     //ref_r->pc!=pc
+     ref_r->edi!=cpu.edi||
+     ref_r->pc!=pc
     ){
       printf("qemu:eax is 0x%08x,nemu eax is 0x%08x, at pc:0x%08x\n",ref_r->eax,cpu.eax,pc);
       printf("qemu:ecx is 0x%08x,nemu ecx is 0x%08x, at pc:0x%08x\n",ref_r->ecx,cpu.ecx,pc);
@@ -24,7 +24,7 @@ printf("qemu:edi is 0x%08x,nemu edi is 0x%08x, at pc:0x%08x\n",ref_r->edi,cpu.ed
 printf("qemu:eip is 0x%08x,nemu pc is 0x%08x, at pc:0x%08x\n",ref_r->pc,pc,pc);
     return false;
   }
-  if(ref_r->eflags.CF!=cpu.eflags.CF||
+  /*if(ref_r->eflags.CF!=cpu.eflags.CF||
      ref_r->eflags.ZF!=cpu.eflags.ZF||
      ref_r->eflags.SF!=cpu.eflags.SF||
      ref_r->eflags.IF!=cpu.eflags.IF||
@@ -32,7 +32,7 @@ printf("qemu:eip is 0x%08x,nemu pc is 0x%08x, at pc:0x%08x\n",ref_r->pc,pc,pc);
   ){
     printf("qemu's eflags!=nemu's eflags\n");
     return false;
-  }
+  }*/
   return true;
 }
 
