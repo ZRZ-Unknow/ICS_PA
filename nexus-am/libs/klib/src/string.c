@@ -23,6 +23,7 @@ char* strncpy(char* dst, const char* src, size_t n) {
     if((*res=*src)!=0){
       src++;
     }
+    else{break;}
     res++;
     n--;
   }
