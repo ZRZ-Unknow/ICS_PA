@@ -55,15 +55,42 @@ int strncmp(const char* s1, const char* s2, size_t n) {
 }
 
 void* memset(void* v,int c,size_t n) {
-  return NULL;
+  const unsigned char temp=c;
+  unsigned char *s;
+  for(s=v;n>0;++s,--n){
+    *s=temp;
+  }
+  return v;
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
-  return NULL;
+  char *pout=(char*)(out);
+  const char *pin=(const char*)(in);
+  if(pout>pin && pout<pin+n){
+    pout=pout+n-1;
+    pin=pin+n-1;
+    while(n--){
+      *pout--=*pin--;
+    }
+  }
+  else{
+    while(n--){
+      *pout++=*pin++;
+    }
+  }
+  return pout;
 }
 
 int memcmp(const void* s1, const void* s2, size_t n){
-  return 0;
+  assert(s1 || s2);
+  const unsigned char *s11,*s22;
+  int count=0;
+  for(s11=s1,s22=s2;n>0;++s11,++s22,n--){
+    if((count=*s11-*s22)!=0){
+      break;
+    }
+  }
+  return count;
 }
 
 #endif
