@@ -47,7 +47,7 @@ typedef struct {
       uint32_t OF:1;
       unsigned:20;
     };
-    uint32_t flags;
+    rtlreg_t flags;
   }eflags;
   
   //vaddr_t pc;
