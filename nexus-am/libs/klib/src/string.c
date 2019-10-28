@@ -34,7 +34,7 @@ char* strcat(char* dst, const char* src) {
   while(*dst){
     dst++;
   }
-  while((*dst++=*src++)!='\0');
+  while((*dst++=*src++)!=0);
   return temp; 
 }
 
