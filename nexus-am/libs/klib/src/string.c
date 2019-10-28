@@ -19,12 +19,7 @@ char* strncpy(char* dst, const char* src, size_t n) {
     n=strlen(src);
   }
   char *res=dst;
-  while(n){
-    if((*res=*src)!=0){
-      src++;
-    }
-    //else{break;}
-    res++;
+  while(n && (*dst++=*src++)){
     n--;
   }
   return res;
@@ -41,18 +36,6 @@ char* strcat(char* dst, const char* src) {
 
 int strcmp(const char* s1, const char* s2) {
   int t=0;
-  /*while((t=(*s1-*s2))==0 && *s1 && *s2){
-    s1++;s2++;
-  }
-  if(t>0){
-    return 1;
-  }
-  else if(t<0){
-    return -1;
-  }
-  else{
-    return 0;
-  }*/
   while((t=(*s1-*s2))==0 && *s1 && *s2){
     s1++;s2++;
   }
