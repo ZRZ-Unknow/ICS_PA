@@ -9,7 +9,7 @@ int printf(const char *fmt, ...) {
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
   char *outp;
-  int width=-1;
+  int width=0;
   int flags=0;
   for(outp=out;*fmt;fmt++){
     if(*fmt!='%'){
@@ -29,11 +29,12 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       }
     }
     if(*fmt>='0'&&*fmt<='9'){
-      char nums[20];
-      for(int i=0;*fmt>='0'&&*fmt<='9';i++,fmt++){
-        nums[i]=*fmt;
+      //char nums[20];
+      for(;*fmt>='0'&&*fmt<='9';fmt++){
+        //nums[i]=*fmt;
+        width=width*10+*fmt-'0';
       }
-      width=atoi(nums);
+      //width=atoi(nums);
     }
     else if(*fmt=='*'){
       fmt++;
