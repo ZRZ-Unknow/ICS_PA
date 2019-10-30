@@ -12,10 +12,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   int width;
   int flags;
   const char *s;
-  int len_s;
-  char nums[100];char *ss=nums;
+  //int len_s;
+  char nums[66];
+  char *ss=nums;
   int num;
-
 
   for(outp=out;*fmt;fmt++){
     if(*fmt!='%'){
@@ -56,9 +56,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     switch(*fmt){
       case 'd':break;
       case 's':{
-        //int len;
         s=va_arg(ap,char *);
-        len_s=strlen(s);
+        int len_s=strlen(s);
         if(!(flags&16)){
           while(len_s<width--){
             *outp++=' ';
@@ -73,13 +72,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         continue;
       }
     }
+
     num=va_arg(ap,int);
-    //char nums[100];
     int count=0;
-    //char *ss=nums;
     if(num==0){
       *ss++='0';
-      //nums[count]='0';
       count+=1;
     }
     else{
@@ -89,7 +86,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       }
       while(num){
         *ss++=num%10+'0';
-        //nums[count]=num%10+'0';
         num=num/10;
         count+=1;
       }
@@ -107,10 +103,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
       }
     }
-    while(count--){
-      *outp++=*--ss;
+    while(--ss){
+      *outp++=*ss;
     }
-    //ss=&nums[0];
   } 
   *outp='\0';
   return 0;
