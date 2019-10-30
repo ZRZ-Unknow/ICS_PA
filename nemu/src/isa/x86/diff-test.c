@@ -24,15 +24,6 @@ printf("qemu:edi is 0x%08x,nemu edi is 0x%08x, at pc:0x%08x\n",ref_r->edi,cpu.ed
 printf("qemu:eip is 0x%08x,nemu pc is 0x%08x, at pc:0x%08x\n",ref_r->pc,pc,pc);
     return false;
   }
-  /*if(ref_r->eflags.CF!=cpu.eflags.CF||
-     ref_r->eflags.ZF!=cpu.eflags.ZF||
-     ref_r->eflags.SF!=cpu.eflags.SF||
-     ref_r->eflags.IF!=cpu.eflags.IF||
-     ref_r->eflags.OF!=cpu.eflags.OF
-  ){
-    printf("qemu's eflags!=nemu's eflags\n");
-    return false;
-  }*/
   return true;
 }
 
