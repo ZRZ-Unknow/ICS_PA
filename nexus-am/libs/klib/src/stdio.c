@@ -9,11 +9,12 @@ int printf(const char *fmt, ...) {
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
   char *outp;
-  int width=0;
-  int flags=0;
+  int width;
+  int flags;
   const char *s;
   int len_s;
   char nums[100];
+  int num;
 
 
   for(outp=out;*fmt;fmt++){
@@ -22,6 +23,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       continue;
     }
     int temp=1;
+    flags=0;
     while(temp==1){
       fmt++;
       switch(*fmt){
@@ -33,6 +35,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         default:temp=0;
       }
     }
+    width=0;
     if(*fmt>='0'&&*fmt<='9'){
       //char nums[20];
       for(;*fmt>='0'&&*fmt<='9';fmt++){
@@ -70,7 +73,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         continue;
       }
     }
-    int num=va_arg(ap,int);
+    num=va_arg(ap,int);
     //char nums[100];
     int count=0;
     char *ss=nums;
