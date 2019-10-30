@@ -47,10 +47,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     else if(*fmt=='*'){
       fmt++;
       width=va_arg(ap,int);
-      /*if(width<0){
+      if(width<0){
         width=-width;
         flags|=16;
-      }*/
+      }
     }
     //int base=10;
     switch(*fmt){
