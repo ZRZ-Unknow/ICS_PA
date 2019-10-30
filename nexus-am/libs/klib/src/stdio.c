@@ -66,7 +66,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       }
     }
     int num=va_arg(ap,int);
-    char nums[66];
+    char nums[100];
     int count=0;
     char *ss=nums;
     if(num==0){
