@@ -110,6 +110,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     while(ss--){
       *outp++=*ss;
     }
+    ss=nums;
   } 
   *outp='\0';
   return 0;
