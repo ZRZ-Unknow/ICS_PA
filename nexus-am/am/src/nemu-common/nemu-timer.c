@@ -1,12 +1,12 @@
 #include <am.h>
 #include <amdev.h>
 #include <nemu.h>
-#define RTC_PORT 0x48
+//#define RTC_PORT 0x48
 size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
       _DEV_TIMER_UPTIME_t *uptime = (_DEV_TIMER_UPTIME_t *)buf;
-      unsigned long long now=inl(RTC_PORT);
+      unsigned long long now=inl(RTC_ADDR);
       uptime->hi=now>>32;
       uptime->lo=now&0xffffffff;
       //uptime->hi = 0;
