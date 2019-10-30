@@ -43,7 +43,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         flags|=16;
       }
     }
-    int base=10;
+    //int base=10;
     switch(*fmt){
       case 'd':break;
       case 's':{
@@ -109,7 +109,7 @@ int sprintf(char *out, const char *fmt, ...) {
   va_list args;
   int v;
   va_start(args,fmt);
-  v=vsnprintf(out,fmt,args);
+  v=vsprintf(out,fmt,args);
   va_end(args);
   return v;
 }
