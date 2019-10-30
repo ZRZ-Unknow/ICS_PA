@@ -67,9 +67,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         for(int i=0;i<len_s;i++){
           *outp++=*s++;
         }
-        /*while(len_s<width--){
+        while(len_s<width--){
           *outp++=' ';
-        }*/
+        }
         continue;
       }
     }
