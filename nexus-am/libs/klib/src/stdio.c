@@ -107,10 +107,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
       }
     }
-    while(ss--){
-      *outp++=*ss;
+    while(count--){
+      *outp++=*--ss;
     }
-    ss=&nums[0];
+    //ss=&nums[0];
   } 
   *outp='\0';
   return 0;
