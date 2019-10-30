@@ -4,6 +4,14 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
+  va_list args;
+  va_start(args,fmt);
+  char out[250];
+  int len=vsprintf(out,fmt,args);
+  va_end(args);
+  for(int i=0;i<len;i++){
+    _putc(out[i]);
+  }
   return 0;
 }
 
@@ -102,7 +110,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
   } 
   *outp='\0';
-  return 0;
+  return strlen(outp);
 }
 
 int sprintf(char *out, const char *fmt, ...) {
