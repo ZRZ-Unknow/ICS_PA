@@ -59,11 +59,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         //int len;
         s=va_arg(ap,char *);
         len_s=strlen(s);
-        /*if(!(flags&16)){
+        if(!(flags&16)){
           while(len_s<width--){
             *outp++=' ';
           }
-        }*/
+        }
         for(int i=0;i<len_s;i++){
           *outp++=*s++;
         }
