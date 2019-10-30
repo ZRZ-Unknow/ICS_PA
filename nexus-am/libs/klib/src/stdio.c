@@ -13,7 +13,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   int flags;
   const char *s;
   int len_s;
-  char nums[100];nums[0]='\0';
+  char nums[100];char *ss=nums;
   int num;
 
 
@@ -76,7 +76,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     num=va_arg(ap,int);
     //char nums[100];
     int count=0;
-    char *ss=nums;
+    //char *ss=nums;
     if(num==0){
       *ss++='0';
       //nums[count]='0';
