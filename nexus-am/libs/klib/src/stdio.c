@@ -7,9 +7,9 @@ int printf(const char *fmt, ...) {
   va_list args;
   va_start(args,fmt);
   char out[250];
-  vsprintf(out,fmt,args);
+  int len=vsprintf(out,fmt,args);
   va_end(args);
-  int len=strlen(out);
+  //int len=strlen(out);
   for(int i=0;i<len;i++){
     _putc(out[i]);
   }
@@ -111,16 +111,21 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
   } 
   *outp='\0';
-  return 0;
+  char *real=outp;
+  //char *treal=outp;
+  int out_len=0;
+  while(real) {
+    real--;out_len++;
+  }
+  return out_len-1;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
   va_list args;
-  int v;
   va_start(args,fmt);
-  v=vsprintf(out,fmt,args);
+  int out_len=vsprintf(out,fmt,args);
   va_end(args);
-  return v;
+  return out_len;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
