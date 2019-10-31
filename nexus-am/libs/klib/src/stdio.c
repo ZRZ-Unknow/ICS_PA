@@ -17,7 +17,7 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  char *outp;
+  char *outp;int out_len=0;
   int width;
   int flags;
   char nums[66];
@@ -26,6 +26,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   for(outp=out;*fmt;fmt++){
     if(*fmt!='%'){
       *outp++=*fmt;
+      out_len++;
       continue;
     }
     int temp=1;
@@ -63,14 +64,14 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         int len_s=strlen(s);
         if(!(flags&16)){
           while(len_s<width--){
-            *outp++=' ';
+            *outp++=' ';out_len++;
           }
         }
         for(int i=0;i<len_s;i++){
-          *outp++=*s++;
+          *outp++=*s++;out_len++;
         }
         while(len_s<width--){
-          *outp++=' ';
+          *outp++=' ';out_len++;
         }
         continue;
       }
@@ -84,7 +85,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
     else{
       if(num<0){
-        *outp++='-';
+        *outp++='-';out_len++;
         num=-num;
       }
       while(num){
@@ -97,27 +98,27 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       num=width-count;
       if(flags&1){
         while(num--){
-          *outp++='0';
+          *outp++='0';out_len++;
         }
       }
       else if(flags&8){
         while(num--){
-          *outp++=' ';
+          *outp++=' ';out_len++;
         }
       }
     }
     while(count--){
-      *outp++=*--ss;
+      *outp++=*--ss;out_len++;
     }
   } 
   *outp='\0';
-  char *real=outp;
+  //char *real=outp;
   //char *treal=outp;
-  int out_len=0;
-  while(real) {
-    real--;out_len++;
-  }
-  return out_len-1;
+  //int out_len=0;
+  //while(real) {
+  //  real--;out_len++;
+  //}
+  return out_len;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
