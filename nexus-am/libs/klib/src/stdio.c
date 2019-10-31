@@ -10,6 +10,7 @@ int printf(const char *fmt, ...) {
   int out_len=vsprintf(out,fmt,args);
   va_end(args);
   for(int i=0;i<out_len;i++){
+    _putc('d');
     _putc(out[i]);
   }
   return 0;
