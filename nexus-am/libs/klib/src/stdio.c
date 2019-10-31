@@ -12,7 +12,7 @@ int printf(const char *fmt, ...) {
   for(int i=0;i<len;i++){
     _putc(out[i]);
   }
-  return 0;
+  return len;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
