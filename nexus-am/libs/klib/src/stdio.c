@@ -9,7 +9,6 @@ int printf(const char *fmt, ...) {
   char out[250];
   int out_len=vsprintf(out,fmt,args);
   va_end(args);
-  //int len=strlen(out);
   for(int i=0;i<out_len;i++){
     _putc(out[i]);
   }
