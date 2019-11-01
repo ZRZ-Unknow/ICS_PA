@@ -79,6 +79,7 @@ make_EHelper(movzx) {
 }
 
 make_EHelper(movsb){
+  printf("dddddddd\n");
   id_dest->width=decinfo.isa.is_operand_size_16?2:4;
   rtl_sext(&s0,&id_src->val,1);
   operand_write(id_dest,&s0);
