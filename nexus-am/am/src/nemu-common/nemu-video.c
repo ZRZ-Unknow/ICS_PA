@@ -24,11 +24,14 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       _DEV_VIDEO_FBCTL_t *ctl = (_DEV_VIDEO_FBCTL_t *)buf;
       int x=ctl->x,y=ctl->y,w=ctl->w,h=ctl->h;
       uint32_t *pixels=ctl->pixels;
-      for(int i=0;i<h;i++){
-        memcpy(fb+(y+i)*screen_width()+x,pixels+i*w,w*4);
+      int W=screen_width(),H=screen_height();
+      int cp_bytes =sizeof(uint32_t)*(w<W-x?w:W-x);
+      for(int i=0;i<h&&y+i<H;i++){
+        memcpy(&fb[(y+i)*W+x],pixels,cp_bytes);
+        pixels+=w;
       }
       if (ctl->sync) {
-        //outl(SYNC_ADDR, 0);
+        outl(SYNC_ADDR, 0);
       }
       return size;
     }
@@ -37,11 +40,11 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
 }
 
 void __am_vga_init() {
-  /*int i;
+  int i;
   int size=screen_width()*screen_height();
   uint32_t *fb=(uint32_t *)(uintptr_t)FB_ADDR;
   for(i=0;i<size;i++){
     fb[i]=i;
   }
-  draw_sync();*/
+  draw_sync();
 }
