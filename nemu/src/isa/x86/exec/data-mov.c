@@ -84,7 +84,7 @@ make_EHelper(movsb){
   rtl_sext(&s0,&id_src->val,id_src->width);
   operand_write(id_dest,&s0);*/
   //int in=cpu.eflags.DF?-1:1;
-  int in=0;
+  int in=1;
   rtl_lr(&s0,R_ESI,4);
   rtl_lm(&s1,&s0,1);
   s0+=in;
