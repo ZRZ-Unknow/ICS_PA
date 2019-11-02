@@ -13,11 +13,11 @@ bool interpret_relop(uint32_t relop, const rtlreg_t src1, const rtlreg_t src2);
 
 /* RTL basic instructions */
 
-static  void interpret_rtl_li(rtlreg_t* dest, uint32_t imm) {
+static inline void interpret_rtl_li(rtlreg_t* dest, uint32_t imm) {
   *dest = imm;
 }
 
-static void interpret_rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
+static inline void interpret_rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
   *dest = *src1;
 }
 
@@ -135,7 +135,7 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
   *dest=~(*src1);
 }
 
-static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
+ inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   int32_t t=(int32_t)*src1;
   switch(width){
