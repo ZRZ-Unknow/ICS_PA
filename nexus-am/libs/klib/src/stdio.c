@@ -56,7 +56,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         flags|=16;
       }
     }
-    //int base=10;
     switch(*fmt){
       case 'd':break;
       case 's':{
