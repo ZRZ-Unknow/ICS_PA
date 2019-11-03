@@ -83,7 +83,7 @@ make_EHelper(movsb){
   id_dest->width=decinfo.isa.is_operand_size_16?2:4;
   rtl_sext(&s0,&id_src->val,id_src->width);
   operand_write(id_dest,&s0);*/
-  int in=0;
+  int in=1;
   rtl_lr(&s0,R_ESI,4);
   rtl_lm(&s1,&s0,1);
   s0+=in;
