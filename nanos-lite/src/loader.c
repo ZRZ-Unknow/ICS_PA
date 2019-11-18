@@ -13,8 +13,8 @@ extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();  
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
-  //ramdisk_read(ENTRY,0,get_ramdisk_size());
+  //TODO();
+  ramdisk_read(ENTRY,0,get_ramdisk_size());
   return (uintptr_t)ENTRY;
 }
 
