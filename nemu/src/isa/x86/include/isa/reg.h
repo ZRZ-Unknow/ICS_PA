@@ -49,8 +49,14 @@ typedef struct {
     };
     rtlreg_t flags;
   }eflags;
+
+  struct 
+  {
+    uint16_t limit;
+    uint32_t base;
+  }IDTR;
   
-  //vaddr_t pc;
+  uint16_t CS; 
 } CPU_state;
 
 static inline int check_reg_index(int index) {
