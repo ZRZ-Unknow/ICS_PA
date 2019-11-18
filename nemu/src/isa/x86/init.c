@@ -17,7 +17,7 @@ static void restart() {
   /* Set the initial program counter. */
   cpu.pc = PC_START;
   cpu.CS=8;
-  memset(&cpu.eflags,0x2,sizeof(cpu.eflags));
+  cpu.eflags.flags=0x2;
 }
 
 void init_isa(void) {

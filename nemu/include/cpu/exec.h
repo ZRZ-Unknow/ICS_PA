@@ -4,7 +4,7 @@
 #include "nemu.h"
 #include "monitor/diff-test.h"
 #include "rtl/rtl.h"
-
+extern void raise_intr(uint32_t NO, vaddr_t ret_addr);
 #define make_EHelper(name) void concat(exec_, name) (vaddr_t *pc)
 typedef void (*EHelper) (vaddr_t *);
 
