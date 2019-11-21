@@ -8,13 +8,13 @@
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
 #endif
-#define ENTRY ((void *)0x00100000)
+#define ENTRY ((void *)0x3000000)
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();  
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  ramdisk_read(ENTRY,0x001000,0x9e60);
+  ramdisk_read(ENTRY,0,get_ramdisk_size());
   return (uintptr_t)ENTRY;
 }
 
