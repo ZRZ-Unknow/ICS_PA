@@ -13,23 +13,22 @@ extern size_t get_ramdisk_size();
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  Elf_Ehdr *elf;
-  Elf_Phdr *phdr;
-  uint8_t buf[sizeof(Elf_Ehdr)];
-  ramdisk_read(buf,0,sizeof(Elf_Ehdr));
-  elf=(void*)buf;
-  phdr=(void*)(buf+elf->e_phoff);
-  for(int i=0;i<elf->e_phnum;i++,phdr++){
-    //phdr=(void*)(buf+elf->e_phoff+i*elf->e_phentsize);
-    if(phdr->p_type==PT_LOAD){
+  Elf_Ehdr elf;
+
+  //uint8_t buf[get_ramdisk_size()];
+  ramdisk_read((void*)&elf,0,sizeof(Elf_Ehdr));
+  Elf_Phdr phdr[elf.e_phnum];
+  ramdisk_read(phdr,elf.e_ehsize,sizeof(Elf_Phdr)*elf.e_phnum);
+  for(int i=0;i<elf.e_phnum;i++){
+    if(phdr[i].p_type==PT_LOAD){
       printf("ddd\n");
-      ramdisk_read((void*)phdr->p_vaddr,phdr->p_offset,phdr->p_filesz);
-      memset((void*)(phdr->p_vaddr+phdr->p_filesz),0,phdr->p_memsz-phdr->p_filesz);
+      ramdisk_read((void*)phdr[i].p_vaddr,phdr[i].p_offset,phdr[i].p_filesz);
+      memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
       printf("ccc\n");
     }
   }
   printf("aaa\n");
-  return (uintptr_t)elf->e_entry;
+  return elf.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
