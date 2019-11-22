@@ -8,7 +8,7 @@ static inline uintptr_t sys_write(int fd,const void *buf,size_t len){
     printf("--%d\n",len);
     for(int i=0;i<len;i++){
       //printf("----%s\n",b[i]);
-      _putc(b[i]);
+      _putc(*(b++));
     }
     return len;
   }
