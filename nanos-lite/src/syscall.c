@@ -4,8 +4,9 @@
 
 static inline uintptr_t sys_write(int fd,const void *buf,size_t len){
   if(fd==1||fd==2){
+    char *b=(char*)buf;
     for(int i=0;i<len;i++){
-      _putc(((char*)buf)[i]);
+      _putc(b[i]);
     }
     return len;
   }
