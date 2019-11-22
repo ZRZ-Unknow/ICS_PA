@@ -17,6 +17,21 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(fd!=-1);
   Elf_Ehdr elf;
   fs_read(fd,(void*)&elf,sizeof(Elf_Ehdr));
+  for(size_t i=0;i<elf.e_phnum;i++){
+    Elf_Phdr phdr;
+    fs_lseek(fd,elf.e_phoff+i*elf.e_phentsize,SEEK_SET);
+    fs_read(fd,(void*)&phdr,elf.e_phentsize);
+    if(phdr.p_type==PT_LOAD){
+      fs_lseek(fd,phdr.p_offset,SEEK_SET);
+      fs_read(fd,(void*)phdr.p_vaddr,phdr.p_filesz);
+      memset((void*)(phdr.p_vaddr+phdr.p_filesz),0,phdr.p_memsz-phdr.p_filesz);
+    }
+  }
+  /*
+  int fd=fs_open(filename,0,0);
+  assert(fd!=-1);
+  Elf_Ehdr elf;
+  fs_read(fd,(void*)&elf,sizeof(Elf_Ehdr));
   Elf_Phdr phdr[elf.e_phnum];
   //fs_read(fd,(void*)&phdr,sizeof(Elf_Phdr)*elf.e_phnum);
   for(size_t i=0;i<elf.e_phnum;i++){
@@ -27,9 +42,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       fs_read(fd,(void*)phdr[i].p_vaddr,phdr[i].p_filesz);
       memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
     }
-  }
+  }*/
   fs_close(fd);
   return elf.e_entry;
+
   /*Elf_Ehdr elf;
   ramdisk_read((void*)&elf,0,sizeof(Elf_Ehdr));
   Elf_Phdr phdr[elf.e_phnum];
