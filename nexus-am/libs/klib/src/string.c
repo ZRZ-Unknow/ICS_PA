@@ -54,10 +54,13 @@ int strncmp(const char* s1, const char* s2, size_t n) {
 }
 
 void* memset(void* v,int c,size_t n) {
-  const unsigned char temp=c;
-  unsigned char *s;
-  for(s=v;n>0;++s,--n){
-    *s=temp;
+  //const unsigned char temp=c;
+  //unsigned char *s;
+  //for(s=v;n>0;++s,--n){
+  //  *s=temp;
+  //}
+  for(size_t i=0;i<n;i++){
+    ((int8_t*)v)[i]=c;
   }
   return v;
 }
