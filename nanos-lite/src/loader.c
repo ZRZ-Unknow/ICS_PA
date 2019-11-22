@@ -19,6 +19,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   fs_read(fd,(void*)&elf,sizeof(Elf_Ehdr));
   Elf_Phdr phdr[elf.e_phnum];
+  printf("enum is %d\n",elf.e_phnum);
   //fs_read(fd,(void*)&phdr,sizeof(Elf_Phdr)*elf.e_phnum);
   for(size_t i=0;i<elf.e_phnum;i++){
     printf("fd is %d for i is %d\n",fd,i);
