@@ -76,20 +76,14 @@ size_t fs_write(int fd,void *buf,size_t len){
   if(file_table[fd].open_offset+len>file_table[fd].size){
     lens=file_table[fd].size-file_table[fd].open_offset;
   }
-  printf("ddddd\n");
   if(file_table[fd].write==NULL){
-  //if(file_table[fd].write==NULL){
-    printf("ccc\n");
     size_t offset=ramdisk_write(buf,file_table[fd].disk_offset+file_table[fd].open_offset,lens); 
     file_table[fd].open_offset+=offset;
-    printf("ccc1\n");
     return offset; 
   }
   else{
-    printf("aaa\n");
     size_t offset=file_table[fd].write(buf,file_table[fd].open_offset,lens);
     file_table[fd].open_offset+=offset;
-    printf("aaa1\n");
     return offset;
   }
 
