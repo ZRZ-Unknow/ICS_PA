@@ -14,11 +14,10 @@ extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   Elf_Ehdr elf;
-
   ramdisk_read((void*)&elf,0,sizeof(Elf_Ehdr));
   Elf_Phdr phdr[elf.e_phnum];
-  ramdisk_read(phdr,elf.e_ehsize,sizeof(Elf_Phdr)*elf.e_phnum);
   Elf_Phdr *ph=phdr;
+  ramdisk_read((void*)ph,elf.e_ehsize,sizeof(Elf_Phdr)*elf.e_phnum);
   for(size_t i=0;i<elf.e_phnum;i++,ph++){
     /*if(phdr[i].p_type==PT_LOAD){
       ramdisk_read((void*)phdr[i].p_vaddr,phdr[i].p_offset,phdr[i].p_filesz);
