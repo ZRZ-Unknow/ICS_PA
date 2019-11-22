@@ -2,7 +2,7 @@
 #include "syscall.h"
 
 
-static intptr_t sys_write(int fd,const void *buf,size_t len){
+static inline int32_t sys_write(int fd,const void *buf,size_t len){
   if(fd==1||fd==2){
     char *b=(char*)buf;
     printf("--%d\n",len);
