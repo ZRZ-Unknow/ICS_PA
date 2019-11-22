@@ -29,6 +29,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       printf("ccc\n");
     }
   }
+  printf("aaa\n");
   return (uintptr_t)elf->e_entry;
 }
 
