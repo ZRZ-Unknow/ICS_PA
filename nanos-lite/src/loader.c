@@ -19,9 +19,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(buf,0,get_ramdisk_size());
   elf=(void*)buf;
   phdr=(void*)(buf+elf->e_phoff);
-  printf("ddddd\n");
   for(int i=0;i<elf->e_phnum;i++,phdr++){
     //phdr=(void*)buf+elf->e_phoff+i*elf->e_phentsize;
+    printf("ddd\n");
     if(phdr->p_type==PT_LOAD){
       //phdr->p_vaddr=malloc();
       ramdisk_read((void*)phdr->p_vaddr,phdr->p_offset,phdr->p_filesz);
