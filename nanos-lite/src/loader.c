@@ -18,12 +18,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   uint8_t buf[get_ramdisk_size()];
   ramdisk_read(buf,0,get_ramdisk_size());
   elf=(void*)buf;
-  for(int i=0;i<elf->e_phnum;i++){
-    phdr=(void*)buf+elf->e_phoff+i*elf->e_phentsize;
+  phdr=(void*)(buf+elf->e_phoff);
+  for(int i=0;i<elf->e_phnum;i++,phdr++){
+    //phdr=(void*)buf+elf->e_phoff+i*elf->e_phentsize;
     if(phdr->p_type==PT_LOAD){
-      uint32_t addr=phdr->p_vaddr;
-      ramdisk_read((void*)addr,phdr->p_offset,phdr->p_filesz);
-      memset((void*)addr+phdr->p_filesz,0,phdr->p_memsz-phdr->p_filesz);
+      //phdr->p_vaddr=malloc();
+      ramdisk_read((void*)phdr->p_vaddr,phdr->p_offset,phdr->p_filesz);
+      memset((void*)(phdr->p_vaddr+phdr->p_filesz),0,phdr->p_memsz-phdr->p_filesz);
     }
   }
   return (uintptr_t)elf->e_entry;
