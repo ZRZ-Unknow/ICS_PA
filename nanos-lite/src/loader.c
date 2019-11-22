@@ -21,11 +21,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   phdr=(void*)(buf+elf->e_phoff);
   for(int i=0;i<elf->e_phnum;i++,phdr++){
     //phdr=(void*)buf+elf->e_phoff+i*elf->e_phentsize;
-    printf("ddd\n");
     if(phdr->p_type==PT_LOAD){
       //phdr->p_vaddr=malloc();
+      printf("ddd\n");
       ramdisk_read((void*)phdr->p_vaddr,phdr->p_offset,phdr->p_filesz);
       memset((void*)(phdr->p_vaddr+phdr->p_filesz),0,phdr->p_memsz-phdr->p_filesz);
+      printf("ccc\n");
     }
   }
   return (uintptr_t)elf->e_entry;
