@@ -23,7 +23,7 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
   //fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
-  //此时文件头部应写入了1001-1500，n为1000,移动到2500
+  //此时文件头部应写入了1001-1500，n为1000,移动到2500,文件为1001-1500,501-1000
   //printf("ee\n");
   /*for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
@@ -31,7 +31,7 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }*/
-  fseek(fp, 2500, SEEK_SET);
+  fseek(fp, 2499, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
