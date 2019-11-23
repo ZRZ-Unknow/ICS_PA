@@ -40,7 +40,7 @@ void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
 
-int fs_open(const char* pathname,int flags,int mode){
+int32_t fs_open(const char* pathname,int flags,int mode){
   for(int i=0;i<NR_FILES;i++){
     if(strcmp(pathname,file_table[i].name)==0){
       return i;
@@ -50,7 +50,7 @@ int fs_open(const char* pathname,int flags,int mode){
   return -1;
 }
 
-size_t fs_read(int fd,void*buf,size_t len){
+int32_t fs_read(int fd,void*buf,size_t len){
   assert(fd>=0 && fd<NR_FILES);
   size_t lens;
   if(file_table[fd].read==NULL){
@@ -86,7 +86,7 @@ int fs_close(int fd){
   file_table[fd].open_offset=0;
   return 0;
 }
-size_t fs_write(int fd,void *buf,size_t len){
+int32_t fs_write(int fd,void *buf,size_t len){
   assert(fd<NR_FILES);
   size_t lens;
   if(file_table[fd].write==NULL){
@@ -120,7 +120,7 @@ size_t fs_write(int fd,void *buf,size_t len){
   }
   */
 }
-size_t fs_lseek(int fd,size_t offset,int whence){
+uint32_t fs_lseek(int fd,size_t offset,int whence){
   assert(fd>=0 && fd<NR_FILES);
   switch (whence)
   {
