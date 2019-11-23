@@ -28,7 +28,7 @@ int main() {
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
-  fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
+  //fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
   //此时文件头部应写入了1001-1500，n为500,移动到2500
   //printf("ee\n");
   /*for (i = 500; i < 1000; i ++) {
