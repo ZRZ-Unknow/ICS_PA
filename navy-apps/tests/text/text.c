@@ -27,6 +27,7 @@ int main() {
     fscanf(fp, "%d", &n);
     printf("n is %d\n",n);
     printf("curr pos is %d\n",ftell(fp));
+    printf("before second\n");
     fscanf(fp,"%d",&n);
     printf("n is %d\n",n);
     printf("curr pos is %d\n",ftell(fp));
