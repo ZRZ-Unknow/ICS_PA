@@ -20,16 +20,17 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
-
-  fseek(fp, 0, SEEK_SET);
+  //此时n=500
+  fseek(fp, 0, SEEK_SET);//指向了文件开头
   //printf("bb\n");
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
+  //此时文件头部应写入了1001-1500，n为500
   //printf("ee\n");
   for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
-    if(fp==NULL)printf("fp is null\n");
+    printf("curr pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);
     //printf("n is %d\n",n);
     assert(n == i + 1);
