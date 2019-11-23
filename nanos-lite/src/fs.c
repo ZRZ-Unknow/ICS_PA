@@ -103,6 +103,7 @@ int32_t fs_write(int fd,void *buf,size_t len){
     }
     lens=file_table[fd].write(buf,file_table[fd].open_offset,lens);
     file_table[fd].open_offset+=lens;
+    printf("used to be\n");
     return lens;
   }
   /*size_t lens=len;
