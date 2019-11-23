@@ -1,4 +1,4 @@
-/*#include "klib.h"
+#include "klib.h"
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
@@ -125,9 +125,9 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   return 0;
 }
 
-#endif*/
+#endif
 //this is for the diff-dug
-#include "klib.h"
+/*#include "klib.h"
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
@@ -255,3 +255,4 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 }
 
 #endif
+*/
