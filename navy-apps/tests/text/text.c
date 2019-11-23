@@ -20,6 +20,7 @@ int main() {
     //printf("pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
+    printf("n is %d",n);
   }
   //此时n=500
   fseek(fp, 0, SEEK_SET);//指向了文件开头
@@ -39,7 +40,6 @@ int main() {
   }*/
   printf("ff\n");
   fseek(fp, 2504, SEEK_SET);
-  printf("dddd\n");
 printf("n is %d",n);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
