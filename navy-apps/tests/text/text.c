@@ -2,7 +2,7 @@
 #include <assert.h>
 //printf调用fs_write,ramdiskwrite的.write
 int main() {
-  /*FILE *fp = fopen("/share/texts/num", "r+");
+  FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
@@ -19,7 +19,6 @@ int main() {
   fseek(fp, 0, SEEK_SET);//指向了文件开头
   printf("now pos is %d\n",ftell(fp));
   for (i = 0; i < 500; i ++) {
-    _putc('8');_putc('\n');
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
   //fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
@@ -30,17 +29,15 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }*/
-  /*fseek(fp, 2495, SEEK_SET);
+  fseek(fp, 2495, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
     printf("n is %d\n",n);
     printf("curr pos is %d\n",ftell(fp));
     //assert(n == i + 1 + 1000);
   }
-  printf("gg\n");
-  fclose(fp);*/
+  fclose(fp);
 
   printf("PASS!!!\n");
-_putc('5');
   return 0;
 }
