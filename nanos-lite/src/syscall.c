@@ -7,6 +7,7 @@ static inline int32_t sys_write(int fd,const void *buf,size_t len){
     char *b=(char*)buf;
     //char p[len];
     //memcpy(p,buf,len);
+    printf("len is %d",len);
     for(int i=0;i<len;i++){
       _putc(*(b++));
     }
