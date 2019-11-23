@@ -11,7 +11,7 @@ int main() {
   fseek(fp, 5*500, SEEK_SET);//5*500
   int i, n;
   for (i = 500; i < 1000; i ++) {
-printf("currt pos is %d\n",ftell(fp));
+//printf("currt pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
   }
@@ -19,6 +19,7 @@ printf("currt pos is %d\n",ftell(fp));
   fseek(fp, 0, SEEK_SET);//指向了文件开头
   printf("now pos is %d\n",ftell(fp));
   for (i = 0; i < 500; i ++) {
+    printf("kkkkkk\n");
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
   //fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
