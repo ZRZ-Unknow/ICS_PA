@@ -31,7 +31,7 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }*/
-  fseek(fp, 4, SEEK_SET);
+  fseek(fp, 9, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
