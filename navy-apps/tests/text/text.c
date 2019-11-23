@@ -17,6 +17,7 @@ int main() {
   int i, n;
   //printf("aab\n");
   for (i = 500; i < 1000; i ++) {
+    printf("pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
