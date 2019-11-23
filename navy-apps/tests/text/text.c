@@ -2,33 +2,34 @@
 #include <assert.h>
 
 int main() {
-  printf("begin\n");
+  //printf("begin\n");
   FILE *fp = fopen("/share/texts/num", "r+");
-  printf("dd\n");
+  //printf("dd\n");
   assert(fp);
-  printf("after assertfp\n");
+  //printf("after assertfp\n");
   fseek(fp, 0, SEEK_END);
-  printf("after fseek\n");
+  //printf("after fseek\n");
   long size = ftell(fp);
   printf("size is %d\n",size);
   assert(size == 5000);
-  printf("after assert1\n");
+  //printf("after assert1\n");
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
-  printf("aab\n");
+  //printf("aab\n");
   for (i = 500; i < 1000; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
 
   fseek(fp, 0, SEEK_SET);
-  printf("bb\n");
+  //printf("bb\n");
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
-  printf("ee\n");
+  //printf("ee\n");
   for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
+    if(&n==NULL)printf("n is null\n");
     fscanf(fp, "%d", &n);
     //printf("n is %d\n",n);
     assert(n == i + 1);
