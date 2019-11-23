@@ -39,6 +39,7 @@ int main() {
   }*/
   printf("ff\n");
   fseek(fp, 2504, SEEK_SET);
+printf("n is %d",n);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
