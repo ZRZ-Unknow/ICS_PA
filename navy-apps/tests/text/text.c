@@ -17,12 +17,13 @@ int main() {
   int i, n;
   //printf("aab\n");
   for (i = 500; i < 1000; i ++) {
-    printf("pos is %d\n",ftell(fp));
-    fscanf(fp, "%d", &n);
+    //printf("pos is %d\n",ftell(fp));
+    fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
   }
   //此时n=500
   fseek(fp, 0, SEEK_SET);//指向了文件开头
+  printf("now pos is %d\n",ftell(fp));
   //printf("bb\n");
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
