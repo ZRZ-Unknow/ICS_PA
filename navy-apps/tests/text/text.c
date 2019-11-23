@@ -8,11 +8,10 @@ int main() {
   long size = ftell(fp);
   printf("size is %d\n",size);
   assert(size == 5000);
-  fseek(fp, 5*500, SEEK_SET);//5*500
+  fseek(fp, 5*500, SEEK_SET);
   int i, n;
   for (i = 500; i < 1000; i ++) {
-//printf("currt pos is %d\n",ftell(fp));
-    fscanf(fp, "%d", &n);//没读一次前进5
+    fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
   //此时n=1000
@@ -29,7 +28,7 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }*/
-  fseek(fp, 2495, SEEK_SET);
+  fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
     printf("n is %d\n",n);
