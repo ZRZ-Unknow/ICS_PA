@@ -4,7 +4,7 @@
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   //char *b=(char*)buf;
   printf("off is %d,len is %d\n",offset,len);
-  for(int i=offset;i<len;i++){
+  for(int i=0;i<10;i++){
     _putc(((char*)buf)[i]);
   }
   return len;
