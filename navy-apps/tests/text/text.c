@@ -31,18 +31,18 @@ int main() {
   fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
   //此时文件头部应写入了1001-1500，n为500,移动到2500
   //printf("ee\n");
-  for (i = 500; i < 1000; i ++) {
+  /*for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
     printf("curr pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);
-    //printf("n is %d\n",n);
     assert(n == i + 1);
-  }
+  }*/
   printf("ff\n");
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
+    printf("n is %d",n);
     assert(n == i + 1 + 1000);
   }
   printf("gg\n");
