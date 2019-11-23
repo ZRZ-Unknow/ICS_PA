@@ -2,20 +2,14 @@
 #include <assert.h>
 
 int main() {
-  //printf("begin\n");
   FILE *fp = fopen("/share/texts/num", "r+");
-  //printf("dd\n");
   assert(fp);
-  //printf("after assertfp\n");
   fseek(fp, 0, SEEK_END);
-  //printf("after fseek\n");
   long size = ftell(fp);
   printf("size is %d\n",size);
   assert(size == 5000);
-  //printf("after assert1\n");
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
-  //printf("aab\n");
   for (i = 500; i < 1000; i ++) {
     //printf("pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
@@ -39,11 +33,11 @@ int main() {
   }*/
   printf("ff\n");
   fseek(fp, 0, SEEK_SET);
-printf("n is %d\n",n);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
     printf("n is %d\n",n);
+    printf("curr pos is %d\n",ftell(fp));
     //assert(n == i + 1 + 1000);
   }
   printf("gg\n");
