@@ -52,8 +52,23 @@ int fs_open(const char* pathname,int flags,int mode){
 
 size_t fs_read(int fd,void*buf,size_t len){
   assert(fd<NR_FILES);
-  size_t lens=len;
-  if(file_table[fd].open_offset+len>file_table[fd].size){
+  size_t lens;
+  if(file_table[fd].read==NULL){
+    lens=file_table[fd].open_offset+len<=file_table[fd].size?len:file_table[fd].size-file_table[fd].open_offset;
+    lens=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,lens); 
+    file_table[fd].open_offset+=lens;
+    return lens; 
+  }
+  else{
+    lens=len;
+    if(file_table[fd].size && file_table[fd].open_offset+len>file_table[fd].size){
+      lens=file_table[fd].size-file_table[fd].open_offset;
+    }
+    lens=file_table[fd].read(buf,file_table[fd].open_offset,lens);
+    file_table[fd].open_offset+=lens;
+    return lens;
+  }
+  /*if(file_table[fd].open_offset+len>file_table[fd].size){
     lens=file_table[fd].size-file_table[fd].open_offset;
   }
   if(file_table[fd].read==NULL){
@@ -65,7 +80,7 @@ size_t fs_read(int fd,void*buf,size_t len){
     size_t offset=file_table[fd].read(buf,file_table[fd].open_offset,lens);
     file_table[fd].open_offset+=offset;
     return offset;
-  }
+  }*/
 }
 int fs_close(int fd){
   file_table[fd].open_offset=0;
