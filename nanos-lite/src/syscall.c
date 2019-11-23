@@ -4,11 +4,11 @@
 
 static inline int32_t sys_write(int fd,const void *buf,size_t len){
   if(fd==1||fd==2){
-    //char *b=(char*)buf;
-    char p[len];
-    memcpy(p,buf,len);
+    char *b=(char*)buf;
+    //char p[len];
+    //memcpy(p,buf,len);
     for(int i=0;i<len;i++){
-      _putc(p[i]);
+      _putc(*(b++));
     }
     return len;
   }
