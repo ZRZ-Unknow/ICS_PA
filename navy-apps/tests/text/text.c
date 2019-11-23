@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-
+//printf调用fs_write,ramdiskwrite的.write
 int main() {
   /*FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
@@ -41,6 +41,6 @@ int main() {
   fclose(fp);*/
 
   printf("PASS!!!\n");
-
+_putc('5');
   return 0;
 }
