@@ -12,7 +12,7 @@ int main() {
   int i, n;
   for (i = 500; i < 1000; i ++) {
 //printf("currt pos is %d\n",ftell(fp));
-    if(i%10==0)printf("pos is %d\n",ftell(fp));
+    if(i%15==0)printf("pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
   }
