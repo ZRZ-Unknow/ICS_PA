@@ -8,6 +8,7 @@ int main() {
   assert(fp);
   printf("after assertfp\n");
   fseek(fp, 0, SEEK_END);
+  printf("after fseek\n");
   long size = ftell(fp);
   printf("cc\n");
   assert(size == 5000);
