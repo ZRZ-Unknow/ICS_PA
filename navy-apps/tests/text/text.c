@@ -10,9 +10,9 @@ int main() {
   fseek(fp, 0, SEEK_END);
   printf("after fseek\n");
   long size = ftell(fp);
-  printf("cc\n");
+  printf("size is %d\n",size);
   assert(size == 5000);
-
+  printf("after assert1\n");
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
   printf("aab\n");
