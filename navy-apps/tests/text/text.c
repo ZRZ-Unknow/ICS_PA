@@ -26,6 +26,8 @@ int main() {
     //printf("i is %d\n",i);
     //printf("curr pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);
+    printf("n is %d\n",n);
+    printf("curr pos is %d\n",ftell(fp));
     assert(n == i + 1);
   }
   fseek(fp, 0, SEEK_SET);
