@@ -27,7 +27,7 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
   printf("ee\n");
-  for (i = 500; i < 1000; i ++) {
+  /*for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
     fscanf(fp, "%d", &n);
     printf("n is %d\n",n);
@@ -38,7 +38,7 @@ int main() {
   for (i = 0; i < 500; i ++) {
     fscanf(fp, "%d", &n);
     assert(n == i + 1 + 1000);
-  }
+  }*/
   printf("gg\n");
   fclose(fp);
 
