@@ -21,7 +21,7 @@ int main() {
     fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
   }
-  //此时n=500
+  //此时n=1000
   fseek(fp, 0, SEEK_SET);//指向了文件开头
   printf("now pos is %d\n",ftell(fp));
   //printf("bb\n");
@@ -29,7 +29,7 @@ int main() {
     fprintf(fp, "%4d\n", i + 1 + 1000);
   }
   //fseek(fp,0,SEEK_END);printf("after insert size is %d\n",ftell(fp));
-  //此时文件头部应写入了1001-1500，n为500,移动到2500
+  //此时文件头部应写入了1001-1500，n为1000,移动到2500
   //printf("ee\n");
   /*for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
@@ -38,12 +38,12 @@ int main() {
     assert(n == i + 1);
   }*/
   printf("ff\n");
-  fseek(fp, 2500, SEEK_SET);
+  fseek(fp, 0, SEEK_SET);
 printf("n is %d\n",n);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
-    printf("n is %d",n);
+    printf("n is %d\n",n);
     //assert(n == i + 1 + 1000);
   }
   printf("gg\n");
