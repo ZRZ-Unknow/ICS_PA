@@ -6,7 +6,7 @@
 int printf(const char *fmt, ...) {
   va_list args;
   va_start(args,fmt);
-  char out[250];
+  char out[1000];
   int out_len=vsprintf(out,fmt,args);
   va_end(args);
   for(int i=0;i<out_len;i++){
@@ -19,7 +19,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   char *outp;int out_len=0;
   int width;
   int flags;
-  char nums[66];
+  char nums[1000];
   char *ss=nums;
 
   for(outp=out;*fmt;fmt++){

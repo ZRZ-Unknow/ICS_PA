@@ -11,8 +11,7 @@ int main() {
   fseek(fp, 5*500, SEEK_SET);//5*500
   int i, n;
   for (i = 500; i < 1000; i ++) {
-//printf("currt pos is %d\n",ftell(fp));
-    if(i%15==0)printf("pos is %d\n",ftell(fp));
+printf("currt pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
   }
@@ -32,7 +31,6 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }*/
-  printf("ff\n");
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
     //printf("i is %d,n is %d\n",i,n);
