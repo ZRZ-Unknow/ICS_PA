@@ -12,9 +12,6 @@ struct _Context {
 #define GPR2 ebx
 #define GPR3 ecx
 #define GPR4 edx
-#define GPR5 esi
-#define GPR6 edi
-#define GPR7 ebp
 #define GPRx eax
 
 #endif
