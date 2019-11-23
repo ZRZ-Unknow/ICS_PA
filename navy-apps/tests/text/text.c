@@ -8,9 +8,10 @@ int main() {
   long size = ftell(fp);
   printf("size is %d\n",size);
   assert(size == 5000);
-  fseek(fp, 500 * 5, SEEK_SET);
+  fseek(fp, 0, SEEK_SET);//5*500
   int i, n;
   for (i = 500; i < 1000; i ++) {
+printf("curr pos is %d\n",ftell(fp));
     //printf("pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
     assert(n == i + 1);
