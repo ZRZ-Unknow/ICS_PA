@@ -14,7 +14,7 @@ int main() {
 printf("curr pos is %d\n",ftell(fp));
     //printf("pos is %d\n",ftell(fp));
     fscanf(fp, "%d", &n);//没读一次前进5
-    assert(n == i + 1);
+    //assert(n == i + 1);
   }
   //此时n=1000
   fseek(fp, 0, SEEK_SET);//指向了文件开头
