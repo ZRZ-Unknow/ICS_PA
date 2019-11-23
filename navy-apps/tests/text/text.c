@@ -28,7 +28,7 @@ int main() {
   for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
     fscanf(fp, "%d", &n);
-    printf("n is %d",n);
+    printf("n is %d\n",n);
     assert(n == i + 1);
   }
   printf("ff\n");
