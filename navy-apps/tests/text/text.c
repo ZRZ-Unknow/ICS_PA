@@ -29,7 +29,7 @@ int main() {
   //printf("ee\n");
   for (i = 500; i < 1000; i ++) {
     printf("i is %d\n",i);
-    if(&n==NULL)printf("n is null\n");
+    if(fp==NULL)printf("fp is null\n");
     fscanf(fp, "%d", &n);
     //printf("n is %d\n",n);
     assert(n == i + 1);
