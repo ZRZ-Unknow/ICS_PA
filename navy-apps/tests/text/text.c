@@ -32,13 +32,14 @@ int main() {
     fscanf(fp, "%d", &n);
     printf("n is %d\n",n);
     assert(n == i + 1);
-  }
+  }*/
   printf("ff\n");
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i ++) {
+    printf("i is %d,n is %d\n",i,n);
     fscanf(fp, "%d", &n);
     assert(n == i + 1 + 1000);
-  }*/
+  }
   printf("gg\n");
   fclose(fp);
 
