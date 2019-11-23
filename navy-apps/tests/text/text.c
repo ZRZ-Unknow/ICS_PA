@@ -6,7 +6,7 @@ int main() {
   assert(fp);
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
-  printf("size is %d\n",size);
+  //printf("size is %d\n",size);
   assert(size == 5000);
   fseek(fp, 5*500, SEEK_SET);
   int i, n;
@@ -14,8 +14,7 @@ int main() {
     fscanf(fp, "%d", &n);
     assert(n == i + 1);
   }
-  //此时n=1000
-  fseek(fp, 0, SEEK_SET);//指向了文件开头
+  fseek(fp, 0, SEEK_SET);
   //printf("now pos is %d\n",ftell(fp));
   for (i = 0; i < 500; i ++) {
     fprintf(fp, "%4d\n", i + 1 + 1000);
