@@ -28,9 +28,11 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     //}
     //else 
     if(key & 0x8000){
+        printf("aaaaaaaaaaaaaaaaa\n");
         sprintf(buf,"kd %s\n",keyname[key & ~0x8000]);
     }
     else if ((key & ~0x8000)!=_KEY_NONE){
+      printf("ddddddd\n");
         sprintf(buf,"ku %s\n",keyname[key & ~0x8000]);
     }
     else{
