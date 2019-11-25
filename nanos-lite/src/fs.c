@@ -55,6 +55,7 @@ int32_t fs_open(const char* pathname,int flags,int mode){
       return i;
     }
   }
+  printf("%s\n",pathname);
   panic("could not find file");
   return -1;
 }
