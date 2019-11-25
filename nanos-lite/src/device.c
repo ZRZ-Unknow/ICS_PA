@@ -36,6 +36,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
         sprintf(buf,"ku %s\n",keyname[key & ~0x8000]);
     }
     else{
+      printf("sakfkasjfdlka\n");
       sprintf(buf,"t %d\n",uptime());
     }
   return strlen(buf);
