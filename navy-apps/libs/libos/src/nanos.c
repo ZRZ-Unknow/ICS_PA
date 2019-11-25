@@ -66,8 +66,6 @@ int _write(int fd, void *buf, size_t count) {
 void *_sbrk(intptr_t increment) {
   extern uint32_t _end;
   static uint32_t program_break=&_end;
-  /*if(program_break==0){
-  program_break=&_end;}*/
   if(_syscall_(SYS_brk,program_break+increment,0,0)==0){
     uint32_t old=program_break;
     program_break=program_break+increment;
@@ -76,7 +74,6 @@ void *_sbrk(intptr_t increment) {
   else{
     return (void*)-1;
   }
-  //return (void*)-1;
 }
 
 int _read(int fd, void *buf, size_t count) {
@@ -87,7 +84,6 @@ int _read(int fd, void *buf, size_t count) {
 int _close(int fd) {
   //_exit(SYS_close);
   return _syscall_(SYS_close,fd,0,0);
-  //return 0;
 }
 
 off_t _lseek(int fd, off_t offset, int whence) {
