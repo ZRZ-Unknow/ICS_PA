@@ -5,6 +5,7 @@ typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 extern size_t serial_write(const void *buf, size_t offset, size_t len);
+extern size_t events_read(void *buf, size_t offset, size_t len);
 typedef struct {
   char *name;
   size_t size;
@@ -32,6 +33,7 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdout", 0, 0, 0,invalid_read, serial_write},
   {"stderr", 0, 0, 0,invalid_read, serial_write},
 #include "files.h"
+  {"/dev/events",0,0,0,events_read,invalid_write},
 };
 
 #define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
