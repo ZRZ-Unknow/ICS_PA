@@ -1,5 +1,4 @@
 #include "fs.h"
-
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
@@ -9,6 +8,7 @@ extern size_t events_read(void *buf, size_t offset, size_t len);
 extern size_t dispinfo_read(void *buf, size_t offset, size_t len);
 extern size_t fb_write(const void *buf, size_t offset, size_t len);
 extern size_t fbsync_write(const void *buf, size_t offset, size_t len);
+extern size_t discinfo_sizes();
 typedef struct {
   char *name;
   size_t size;
@@ -29,7 +29,7 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
   panic("should not reach here");
   return 0;
 }
-
+extern char discinfo;
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0,invalid_read, invalid_write},
@@ -37,16 +37,16 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stderr", 0, 0, 0,invalid_read, serial_write},
 #include "files.h"
   {"/dev/events",0,0,0,events_read,invalid_write},
+  {"/dev/fbsync",1,0,0,invalid_read,fbsync_write},
   {"/dev/dispinfo",0,0,0,dispinfo_read,invalid_write},
-  {"/dev/fbsync",0,0,0,invalid_read,fbsync_write},
   {"/dev/fb",0,0,0,invalid_read,fb_write},
 };
-
 #define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
   file_table[NR_FILES-1].size=screen_height()*screen_width();
+  file_table[NR_FILES-2].size=discinfo_sizes();
 }
 
 int32_t fs_open(const char* pathname,int flags,int mode){
