@@ -38,15 +38,15 @@ static Finfo file_table[] __attribute__((used)) = {
 #include "files.h"
   {"/dev/events",0,0,0,events_read,invalid_write},
   {"/dev/dispinfo",0,0,0,dispinfo_read,invalid_write},
-  {"/dev/fb",0,0,0,invalid_read,fb_write},
   {"/dev/fbsync",0,0,0,invalid_read,fbsync_write},
+  {"/dev/fb",0,0,0,invalid_read,fb_write},
 };
 
 #define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
-  file_table[NR_FILES-2].size=screen_height()*screen_width();
+  file_table[NR_FILES-1].size=screen_height()*screen_width();
 }
 
 int32_t fs_open(const char* pathname,int flags,int mode){
