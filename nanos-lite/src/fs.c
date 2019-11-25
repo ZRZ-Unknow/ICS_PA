@@ -6,6 +6,9 @@ extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 extern size_t serial_write(const void *buf, size_t offset, size_t len);
 extern size_t events_read(void *buf, size_t offset, size_t len);
+extern size_t dispinfo_read(void *buf, size_t offset, size_t len);
+extern size_t fb_write(const void *buf, size_t offset, size_t len);
+extern size_t fbsync_write(const void *buf, size_t offset, size_t len);
 typedef struct {
   char *name;
   size_t size;
@@ -34,12 +37,16 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stderr", 0, 0, 0,invalid_read, serial_write},
 #include "files.h"
   {"/dev/events",0,0,0,events_read,invalid_write},
+  {"/dev/dispinfo",0,0,0,dispinfo_read,invalid_write},
+  {"/dev/fb",0,0,0,invalid_read,fb_write},
+  {"/dev/fbsync",0,0,0,invalid_read,fbsync_write},
 };
 
 #define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+  file_table[NR_FILES-2].size=screen_height()*screen_width();
 }
 
 int32_t fs_open(const char* pathname,int flags,int mode){
