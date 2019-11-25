@@ -22,7 +22,7 @@ _Context* do_syscall(_Context *c) {
   a[3]=c->GPR4;
   switch (a[0]) {
     case SYS_yield:_yield();c->GPRx=0;break;
-    case SYS_exit:printf("exit is %d\n",a[1]!=0);_halt(a[1]);break;
+    case SYS_exit:_halt(a[1]);break;
     case SYS_brk:c->GPRx=0;break;
     case SYS_open:c->GPRx=fs_open((void*)a[1],a[2],a[3]);break;
     case SYS_read:c->GPRx=fs_read(a[1],(void*)a[2],a[3]);break;
