@@ -62,15 +62,16 @@ int32_t fs_open(const char* pathname,int flags,int mode){
 
 int32_t fs_read(int fd,void*buf,size_t len){
   assert(fd>=0 && fd<NR_FILES);
-  size_t lens;
+  size_t lens=len;
   if(file_table[fd].read==NULL){
-    lens=file_table[fd].open_offset+len<=file_table[fd].size?len:file_table[fd].size-file_table[fd].open_offset;
+    if(file_table[fd].size && file_table[fd].open_offset+len>file_table[fd].size){
+      lens=file_table[fd].size-file_table[fd].open_offset;
+    }
     lens=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].open_offset,lens); 
     file_table[fd].open_offset+=lens;
     return lens; 
   }
   else{
-    lens=len;
     if(file_table[fd].size && file_table[fd].open_offset+len>file_table[fd].size){
       lens=file_table[fd].size-file_table[fd].open_offset;
     }
@@ -98,22 +99,21 @@ int fs_close(int fd){
 }
 int32_t fs_write(int fd,void *buf,size_t len){
   assert(fd<NR_FILES);
-  size_t lens;
+  size_t lens=len;
   if(file_table[fd].write==NULL){
-    lens=file_table[fd].open_offset+len<=file_table[fd].size?len:file_table[fd].size-file_table[fd].open_offset;
+    if(file_table[fd].size && file_table[fd].open_offset+len>file_table[fd].size){
+      lens=file_table[fd].size-file_table[fd].open_offset;
+    }
     lens=ramdisk_write(buf,file_table[fd].disk_offset+file_table[fd].open_offset,lens); 
     file_table[fd].open_offset+=lens;
-    //printf("i am here\n");
     return lens; 
   }
   else{
-    lens=len;
     if(file_table[fd].size && file_table[fd].open_offset+len>file_table[fd].size){
       lens=file_table[fd].size-file_table[fd].open_offset;
     }
     lens=file_table[fd].write(buf,file_table[fd].open_offset,lens);
     file_table[fd].open_offset+=lens;
-   // printf("used to be\n");
     return lens;
   }
   /*size_t lens=len;
