@@ -1,7 +1,8 @@
 #include "common.h"
 #include "syscall.h"
 #include "fs.h"
-
+#include "proc.h"
+extern void naive_uload(PCB *pcb, const char *filename);
 static inline int32_t sys_write(int fd,const void *buf,size_t len){
   if(fd==1||fd==2){
     char *b=(char*)buf;
@@ -29,6 +30,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_write:c->GPRx=fs_write(a[1],(void*)a[2],a[3]);break;
     case SYS_close:c->GPRx=fs_close(a[1]);break;
     case SYS_lseek:c->GPRx=fs_lseek(a[1],a[2],a[3]);break;
+    case SYS_execve:naive_uload(NULL,(char*)a[1]);c->GPRx=0;break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
