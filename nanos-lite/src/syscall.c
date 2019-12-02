@@ -3,7 +3,7 @@
 #include "fs.h"
 #include "proc.h"
 extern void naive_uload(PCB *pcb, const char *filename);
-static inline int32_t sys_write(int fd,const void *buf,size_t len){
+/*static inline int32_t sys_write(int fd,const void *buf,size_t len){
   if(fd==1||fd==2){
     char *b=(char*)buf;
     printf("len is %d\n",len);
@@ -13,7 +13,7 @@ static inline int32_t sys_write(int fd,const void *buf,size_t len){
     return len;
   }
   return -1;
-}
+}*/
 
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
