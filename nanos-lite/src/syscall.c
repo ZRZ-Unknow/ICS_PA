@@ -26,7 +26,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_exit:Log("sys_exit");c->GPRx=-1;naive_uload(NULL,"/bin/init");break;//_halt(a[1]);break;
     case SYS_brk:Log("sys_brk");c->GPRx=0;break;
     case SYS_open:Log("sys_open");c->GPRx=fs_open((void*)a[1],a[2],a[3]);break;
-    case SYS_read:Log("sys_read");c->GPRx=fs_read(a[1],(void*)a[2],a[3]);break;
+    case SYS_read:c->GPRx=fs_read(a[1],(void*)a[2],a[3]);break;
     case SYS_write:Log("sys_write");c->GPRx=fs_write(a[1],(void*)a[2],a[3]);break;
     case SYS_close:Log("sys_close");c->GPRx=fs_close(a[1]);break;
     case SYS_lseek:Log("sys_lseek");c->GPRx=fs_lseek(a[1],a[2],a[3]);break;
