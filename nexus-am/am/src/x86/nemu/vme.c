@@ -82,7 +82,17 @@ void __am_switch(_Context *c) {
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   return 0;
 }
+struct stackframe
+{
+  int argc;
+  char **argv;
+  char **envp;
+}sf;
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  return NULL;
+  _Context *c=(_Context*) (ustack.end-sizeof(_Context)-sizeof(sf));
+  c->cs=8;
+  c->eip=(uintptr_t)entry;
+  c->as=NULL;
+  return c;
 }
