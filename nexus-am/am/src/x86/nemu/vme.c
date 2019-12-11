@@ -90,7 +90,7 @@ struct stackframe
 }sf;
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  _Context *c=(_Context*) (ustack.end-sizeof(_Context)-0x20);
+  _Context *c=(_Context*) (ustack.end-sizeof(_Context)-sizeof(sf));
   c->cs=8;
   c->eip=(uintptr_t)entry;
   c->as=NULL;
