@@ -9,9 +9,9 @@ make_EHelper(lidt) {
 
 make_EHelper(mov_r2cr) {
   //TODO();
-  //operand_write(id_dest,&id_src->val);
+  operand_write(id_dest,&id_src->val);
   printf("dddddd\n");
-  rtl_li(&id_dest->val,id_src->val);
+  //rtl_li(&id_dest->val,id_src->val);
   print_asm("movl %%%s,%%cr%d", reg_name(id_src->reg, 4), id_dest->reg);
 }
 
