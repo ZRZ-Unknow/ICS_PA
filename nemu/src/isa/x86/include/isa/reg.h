@@ -2,7 +2,7 @@
 #define __X86_REG_H__
 
 #include "common.h"
-
+#include "mmu.h"
 #define PC_START IMAGE_START
 
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
@@ -56,7 +56,10 @@ typedef struct {
     uint32_t base;
   }IDTR;
   
-  rtlreg_t CS; 
+  rtlreg_t CS;
+
+  CR0 cr0;
+  CR3 cr3; 
 } CPU_state;
 
 static inline int check_reg_index(int index) {
