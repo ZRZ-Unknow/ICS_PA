@@ -80,8 +80,21 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
+  PDE *pgdir=as->ptr;
+  PDE *pde=&pgdir[PDX(va)];
+  PTE *pgtab;
+
+  if(!(*pde & PTE_P)){    //申请
+    pgtab=(PDE *)pgalloc_usr(1);
+    *pde=PTE_ADDR(pgtab) | PTE_P;
+  } 
+  else{   
+    pgtab=(PTE*)PTE_ADDR(*pde);
+  }
+  pgtab[PTX(va)]=PTE_ADDR(pa) | PTE_P;
   return 0;
 }
+
 struct stackframe
 {
   int argc;
