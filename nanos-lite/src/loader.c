@@ -24,8 +24,18 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_read(fd,(void*)&phdr[i],elf.e_phentsize);
     if(phdr[i].p_type==PT_LOAD){
       fs_lseek(fd,phdr[i].p_offset,SEEK_SET);
-      fs_read(fd,(void*)phdr[i].p_vaddr,phdr[i].p_filesz);
-      memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
+      void *va=(void*)phdr[i].p_paddr;
+      void *pa;
+      int32_t filesz=phdr[i].p_filesz;
+      while(filesz>0){
+        pa=new_page(1);
+        _map(&pcb->as,va,pa,0);
+        fs_read(fd,pa,PGSIZE);
+        va+=PGSIZE;
+        filesz-=PGSIZE;
+      }
+      //fs_read(fd,(void*)phdr[i].p_vaddr,phdr[i].p_filesz);
+      //memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
     }
   }
   fs_close(fd);
