@@ -29,7 +29,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_read(fd,(void*)&phdr[i],elf.e_phentsize);
     if(phdr[i].p_type==PT_LOAD){
       fs_lseek(fd,phdr[i].p_offset,SEEK_SET);
-      void *vaddr = (void *)phdr[i].p_vaddr;
+      /*void *vaddr = (void *)phdr[i].p_vaddr;
       void *paddr=new_page(1);
       int32_t fsize = phdr[i].p_filesz;
       printf("before map\n");
@@ -58,8 +58,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         paddr = new_page(1);
         _map(&pcb->as, vaddr, paddr, 0);
         memset(paddr, 0, wsize);
-      }
-      /*//4.2第一次写的loader
+      }*/
+      //4.2第一次写的loader
       void *va=(void*)phdr[i].p_paddr;
       void *pa;
       int32_t filesz=phdr[i].p_filesz;
@@ -69,7 +69,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         fs_read(fd,pa,PGSIZE);
         va+=PGSIZE;
         filesz-=PGSIZE;
-      }*/
+      }
       //fs_read(fd,(void*)phdr[i].p_vaddr,phdr[i].p_filesz);
       //memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
     }
