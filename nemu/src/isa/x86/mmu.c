@@ -18,16 +18,16 @@ paddr_t page_translate(vaddr_t ad){
 
   return PTE_ADDR(pte.val) | OFF(ad);*/
   paddr_t ptab = paddr_read(cpu.cr3.val + sizeof(PDE) * PDX(ad), sizeof(PDE));
-  /*if (!(ptab & PTE_P)) {
+  if (!(ptab & PTE_P)) {
     printf("ERROR:page_translate(): page table doesn't exists!\n");
     assert(0); 
-  }*/
+  }
 
   paddr_t pg = paddr_read(PTE_ADDR(ptab) + sizeof(PTE) * PTX(ad), sizeof(PTE));
-  /*if (!(pg & PTE_P)) {
+  if (!(pg & PTE_P)) {
     printf("ERROR:page_translate(): page doesn't exists!\n");
     assert(0); 
-  }*/
+  }
 
   return (PTE_ADDR(pg) | OFF(ad));
 }
