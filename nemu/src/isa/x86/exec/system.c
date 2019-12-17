@@ -8,6 +8,7 @@ make_EHelper(lidt) {
 }
 
 make_EHelper(mov_r2cr) {
+  printf("%d\n",id_dest->reg);
   if (id_dest->reg == 0) {
     rtl_li(&cpu.cr0.val, id_src->val);
   } else if (id_dest->reg == 3) {
@@ -19,7 +20,7 @@ make_EHelper(mov_r2cr) {
 
 make_EHelper(mov_cr2r) {
   //TODO();
-  switch (id_dest->reg)
+  switch (id_src->reg)
   {
   case 0:
     //cpu.cr0.val=id_src->val;
