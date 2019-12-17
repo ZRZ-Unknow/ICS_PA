@@ -41,10 +41,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       void *paddr;
       int32_t left_file_size = phdr[i].p_filesz;
 
-      // 这里注意在映射后由于没有修改CR3寄存器，所以现在的映射还没有启用，在
-      // fs_read和memset时要对物理地址进行修改而不是虚拟地址
-
-      // 处理第一页 (第一页可能不是页对齐)
       paddr = new_page(1);
       _map(&pcb->as, vaddr, paddr, 0);
       uint32_t page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
@@ -59,7 +55,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         fs_read(fd, paddr, page_write_size);
       }
 
-      // 将进程剩下的地址空间赋值为0
       left_file_size = phdr[i].p_memsz - phdr[i].p_filesz;
       if (((uint32_t)vaddr & 0xfff) != 0) {
         page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
@@ -97,7 +92,6 @@ void context_kload(PCB *pcb, void *entry) {
 }
 
 void context_uload(PCB *pcb, const char *filename) {
-  memset(pcb,0,sizeof(PCB));
   _protect(&pcb->as);
   uintptr_t entry = loader(pcb, filename);
 
