@@ -19,7 +19,7 @@ make_EHelper(mov_r2cr) {
 
 make_EHelper(mov_cr2r) {
   //TODO();
-  /*switch (id_dest->reg)
+  switch (id_dest->reg)
   {
   case 0:
     //cpu.cr0.val=id_src->val;
@@ -31,16 +31,16 @@ make_EHelper(mov_cr2r) {
   default:
     assert(0);
     break;
-  }*/
-  if (id_src->reg == 0) {
+  }
+  /*if (id_src->reg == 0) {
     rtl_li(&s0, cpu.cr0.val);
   } else if (id_src->reg == 3) {
     rtl_li(&s0, cpu.cr0.val);
   } else {
     assert(0);
-  }
+  }*/
 
-  operand_write(id_dest, &s0);
+  //operand_write(id_dest, &s0);
   print_asm("movl %%cr%d,%%%s", id_src->reg, reg_name(id_dest->reg, 4));
 
   difftest_skip_ref();
