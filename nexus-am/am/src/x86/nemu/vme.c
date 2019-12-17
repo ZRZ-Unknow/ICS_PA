@@ -85,7 +85,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   PTE *pgtab;
 
   if(!(*pde & PTE_P)){    //申请
-    pgtab=(PDE *)pgalloc_usr(1);
+    pgtab=(PTE *)pgalloc_usr(1);
     *pde=PTE_ADDR(pgtab) | PTE_P;
   } 
   else{   

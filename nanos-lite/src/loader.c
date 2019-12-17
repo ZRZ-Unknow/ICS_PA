@@ -24,6 +24,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_read(fd,(void*)&phdr[i],elf.e_phentsize);
     if(phdr[i].p_type==PT_LOAD){
       fs_lseek(fd,phdr[i].p_offset,SEEK_SET);
+
+      //4.2第一次写的loader
       void *va=(void*)phdr[i].p_paddr;
       void *pa;
       int32_t filesz=phdr[i].p_filesz;
