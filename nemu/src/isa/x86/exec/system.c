@@ -9,6 +9,15 @@ make_EHelper(lidt) {
 
 make_EHelper(mov_r2cr) {
   printf("%d\n",id_dest->reg);
+  switch (id_dest->reg)
+  {
+  case 3:
+    printf("it is 3\n");
+    break;
+  
+  default:
+    break;
+  }
   if (id_dest->reg == 0) {
     rtl_li(&cpu.cr0.val, id_src->val);
   } else if (id_dest->reg == 3) {
