@@ -50,7 +50,6 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
   set_cr3(kpdirs);
   set_cr0(get_cr0() | CR0_PG);
   vme_enable = 1;
-  printf("vme enable is 1\n");
   return 0;
 }
 
@@ -81,7 +80,7 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  /*PDE *pgdir=as->ptr;
+  PDE *pgdir=as->ptr;
   PDE *pde=&pgdir[PDX(va)];
   PTE *pgtab;
 
@@ -93,8 +92,8 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
     pgtab=(PTE*)PTE_ADDR(*pde);
   }
   pgtab[PTX(va)]=PTE_ADDR(pa) | PTE_P;
-  return 0;*/
-  PTE *pdir = as->ptr;
+  return 0;
+  /*PTE *pdir = as->ptr;
   PDE *pptab = &pdir[PDX(va)];
 
   if (!(*pptab & PTE_P)) {  
@@ -108,9 +107,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
     printf("page map already exists! %x\n", *ptab);
     assert(0); 
   }
-  *ptab = PTE_ADDR(pa) | PTE_P;
-
-  return 0;
+  *ptab = PTE_ADDR(pa) | PTE_P;*/
 }
 
 
