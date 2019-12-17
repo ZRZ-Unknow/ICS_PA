@@ -33,7 +33,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       void *vaddr = (void *)phdr[i].p_vaddr;
       void *paddr=new_page(1);
       int32_t fsize = phdr[i].p_filesz;
+      printf("before map\n");
       _map(&pcb->as, vaddr, paddr, 0);
+      printf("after map\n");
       uint32_t wsize = get_size(fsize, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
       fs_read(fd, (void *)(PTE_ADDR(paddr) | OFF(vaddr)), wsize);
       fsize -= wsize;
