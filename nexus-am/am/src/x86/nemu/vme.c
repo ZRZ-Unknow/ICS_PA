@@ -93,21 +93,6 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   }
   pgtab[PTX(va)]=PTE_ADDR(pa) | PTE_P;
   return 0;
-  /*PTE *pdir = as->ptr;
-  PDE *pptab = &pdir[PDX(va)];
-
-  if (!(*pptab & PTE_P)) {  
-    *pptab = (uint32_t)pgalloc_usr(1);
-    memset((void *)*pptab, 0, PGSIZE);
-    *pptab = *pptab | PTE_P;
-  }
-
-  PDE *ptab = &(((PDE *)PTE_ADDR(*pptab))[PTX(va)]);
-  if (*ptab & PTE_P) { 
-    printf("page map already exists! %x\n", *ptab);
-    assert(0); 
-  }
-  *ptab = PTE_ADDR(pa) | PTE_P;*/
 }
 
 
