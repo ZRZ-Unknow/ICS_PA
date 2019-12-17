@@ -8,29 +8,20 @@ make_EHelper(lidt) {
 }
 
 make_EHelper(mov_r2cr) {
-  printf("%d\n",id_dest->reg);
   switch (id_dest->reg)
   {
   case 0:
-    printf("it is 0\n");
     cpu.cr0.val=id_src->val;
     break;
   case 3:
-    printf("it is 3\n");
     cpu.cr3.val=id_src->val;
     break;
-  
   default:
     assert(0);
     break;
-  }/*
-  if (id_dest->reg == 0) {
-    rtl_li(&cpu.cr0.val, id_src->val);
-  } else if (id_dest->reg == 3) {
-    rtl_li(&cpu.cr3.val, id_src->val);
-  } else {
-    assert(0);
-  }*/
+  }
+
+  print_asm("movl %%%s,%%cr%d",reg_name(id_src->reg,4),id_dest->reg);
 }
 
 make_EHelper(mov_cr2r) {
@@ -38,27 +29,18 @@ make_EHelper(mov_cr2r) {
   switch (id_src->reg)
   {
   case 0:
-    //cpu.cr0.val=id_src->val;
-    printf("ddd\n");
+    //printf("ddd\n");
     operand_write(id_dest,&cpu.cr0.val);
     break;
   case 3:
-    printf("cc\n");
+    //printf("cc\n");
     operand_write(id_dest,&cpu.cr3.val);
     break;
   default:
     assert(0);
     break;
   }
-  /*if (id_src->reg == 0) {
-    rtl_li(&s0, cpu.cr0.val);
-  } else if (id_src->reg == 3) {
-    rtl_li(&s0, cpu.cr0.val);
-  } else {
-    assert(0);
-  }*/
 
-  //operand_write(id_dest, &s0);
   print_asm("movl %%cr%d,%%%s", id_src->reg, reg_name(id_dest->reg, 4));
 
   difftest_skip_ref();
