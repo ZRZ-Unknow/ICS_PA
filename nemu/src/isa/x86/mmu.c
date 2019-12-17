@@ -7,7 +7,7 @@
 #define OFF(va)          ((uint32_t)(va) & 0xfff)
 #define PTE_ADDR(pte)    ((uint32_t)(pte) & ~0xfff)
 #define PTE_P          0x001 
-/*paddr_t page_translate(vaddr_t ad){
+paddr_t page_translate(vaddr_t ad){
   PDE pde;
   PTE pte;  
   pde.val=paddr_read(cpu.cr3.val+4*PDX(ad),4);
@@ -52,8 +52,8 @@ void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   else{
     paddr_write(addr, data,len);
   }
-}*/
-
+}
+/*
 inline paddr_t page_translate(vaddr_t va) {
   paddr_t ptab = paddr_read(cpu.cr3.val + sizeof(PDE) * PDX(va), sizeof(PDE));
   if (!(ptab & PTE_P)) {
@@ -106,4 +106,4 @@ void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   } else {  
     paddr_write(addr, data, len);
   }
-}
+}*/
