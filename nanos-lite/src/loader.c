@@ -65,7 +65,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       int32_t filesz=phdr[i].p_filesz;
       while(filesz>0){
         pa=new_page(1);
-        _map(&pcb->as,va,pa,0);
+        //_map(&pcb->as,va,pa,0);
         fs_read(fd,pa,PGSIZE);
         va+=PGSIZE;
         filesz-=PGSIZE;
