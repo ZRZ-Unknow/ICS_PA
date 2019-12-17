@@ -20,7 +20,6 @@ static inline uint32_t get_size(int32_t fsize,int32_t usize){
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   int fd=fs_open(filename,0,0);
-  printf("%s\n",filename);
   assert(fd!=-1);
   Elf_Ehdr elf;
   fs_read(fd,(void*)&elf,sizeof(Elf_Ehdr));
@@ -76,6 +75,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     }
   }
   fs_close(fd);
+  printf("%s,%x\n",filename,elf.e_entry);
   return elf.e_entry;
 }
 
