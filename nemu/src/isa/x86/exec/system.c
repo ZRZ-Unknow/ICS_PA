@@ -13,22 +13,24 @@ make_EHelper(mov_r2cr) {
   {
   case 0:
     printf("it is 0\n");
+    rtl_li(&cpu.cr0.val, id_src->val);
     break;
   case 3:
     printf("it is 3\n");
+    rtl_li(&cpu.cr3.val, id_src->val);
     break;
   
   default:
     assert(0);
     break;
-  }
+  }/*
   if (id_dest->reg == 0) {
     rtl_li(&cpu.cr0.val, id_src->val);
   } else if (id_dest->reg == 3) {
     rtl_li(&cpu.cr3.val, id_src->val);
   } else {
     assert(0);
-  }
+  }*/
 }
 
 make_EHelper(mov_cr2r) {
