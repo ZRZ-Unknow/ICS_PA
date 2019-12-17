@@ -11,10 +11,10 @@ paddr_t page_translate(vaddr_t ad){
   PDE pde;
   PTE pte;  
   pde.val=paddr_read(cpu.cr3.val+4*PDX(ad),4);
-  //if(pde.present==0) assert(0);
+  if(pde.present==0) assert(0);
 
   pte.val=paddr_read(PTE_ADDR(pde.val)+4*PTX(ad),4);
-//  if(pte.present==0) assert(0);
+  if(pte.present==0) assert(0);
 
   return PTE_ADDR(pte.val) | OFF(ad);
 }
@@ -27,7 +27,6 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     }
     //跨页
     else{
-      printf("read across page\n");
       //assert(0);
       uint8_t byte[4];
       for (int i = 0; i < len; i++)
