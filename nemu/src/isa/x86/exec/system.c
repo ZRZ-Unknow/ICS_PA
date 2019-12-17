@@ -23,9 +23,11 @@ make_EHelper(mov_cr2r) {
   {
   case 0:
     //cpu.cr0.val=id_src->val;
+    printf("ddd\n");
     operand_write(id_dest,&cpu.cr0.val);
     break;
   case 3:
+    printf("cc\n");
     operand_write(id_dest,&cpu.cr3.val);
     break;
   default:
