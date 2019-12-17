@@ -13,11 +13,11 @@ make_EHelper(mov_r2cr) {
   {
   case 0:
     printf("it is 0\n");
-    rtl_li(&cpu.cr0.val, id_src->val);
+    cpu.cr0.val=id_src->val;
     break;
   case 3:
     printf("it is 3\n");
-    rtl_li(&cpu.cr3.val, id_src->val);
+    cpu.cr3.val=id_src->val;
     break;
   
   default:
