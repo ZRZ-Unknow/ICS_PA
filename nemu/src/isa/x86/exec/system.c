@@ -16,6 +16,7 @@ make_EHelper(mov_r2cr) {
     break;
   
   default:
+    assert(0);
     break;
   }
   if (id_dest->reg == 0) {
