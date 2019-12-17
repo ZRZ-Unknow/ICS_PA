@@ -9,9 +9,8 @@ make_EHelper(lidt) {
 
 make_EHelper(mov_r2cr) {
   //TODO();
-  //operand_write(id_dest,&id_src->val);
   //rtl_li(&id_dest->val,id_src->val);
-  /*switch (id_dest->reg)
+  switch (id_dest->reg)
   {
   case 0:
     cpu.cr0.val=id_src->val;
@@ -21,14 +20,14 @@ make_EHelper(mov_r2cr) {
   default:
     assert(0);
     break;
-  }*/
-  if (id_dest->reg == 0) {
+  }
+  /*if (id_dest->reg == 0) {
     rtl_li(&cpu.cr0.val, id_src->val);
   } else if (id_dest->reg == 3) {
     rtl_li(&cpu.cr3.val, id_src->val);
   } else {
     assert(0);
-  }
+  }*/
   print_asm("movl %%%s,%%cr%d", reg_name(id_src->reg, 4), id_dest->reg);
 }
 
