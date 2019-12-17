@@ -23,12 +23,11 @@ paddr_t page_translate(vaddr_t ad){
 uint32_t isa_vaddr_read(vaddr_t addr, int len) {
   if(cpu.cr0.paging==1){
     if( (addr&0xfff) +len-1 <= 0xfff){
-      printf("succ read\n");
       return paddr_read(page_translate(addr),len);
     }
     //跨页
     else{
-      Log("read across page\n");
+      printf("read across page\n");
       assert(0);
       return 0;
     }
@@ -41,11 +40,10 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
 void isa_vaddr_write(vaddr_t addr, uint32_t data, int len) {
   if(cpu.cr0.paging==1){ 
     if((addr&0xfff) +len-1 <= 0xfff){
-      printf("succ write\n");
       paddr_write(page_translate(addr),data,len);
     }
     else{
-      Log("write across page\n");
+      printf("write across page\n");
       assert(0);
     }
   }
