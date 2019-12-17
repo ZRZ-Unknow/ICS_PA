@@ -18,6 +18,7 @@ static void restart() {
   cpu.pc = PC_START;
   cpu.CS=8;
   cpu.eflags.flags=0x2;
+  cpu.cr0.val=0x60000011;
 }
 
 void init_isa(void) {
