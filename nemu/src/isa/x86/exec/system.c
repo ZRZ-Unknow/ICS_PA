@@ -11,6 +11,9 @@ make_EHelper(mov_r2cr) {
   printf("%d\n",id_dest->reg);
   switch (id_dest->reg)
   {
+  case 0:
+    printf("it is 0\n");
+    break;
   case 3:
     printf("it is 3\n");
     break;
