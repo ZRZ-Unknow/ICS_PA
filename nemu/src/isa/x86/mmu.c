@@ -28,8 +28,14 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     //跨页
     else{
       printf("read across page\n");
-      assert(0);
-      return 0;
+      //assert(0);
+      uint8_t byte[4];
+      for (int i = 0; i < len; i++)
+        byte[i] = isa_vaddr_read(addr + i, 1);
+      if (len == 2)
+        return *(uint16_t *)byte;
+      else
+        return *(uint32_t *)byte;
     }
   }
   else{
