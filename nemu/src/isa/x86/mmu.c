@@ -8,7 +8,7 @@
 #define PTE_ADDR(pte)    ((uint32_t)(pte) & ~0xfff)
 #define PTE_P          0x001 
 paddr_t page_translate(vaddr_t ad){
-  /*PDE pde;
+  PDE pde;
   PTE pte;  
   pde.val=paddr_read(cpu.cr3.val+4*PDX(ad),4);
   if(pde.present==0) assert(0);
@@ -16,8 +16,8 @@ paddr_t page_translate(vaddr_t ad){
   pte.val=paddr_read(PTE_ADDR(pde.val)+4*PTX(ad),4);
   if(pte.present==0) assert(0);
 
-  return PTE_ADDR(pte.val) | OFF(ad);*/
-  paddr_t ptab = paddr_read(cpu.cr3.val + sizeof(PDE) * PDX(ad), sizeof(PDE));
+  return PTE_ADDR(pte.val) | OFF(ad);
+  /*paddr_t ptab = paddr_read(cpu.cr3.val + sizeof(PDE) * PDX(ad), sizeof(PDE));
   if (!(ptab & PTE_P)) {
     printf("ERROR:page_translate(): page table doesn't exists!\n");
     assert(0); 
@@ -29,7 +29,7 @@ paddr_t page_translate(vaddr_t ad){
     assert(0); 
   }
 
-  return (PTE_ADDR(pg) | OFF(ad));
+  return (PTE_ADDR(pg) | OFF(ad));*/
 }
 
 
