@@ -4,10 +4,10 @@
 extern void naive_uload(PCB *pcb, const char *filename);
 extern void context_kload(PCB *pcb, void *entry); 
 extern void context_uload(PCB *pcb, const char *filename);
-static PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
+PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
 static PCB pcb_boot = {};
 PCB *current = NULL;
-
+PCB *fg_pcb=NULL;
 void switch_boot_pcb() {
   current = &pcb_boot;
 }
@@ -24,18 +24,20 @@ void hello_fun(void *arg) {
 void init_proc() {
   //context_kload(&pcb[0],(void*)hello_fun);
   //context_uload(&pcb[0],"/bin/hello");
-  context_uload(&pcb[0],"/bin/pal");
-  context_uload(&pcb[1],"/bin/hello");
-  switch_boot_pcb();
+  context_uload(&pcb[0],"/bin/hello");
+  context_uload(&pcb[1],"/bin/pal");
+  context_uload(&pcb[2],"/bin/pal");
+  context_uload(&pcb[3],"/bin/pal");
+  //switch_boot_pcb();
   Log("Initializing processes...");
-
+  fg_pcb=&pcb[1];
   // load program here
   //naive_uload(NULL,"/bin/dummy");
 }
 
 _Context* schedule(_Context *prev) {
   current->cp=prev;
-  //current=&pcb[0];
-  current=(current==&pcb[0]?&pcb[1]:&pcb[0]);
+  current=fg_pcb;
+  //current=(current==&pcb[0]?&pcb[1]:&pcb[0]);
   return current->cp;
 }

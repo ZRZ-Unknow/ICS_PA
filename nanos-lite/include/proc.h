@@ -5,7 +5,7 @@
 #include "memory.h"
 
 #define STACK_SIZE (8 * PGSIZE)
-
+#define MAX_NR_PROC 4 
 typedef union {
   uint8_t stack[STACK_SIZE] PG_ALIGN;
   struct {
@@ -17,5 +17,6 @@ typedef union {
 } PCB;
 
 extern PCB *current;
-
+extern PCB *fg_pcb;
+extern PCB pcb[MAX_NR_PROC];
 #endif
