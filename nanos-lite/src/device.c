@@ -24,7 +24,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int key=read_key();
     if(key & 0x8000){
         sprintf(buf,"kd %s\n",keyname[key & ~0x8000]);
-        switch (key)
+        /*switch (key)
         {
         case 32807:fg_pcb=&pcb[1];
           break;
@@ -34,7 +34,23 @@ size_t events_read(void *buf, size_t offset, size_t len) {
           break;
         default:
           break;
-        }
+        }*/
+      if (keyname[key & ~0x8000][0] == 'F') {
+      Log("F key down!");
+      switch (keyname[key & ~0x8000][1]) {
+        case '1':
+          fg_pcb = &pcb[1];
+          break;
+        case '2':
+          fg_pcb = &pcb[2];
+          break;
+        case '3':
+          fg_pcb = &pcb[3];
+          break;
+        default:
+          break;
+      }
+    }
     }
     else if ((key & ~0x8000)!=_KEY_NONE){
         sprintf(buf,"ku %s\n",keyname[key & ~0x8000]);
