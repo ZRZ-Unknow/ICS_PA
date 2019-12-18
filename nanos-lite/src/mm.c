@@ -25,15 +25,24 @@ int mm_brk(uintptr_t brk, intptr_t increment) {
     current->max_brk+=PGSIZE;
   }
   return 0;*/
+
   if (current->max_brk == 0) {
-    current->max_brk = (brk & 0xfff) ? ((brk & ~0xfff) + PGSIZE) : brk;
+    current->max_brk = brk;
     return 0;
   }
-
-  for (; current->max_brk < brk; current->max_brk += PGSIZE) {
-    _map(&current->as, (void *)current->max_brk, new_page(1), 0);
+  if(brk+increment>current->max_brk){
+    uintptr_t va;
+    if(current->max_brk%PGSIZE==0){
+      va=current->max_brk;
+    }
+    else{
+      va=(current->max_brk/PGSIZE+1)*PGSIZE;
+    }
+    for (; va< brk+increment;va += PGSIZE) {
+    _map(&current->as, (void *)va, new_page(1), 0);
+    }
+    current->max_brk=brk+increment;
   }
-
   return 0;
 }
 
