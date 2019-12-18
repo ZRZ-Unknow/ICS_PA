@@ -125,6 +125,6 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
   c->cs=8;
   c->eip=(uintptr_t)entry;
   c->as=as;
-  c->eflags.IF=1;
+  //c->eflags.IF=1;
   return c;
 }
