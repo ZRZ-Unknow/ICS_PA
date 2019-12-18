@@ -40,6 +40,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     }
     //跨页
     else{
+      assert(0);
       uint8_t byte[4];
       for (int i = 0; i < len; i++)
         byte[i] = isa_vaddr_read(addr + i, 1);
