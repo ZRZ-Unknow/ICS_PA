@@ -80,7 +80,7 @@ void __am_switch(_Context *c) {
 }
 
 int _map(_AddressSpace *as, void *va, void *pa, int prot) {
-  PDE *pgdir=as->ptr;
+  /*PDE *pgdir=as->ptr;
   PDE *pde=&pgdir[PDX(va)];
   PTE *pgtab;
 
@@ -92,8 +92,8 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
     pgtab=(PTE*)PTE_ADDR(*pde);
   }
   pgtab[PTX(va)]=PTE_ADDR(pa) | PTE_P;
-  return 0;
-  /*PTE *pdir = as->ptr;
+  return 0;*/
+  PTE *pdir = as->ptr;
   PDE *pptab = &pdir[PDX(va)];
 
   if (!(*pptab & PTE_P)) {  
@@ -109,7 +109,7 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
   }
   *ptab = PTE_ADDR(pa) | PTE_P;
 
-  return 0;*/
+  return 0;
 }
 
 
