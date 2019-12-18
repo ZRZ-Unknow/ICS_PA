@@ -14,7 +14,7 @@ paddr_t page_translate(vaddr_t ad){
   if(pde.present==0) assert(0);
 
   pte.val=paddr_read(PTE_ADDR(pde.val)+4*PTX(ad),4);
-//  if(pte.present==0) assert(0);
+  if(pte.present==0) assert(0);
 
   return PTE_ADDR(pte.val) | OFF(ad);
   /*paddr_t ptab = paddr_read(cpu.cr3.val + sizeof(PDE) * PDX(ad), sizeof(PDE));
