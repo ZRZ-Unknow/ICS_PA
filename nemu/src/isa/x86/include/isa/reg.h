@@ -59,7 +59,9 @@ typedef struct {
   rtlreg_t CS;
 
   CR0 cr0;
-  CR3 cr3; 
+  CR3 cr3;
+
+  bool INTR; 
 } CPU_state;
 
 static inline int check_reg_index(int index) {
