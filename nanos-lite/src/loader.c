@@ -57,12 +57,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
       left_file_size = phdr[i].p_memsz - phdr[i].p_filesz;
       page_write_size=left_file_size;
-     /* if (((uint32_t)vaddr & 0xfff) != 0) {
-        page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
+      if (((uint32_t)vaddr & 0xfff) != 0) {
+        //page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
         memset((void *)(PTE_ADDR(paddr) | OFF(vaddr)), 0, page_write_size);
         left_file_size -= page_write_size;
         vaddr += page_write_size;
-      }*/
+      }
       for (page_write_size = PGSIZE; left_file_size > 0; left_file_size -= page_write_size, vaddr += page_write_size) {
         assert(((uint32_t)vaddr & 0xfff) == 0);
         paddr = new_page(1);
