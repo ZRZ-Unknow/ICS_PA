@@ -1,6 +1,6 @@
 #include "memory.h"
 #include "proc.h"
-
+#define align(va) (va%PGSIZE==0)?(va):((va/PGSIZE+1)*PGSIZE) 
 static void *pf = NULL;
 
 void* new_page(size_t nr_page) {
@@ -28,20 +28,21 @@ int mm_brk(uintptr_t brk, intptr_t increment) {
 
   if (current->max_brk == 0) {
     current->max_brk = brk;
-    return 0;
   }
-  if(brk+increment>current->max_brk){
-    uintptr_t va;
-    if(current->max_brk%PGSIZE==0){
-      va=current->max_brk;
+  else{
+    if(brk+increment>current->max_brk){
+      uintptr_t va=align(current->max_brk);
+      /*if(current->max_brk%PGSIZE==0){
+        va=current->max_brk;
+      }
+      else{
+        va=(current->max_brk/PGSIZE+1)*PGSIZE;
+      }*/
+      for (; va< brk+increment;va += PGSIZE) {
+      _map(&current->as, (void *)va, new_page(1), 0);
+      }
+      current->max_brk=brk+increment;
     }
-    else{
-      va=(current->max_brk/PGSIZE+1)*PGSIZE;
-    }
-    for (; va< brk+increment;va += PGSIZE) {
-    _map(&current->as, (void *)va, new_page(1), 0);
-    }
-    current->max_brk=brk+increment;
   }
   return 0;
 }

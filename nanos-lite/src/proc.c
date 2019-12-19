@@ -37,7 +37,6 @@ void init_proc() {
 
 _Context* schedule(_Context *prev) {
   current->cp=prev;
-  //current=fg_pcb;
   current=(current==fg_pcb?&pcb[0]:fg_pcb);
   return current->cp;
 }
