@@ -20,74 +20,20 @@ static const char *keyname[256] __attribute__((used)) = {
 };
 
 size_t events_read(void *buf, size_t offset, size_t len) {
-  //_yield();
   int key=read_key();
-    if(key & 0x8000){
-        sprintf(buf,"kd %s\n",keyname[key & ~0x8000]);
-        /*switch (key)
-        {
-        case 32807:fg_pcb=&pcb[1];
-          break;
-        case 32808:fg_pcb=&pcb[2];
-          break;
-        case 32809:fg_pcb=&pcb[3];
-          break;
-        default:
-          break;
-        }*/
-      if(keyname[key & ~0x8000][0]=='Q')fg_pcb=&pcb[1];
-      else if(keyname[key & ~0x8000][0]=='W')fg_pcb=&pcb[2];
-      else if(keyname[key & ~0x8000][0]=='F')fg_pcb=&pcb[3];
-      
-    }
-    else if ((key & ~0x8000)!=_KEY_NONE){
-        sprintf(buf,"ku %s\n",keyname[key & ~0x8000]);
-      if (keyname[key & ~0x8000][0] == 'F') {
-      Log("F key down!");
-      switch (keyname[key & ~0x8000][1]) {
-        case '1':
-          fg_pcb = &pcb[1];
-          break;
-        case '2':
-          fg_pcb = &pcb[2];
-          break;
-        case '3':
-          fg_pcb = &pcb[3];
-          break;
-        default:
-          break;
-      }
-    }
-    }
-    else{
-      sprintf(buf,"t %d\n",uptime());
-    }
-  return strlen(buf);
-  /*int keycode = read_key();
-  if ((keycode & ~0x8000) == _KEY_NONE) {
-    sprintf(buf, "t %d\n", uptime());
-  } else if (keycode & 0x8000) {
-    sprintf(buf, "kd %s\n", keyname[keycode & ~0x8000]);
-    if (keyname[keycode & ~0x8000][0] == 'F') {
-      Log("F key down!");
-      switch (keyname[keycode & ~0x8000][1]) {
-        case '1':
-          fg_pcb = &pcb[1];
-          break;
-        case '2':
-          fg_pcb = &pcb[2];
-          break;
-        case '3':
-          fg_pcb = &pcb[3];
-          break;
-        default:
-          break;
-      }
-    }
-  } else {
-    sprintf(buf, "ku %s\n", keyname[keycode & ~0x8000]);
+  if(key & 0x8000){
+    sprintf(buf,"kd %s\n",keyname[key & ~0x8000]);
+    if(keyname[key & ~0x8000][0]=='F' && keyname[key & ~0x8000][1]=='1')fg_pcb=&pcb[1];
+    else if(keyname[key & ~0x8000][0]=='F' && keyname[key & ~0x8000][1]=='2')fg_pcb=&pcb[2];
+    else if(keyname[key & ~0x8000][0]=='F' && keyname[key & ~0x8000][1]=='3')fg_pcb=&pcb[3];
   }
-  return strlen(buf);*/
+  else if ((key & ~0x8000)!=_KEY_NONE){
+    sprintf(buf,"ku %s\n",keyname[key & ~0x8000]);
+  }
+  else{
+    sprintf(buf,"t %d\n",uptime());
+  }
+  return strlen(buf);
 }
 static char dispinfo[128] __attribute__((used)) = {};
 
