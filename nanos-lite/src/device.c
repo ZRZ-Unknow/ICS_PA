@@ -21,10 +21,10 @@ static const char *keyname[256] __attribute__((used)) = {
 
 size_t events_read(void *buf, size_t offset, size_t len) {
   //_yield();
-  /*int key=read_key();
+  int key=read_key();
     if(key & 0x8000){
         sprintf(buf,"kd %s\n",keyname[key & ~0x8000]);
-        switch (key)
+        /*switch (key)
         {
         case 32807:fg_pcb=&pcb[1];
           break;
@@ -34,10 +34,10 @@ size_t events_read(void *buf, size_t offset, size_t len) {
           break;
         default:
           break;
-        }
+        }*/
       if(keyname[key & ~0x8000][0]=='Q')fg_pcb=&pcb[1];
       else if(keyname[key & ~0x8000][0]=='W')fg_pcb=&pcb[2];
-      else if(keyname[key & ~0x8000][0]=='E')fg_pcb=&pcb[3];
+      else if(keyname[key & ~0x8000][0]=='F')fg_pcb=&pcb[3];
       
     }
     else if ((key & ~0x8000)!=_KEY_NONE){
@@ -62,8 +62,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     else{
       sprintf(buf,"t %d\n",uptime());
     }
-  return strlen(buf);*/
-  int keycode = read_key();
+  return strlen(buf);
+  /*int keycode = read_key();
   if ((keycode & ~0x8000) == _KEY_NONE) {
     sprintf(buf, "t %d\n", uptime());
   } else if (keycode & 0x8000) {
@@ -87,7 +87,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   } else {
     sprintf(buf, "ku %s\n", keyname[keycode & ~0x8000]);
   }
-  return strlen(buf);
+  return strlen(buf);*/
 }
 static char dispinfo[128] __attribute__((used)) = {};
 
