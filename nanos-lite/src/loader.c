@@ -38,15 +38,15 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         filesz-=PGSIZE;
       }*/
       void *vaddr = (void *)phdr[i].p_vaddr;
-      void *paddr;
+      void *paddr=0;
       int32_t left_file_size = phdr[i].p_filesz;
-
-      paddr = new_page(1);
+      uint32_t page_write_size=left_file_size;
+      /*paddr = new_page(1);
       _map(&pcb->as, vaddr, paddr, 0);
       uint32_t page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
       fs_read(fd, (void *)(PTE_ADDR(paddr) | OFF(vaddr)), page_write_size);
       left_file_size -= page_write_size;
-      vaddr += page_write_size;
+      vaddr += page_write_size;*/
       for (; left_file_size > 0; left_file_size -= page_write_size, vaddr += page_write_size) {
         assert(((uint32_t)vaddr & 0xfff) == 0);
         paddr = new_page(1);
@@ -54,7 +54,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         page_write_size = min(left_file_size, PGSIZE);
         fs_read(fd, paddr, page_write_size);
       }
-/*
+
       left_file_size = phdr[i].p_memsz - phdr[i].p_filesz;
       if (((uint32_t)vaddr & 0xfff) != 0) {
         page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
@@ -67,7 +67,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         paddr = new_page(1);
         _map(&pcb->as, vaddr, paddr, 0);
         memset(paddr, 0, page_write_size);
-      }*/
+      }
       //fs_read(fd,(void*)phdr[i].p_vaddr,phdr[i].p_filesz);
       //memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
     }
