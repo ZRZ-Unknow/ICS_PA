@@ -37,36 +37,33 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         va+=PGSIZE;
         filesz-=PGSIZE;
       }*/
-      void *vaddr = (void *)phdr[i].p_vaddr;
-      void *paddr=0;
-      int32_t left_file_size = phdr[i].p_filesz;
-      uint32_t page_write_size=left_file_size;
-      /*paddr = new_page(1);
-      _map(&pcb->as, vaddr, paddr, 0);
-      uint32_t page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
-      fs_read(fd, (void *)(PTE_ADDR(paddr) | OFF(vaddr)), page_write_size);
-      left_file_size -= page_write_size;
-      vaddr += page_write_size;*/
-      for (; left_file_size > 0; left_file_size -= page_write_size, vaddr += page_write_size) {
-        assert(((uint32_t)vaddr & 0xfff) == 0);
-        paddr = new_page(1);
-        _map(&pcb->as, vaddr, paddr, 0);
-        page_write_size = min(left_file_size, PGSIZE);
-        fs_read(fd, paddr, page_write_size);
+      void *va = (void *)phdr[i].p_vaddr;
+      void *pa=0;
+      int32_t fsize = phdr[i].p_filesz;
+      uint32_t wsize=fsize;
+      while(fsize>0){
+        pa=new_page(1);
+        _map(&pcb->as, va, pa, 0);
+        wsize=fsize>PGSIZE?PGSIZE:fsize;
+        fs_read(fd,pa,wsize);
+        fsize-=wsize;
+        va+=wsize;
       }
-
-      left_file_size = phdr[i].p_memsz - phdr[i].p_filesz;
-      if (((uint32_t)vaddr & 0xfff) != 0) {
-        page_write_size = min(left_file_size, PTE_ADDR((uint32_t)vaddr + PGSIZE) - (uint32_t)vaddr);
-        memset((void *)(PTE_ADDR(paddr) | OFF(vaddr)), 0, page_write_size);
-        left_file_size -= page_write_size;
-        vaddr += page_write_size;
+      //将剩余置0
+      int32_t leftsize=phdr[i].p_memsz - phdr[i].p_filesz;
+      //处理上一页剩下的部分
+      if (((uint32_t)va & 0xfff) != 0) {
+        uint32_t setsize=leftsize<(PTE_ADDR(va + PGSIZE)-(uint32_t)va)?leftsize:(PTE_ADDR(va + PGSIZE)-(uint32_t)va);
+        memset((void *)(PTE_ADDR(pa) | OFF(va)), 0, setsize);
+        leftsize -= setsize;
+        va += setsize;
       }
-      for (page_write_size = PGSIZE; left_file_size > 0; left_file_size -= page_write_size, vaddr += page_write_size) {
-        assert(((uint32_t)vaddr & 0xfff) == 0);
-        paddr = new_page(1);
-        _map(&pcb->as, vaddr, paddr, 0);
-        memset(paddr, 0, page_write_size);
+      while(leftsize>0){
+        pa=new_page(1);
+        _map(&pcb->as, va, pa, 0);
+        memset(pa,0,PGSIZE);
+        leftsize-=PGSIZE;
+        va+=PGSIZE;
       }
       //fs_read(fd,(void*)phdr[i].p_vaddr,phdr[i].p_filesz);
       //memset((void*)(phdr[i].p_vaddr+phdr[i].p_filesz),0,phdr[i].p_memsz-phdr[i].p_filesz);
