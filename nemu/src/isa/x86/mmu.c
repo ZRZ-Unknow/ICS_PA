@@ -26,13 +26,18 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
     }
     //跨页
     else{
-      uint8_t byte[4];
+      /*uint8_t byte[4];
       for (int i = 0; i < len; i++)
         byte[i] = isa_vaddr_read(addr + i, 1);
       if (len == 2)
         return *(uint16_t *)byte;
       else
-        return *(uint32_t *)byte;
+        return *(uint32_t *)byte;*/
+      uint32_t data=0;
+      for(int i=0;i<len;i++){
+        data+=(paddr_read(page_translate(addr+i),1));
+      }
+      return data;
     }
   }
   else{
