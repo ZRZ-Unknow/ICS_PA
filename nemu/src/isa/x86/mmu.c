@@ -35,7 +35,7 @@ uint32_t isa_vaddr_read(vaddr_t addr, int len) {
         return *(uint32_t *)byte;*/
       uint32_t data=0;
       for(int i=0;i<len;i++){
-        data+=(paddr_read(page_translate(addr+i),1));
+        data+=(paddr_read(page_translate(addr+i),1))<<8*i;
       }
       return data;
     }
