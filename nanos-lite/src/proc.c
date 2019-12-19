@@ -30,7 +30,7 @@ void init_proc() {
   context_uload(&pcb[3],"/bin/pal");
   //switch_boot_pcb();
   Log("Initializing processes...");
-  fg_pcb=&pcb[0];
+  fg_pcb=&pcb[1];
   // load program here
   //naive_uload(NULL,"/bin/dummy");
 }
