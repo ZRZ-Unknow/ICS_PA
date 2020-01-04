@@ -13,7 +13,6 @@ extern size_t get_ramdisk_size();
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 #define PTE_ADDR(pte)    ((uint32_t)(pte) & ~0xfff)
 #define OFF(va)          ((uint32_t)(va) & 0xfff)
-#define min(x,y)     (x<y? x:y)
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   int fd=fs_open(filename,0,0);
